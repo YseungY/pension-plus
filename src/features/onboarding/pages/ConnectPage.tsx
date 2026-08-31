@@ -1,4 +1,4 @@
-import { BadgeCheck, ChevronRight, KeyRound, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, BadgeCheck, ChevronRight, KeyRound, ShieldCheck } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { BrandMark } from '../components/BrandMark'
@@ -17,7 +17,12 @@ export function ConnectPage() {
   return (
     <main className="flex min-h-screen flex-col bg-white px-7 pb-8 pt-10">
       <header className="flex items-center justify-between">
-        <BrandMark size="md" />
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={() => navigate('/onboarding')} aria-label="이전 화면으로" className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-navy-800 transition active:scale-95">
+            <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <BrandMark size="sm" />
+        </div>
         <span className="rounded-full bg-mint-100 px-3 py-1.5 text-[11px] font-[800] text-mint-700">시연용 화면</span>
       </header>
       <section className="flex-1 pt-16">

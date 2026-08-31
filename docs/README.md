@@ -10,6 +10,7 @@
 | [SRS Lite](./SRS.md) | 구현 Requirement와 Acceptance Criteria | 작성 중 |
 | [기술 학습 계획](./TECH_LEARNING_PLAN.md) | 기술 선택·학습·적용 결과 | 작성 중 |
 | [Knowledge Base](./knowledge-base/00-index.md) | 근거·결정·도메인 지식·용어 | 기본 구조 완료 |
+| [AI 협업 기록](./AI_WORKFLOW_LOG.md) | Goal 실행 등 판단을 바꾼 AI 활용 사례 2~3개 | Goal 1 기록 완료 |
 
 최종 README에서는 위 문서와 GitHub Issues·Project·배포 URL·Master Deck을 한 번에 연결합니다.
 

@@ -10,7 +10,7 @@ GitHub Issue:
 - https://github.com/YseungY/pension-plus/issues/3 (이관 현황판)
 
 작업 폴더: src/features/transfer/
-근거 문서: docs/PRD.md, docs/SRS.md (FR-002~009), docs/01-product/예상_프로토타입.html
+근거 문서: docs/PRD.md, docs/SRS.md (FR-002~009), docs/team/product/예상_프로토타입.html
 
 시작 전에:
 1. README.md '팀원 시작 순서' 그대로 따라주세요.
@@ -31,7 +31,7 @@ GitHub Issue:
 - https://github.com/YseungY/pension-plus/issues/5 (인출 결과 화면)
 
 작업 폴더: src/features/withdrawal/
-근거 문서: docs/PRD.md, docs/SRS.md (FR-010~012), docs/01-product/예상_프로토타입.html
+근거 문서: docs/PRD.md, docs/SRS.md (FR-010~012), docs/team/product/예상_프로토타입.html
 
 시작 전에:
 1. README.md '팀원 시작 순서' 그대로 따라주세요.
@@ -44,5 +44,5 @@ GitHub Issue:
 
 ## 공통 안내
 
-- 9월 2일 14시 이후 통합 시작, 9월 3일 11시 코드 동결 (`docs/00-start/개발전_준비.md` §5)
+- 9월 2일 14시 이후 통합 시작, 9월 3일 11시 코드 동결 (`docs/team/start/개발전_준비.md` §5)
 - 막히는 부분은 바로 공유해주세요 — 혼자 오래 고민하지 않기

@@ -25,3 +25,6 @@ docs/99-background/design-system-uploads/
 
 # 로컬 수업 원본 자료 — 저장소에는 핵심 가이드만 유지
 docs/04-course/[[]프로젝트03[]] AI 네이티브 실전기획 자료/
+
+# grill 연습 세션 기록 - 로컬 전용, git 업로드하지 않음
+docs/team/workflow/GRILL_LOG.md

@@ -14,7 +14,7 @@
 
 - MVP 범위: [MVP PRD](../PRD.md)
 - MVP 요구사항: [SRS Lite](../SRS.md)
-- 전체 제품 근거: [상세 PRD](../01-product/PRD.md)
+- 전체 제품 근거: [상세 PRD](../team/product/PRD.md)
 - 전체 요구사항 원천: [상세 SRS](../SRS_연금플러스_v1.0.md)
 
 ## 현재 Open Questions

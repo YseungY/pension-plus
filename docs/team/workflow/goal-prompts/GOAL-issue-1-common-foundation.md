@@ -7,13 +7,13 @@
 ## 1) 작업 핵심 목표 및 범위
 
 - 목표: GitHub Issue [`#1` 공통 라우팅·레이아웃·mock 데이터 스키마 공통 기반](https://github.com/YseungY/pension-plus/issues/1)을 완료한다.
-- 근거 문서: `docs/01-product/예상_프로토타입.html`(시각 프로토타입, 수정 금지·참고만), `docs/SRS.md`(FR-001~FR-012), `AGENTS.md`(구현 규칙).
+- 근거 문서: `docs/team/product/예상_프로토타입.html`(시각 프로토타입, 수정 금지·참고만), `docs/SRS.md`(FR-001~FR-012), `AGENTS.md`(구현 규칙).
 - 시작 지점: 현재 브랜치 `feat/issue-1-common-foundation`에서 그대로 이어서 작업한다(새 브랜치 불필요).
 - 작업 대상:
   - `src/app/router.tsx`, `src/app/App.tsx` — 6개 화면 라우트
   - `src/components/` — 공통 레이아웃(하단 고객센터 바 등)
   - `src/lib/` — 시연용 mock 데이터 공통 타입(`TRANSFER`, `HOLDING`, `LOCK_WINDOW`, `TRADING_WINDOW` 등, SRS §7.2 대응 원본은 `docs/SRS_연금플러스_v1.0.md` §7.2)
-  - `src/styles/`, Tailwind 설정 — 디자인 토큰 (`docs/03-design/디자인시스템_개발적용가이드.md` 기준)
+  - `src/styles/`, Tailwind 설정 — 디자인 토큰 (`docs/team/design/디자인시스템_개발적용가이드.md` 기준)
 - 작업 자율성: 사용자 승인을 기다리지 않고 종료 조건 도달까지 진행한다. 단 **`src/features/transfer`, `src/features/withdrawal` 내부 화면 구현·main 머지·배포·새 패키지 설치는 하지 않는다** — 애초에 시도하지 않는다.
 
 ## 2) 작업 세부 규칙
@@ -41,7 +41,7 @@
 ## 4) 기타 제약조건
 
 - main 머지 금지 · force push 금지 · 배포(Vercel) 트리거 금지.
-- `docs/01-product/예상_프로토타입.html`, `docs/SRS.md`, `docs/PRD.md`는 참고만 하고 수정하지 않는다.
+- `docs/team/product/예상_프로토타입.html`, `docs/SRS.md`, `docs/PRD.md`는 참고만 하고 수정하지 않는다.
 - `src/features/transfer/`, `src/features/withdrawal/` 내부 파일은 README만 있는 상태를 유지하고 건드리지 않는다 (담당자 몫).
 - 새 패키지를 설치하지 않는다 (이미 있는 Vite·React·TypeScript·Tailwind·React Router 범위 안에서 작업).
 
@@ -66,7 +66,7 @@
 ```text
 /goal
 
-@docs/05-workflow/goal-prompts/GOAL-issue-1-common-foundation.md 에서 정의하고 있는 작업 방법에 따라
+@docs/team/workflow/goal-prompts/GOAL-issue-1-common-foundation.md 에서 정의하고 있는 작업 방법에 따라
 목표를 완수할 때까지 작업을 수행해줘.
 ```
 

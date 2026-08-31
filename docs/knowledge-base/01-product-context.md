@@ -16,6 +16,6 @@
 
 ## 출처
 
-- [상세 PRD §1 배경과 §4 사용자](../01-product/PRD.md)
+- [상세 PRD §1 배경과 §4 사용자](../team/product/PRD.md)
 - [MVP PRD](../PRD.md)
 

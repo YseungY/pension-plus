@@ -407,18 +407,16 @@
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1.25fr;gap:24px">
-    <div style="border:1px solid #E1E7EC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:20px">
+    <div style="border:1px solid #E1E7EC;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:18px">
       <strong style="font-size:17px;font-weight:700">금액 표시</strong>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <span style="font-size:13px;font-weight:600;color:#7D8C99">예상 인출가능 금액</span>
-        <span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:36px;font-weight:500;letter-spacing:-.02em;color:#0A7D62;font-variant-numeric:tabular-nums">세후 15,950,000<span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:18px;font-weight:600;color:#4A5B6B;margin-left:5px">원</span></span>
-        <span style="font-size:13.5px;color:#4A5B6B">프로토타입 연금 외 수령 화면 기준</span>
+      <div style="background:#0E2033;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:18px;box-shadow:0 10px 24px rgba(14,32,51,.14)">
+        <span style="font-size:13px;font-weight:600;color:#A8BCCE">예상 인출가능 금액</span>
+        <span style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span style="font-size:17px;font-weight:700;color:#FFFFFF">세후</span><strong style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:34px;font-weight:700;letter-spacing:-.025em;color:#45D3B0;font-variant-numeric:tabular-nums">15,950,000</strong><span style="font-size:16px;font-weight:600;color:#FFFFFF">원</span></span>
+        <span style="height:1px;background:#234465"></span>
+        <span style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><span style="font-size:13.5px;color:#A8BCCE">총 평가금액(적립금)</span><strong style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:14.5px;font-weight:600;color:#FFFFFF;font-variant-numeric:tabular-nums;white-space:nowrap">18,500,000원</strong></span>
+        <span style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><span style="font-size:13.5px;color:#A8BCCE">세금합계</span><strong style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:14.5px;font-weight:600;color:#FF9AA7;font-variant-numeric:tabular-nums;white-space:nowrap">2,550,000원</strong></span>
       </div>
-      <div style="height:1px;background:#E1E7EC"></div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <span style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:14px;color:#4A5B6B">총 평가금액(적립금)</span><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:16px;color:#0E2033;font-variant-numeric:tabular-nums">18,500,000 원</span></span>
-        <span style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:14px;color:#4A5B6B">세금합계</span><span style="font-family:'Pretendard Variable',Pretendard,sans-serif;font-size:16px;color:#D6455B;font-variant-numeric:tabular-nums">2,550,000 원</span></span>
-      </div>
+      <span style="font-size:12.5px;color:#7D8C99">예상 프로토타입 · 연금 외 수령 화면 기준</span>
       <ul style="display:flex;flex-direction:column;gap:7px;list-style:none;font-size:13px;line-height:1.55;color:#7D8C99">
         <li>금액은 항상 tabular-nums, 천단위 콤마, 단위 ‘원’은 한글</li>
         <li>내게 유리한 금액만 민트, 차감은 danger, 중립은 navy-800</li>

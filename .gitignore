@@ -1,9 +1,17 @@
 node_modules/
 dist/
+dist-ssr/
+*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 .env
 .env.*
 !.env.example
 .vscode/
+!.vscode/extensions.json
 .idea/
 *.log
 .DS_Store

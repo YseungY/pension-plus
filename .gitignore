@@ -21,11 +21,10 @@ Thumbs.db
 팀원_개발패키지/
 
 # 디자인 시스템 생성 과정의 참고 업로드
-docs/99-background/design-system-uploads/
+docs/team/references/background/design-system-uploads/
 
 # 로컬 수업 원본 자료 — 저장소에는 핵심 가이드만 유지
-docs/04-course/[[]프로젝트03[]] AI 네이티브 실전기획 자료/
-
+docs/team/references/course/[[]프로젝트03[]] AI 네이티브 실전기획 자료/
 
 # grill 연습 세션 기록 - 로컬 전용, git 업로드하지 않음
-docs/05-workflow/GRILL_LOG.md
+docs/team/workflow/GRILL_LOG.md

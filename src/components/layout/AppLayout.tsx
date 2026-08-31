@@ -1,14 +1,18 @@
 import type { ReactNode } from 'react'
+import { useLocation } from 'react-router'
 import { DEMO_DATA_LABEL } from '../../lib/mock-types'
 
 const KB_SUPPORT_NUMBER = '1588-6666'
 const TRANSFER_COMPANY_SUPPORT_NUMBER = '1544-0000'
 
 export function AppLayout({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation()
+  const isWelcomeFlow = ['/', '/onboarding', '/connect', '/home'].includes(pathname)
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[430px] flex-col bg-surface">
       <div className="flex-1">{children}</div>
-      <CustomerServiceBar />
+      {!isWelcomeFlow && <CustomerServiceBar />}
     </div>
   )
 }

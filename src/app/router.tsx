@@ -4,15 +4,19 @@ import { PlaceholderScreen } from '../components/layout/PlaceholderScreen'
 import { LoginPage } from '../features/auth/pages/LoginPage'
 import { SignupPage } from '../features/auth/pages/SignupPage'
 import { HomePage } from './HomePage'
+import { SplashPage } from '../features/onboarding/pages/SplashPage'
+import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <AppLayout>
         <Routes>
+          <Route path="/" element={<SplashPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/" element={<HomePage />} />
           <Route
             path="/transfer/holdings"
             element={

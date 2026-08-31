@@ -35,7 +35,7 @@
 - 종료 방법:
   1. `npm run build` 실행, exit 0 출력을 대화에 남긴다. **[게이트 1]**
   2. `npm run dev`를 백그라운드로 띄우고 6개 라우트에 각각 접속해 200/정상 렌더를 확인한 결과를 대화에 남긴다. **[게이트 2]**
-  3. `grep -rn "any" src/ --include='*.tsx' --include='*.ts'` 실행 — `any` 사용 0건 확인. **[게이트 3]**
+  3. `rg -n "\bany\b" src -g "*.ts" -g "*.tsx"` 실행 — `any` 사용 0건 확인. **[게이트 3]**
   4. `git log --oneline main..HEAD`로 이번 작업 커밋 목록을, `git status --porcelain`으로 범위 밖 파일 변경이 없음을 대화에 남긴다.
 
 ## 4) 기타 제약조건
@@ -63,9 +63,10 @@
 
 ## 실행 방법
 
-```
+```text
 /goal
 
-@docs/goal-prompts/GOAL-issue-1-common-foundation.md 에서 정의하고 있는 작업 방법에 따라
+@docs/05-workflow/goal-prompts/GOAL-issue-1-common-foundation.md 에서 정의하고 있는 작업 방법에 따라
 목표를 완수할 때까지 작업을 수행해줘.
 ```
+

@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>KB증권 연금 통합 시연 프로토타입 V6 · 퇴직연금 실물이전</title>
+<link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<style>
+
+/* CSS Reset and Variables */
+:root {
+  --kb-yellow: #FFCC00;
+  --kb-yellow-hover: #E6B800;
+  --kb-dark: #1E1E1E;
+  --kb-gray: #645B4C;
+  --kb-blue: #3B82F6;
+  
+  --bg-color: #F4F7FA;
+  --surface: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary: #94A3B8;
+  --border: #E2E8F0;
+  --border-light: #F1F5F9;
+  
+  --success: #10B981;
+  --success-bg: #D1FAE5;
+  --warning: #F59E0B;
+  --warning-bg: #FEF3C7;
+  --danger: #EF4444;
+  --danger-bg: #FEE2E2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  background-color: #E5E7EB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mobile Device Mockup */
+.device {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  border: 14px solid #111827;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screens */
+.screen {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.screen.active {
+  display: flex;
+}
+.scroll-area {
+  flex: 1;
+  min-height: 0; /* Flexbox 하위 요소가 영역을 벗어나지 않도록 강제 (스크롤 잘림 핵심 원인 해결) */
+  overflow-y: auto;
+  position: relative;
+  padding-bottom: 40px;
+}
+.scroll-area::-webkit-scrollbar { display: none; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.header {
+  height: 56px;
+  min-height: 56px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.header .back-btn {
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+/* Typography & Common */
+.section-padding { padding: 24px 20px; }
+.title-large { 
+  font-size: 24px; 
+  font-weight: 700; 
+  margin-bottom: 8px; 
+  color: var(--text-primary); 
+  line-height: 1.35; 
+  letter-spacing: -0.5px;
+  word-break: keep-all;
+}
+.subtitle { 
+  font-size: 14px; 
+  color: var(--text-secondary); 
+  margin-bottom: 24px; 
+  line-height: 1.5; 
+}
+.section-title { 
+  font-size: 18px; 
+  font-weight: 700; 
+  color: var(--text-primary); 
+  margin-bottom: 16px; 
+  letter-spacing: -0.3px;
+}
+
+/* UI Badges (Replacing Emojis) */
+.badge-text {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.badge-text.info { background: #E0E7FF; color: #4338CA; }
+.badge-text.warn { background: #FEF3C7; color: #B45309; }
+.badge-text.alert { background: #FEE2E2; color: #B91C1C; }
+
+/* Status Dot (Replacing Emojis in lists) */
+.status-dot-small {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.status-dot-small.success { background-color: var(--success); }
+.status-dot-small.warning { background-color: var(--warning); }
+.status-dot-small.danger { background-color: var(--danger); }
+.status-dot-small.pending { background-color: var(--text-tertiary); }
+.status-dot-small.active { background-color: var(--kb-blue); }
+
+/* Info Box */
+.info-box {
+  background-color: var(--surface);
+  border-radius: 16px;
+  padding: 18px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+.info-box.highlight { 
+  background-color: var(--warning-bg); 
+  border: 1px solid rgba(245, 158, 11, 0.3); 
+  color: #B45309; 
+}
+
+/* Buttons */
+.btn {
+  display: block; width: 100%; padding: 16px; border-radius: 14px; border: none; font-size: 16px; font-weight: 700;
+  text-align: center; cursor: pointer; margin-bottom: 12px; transition: all 0.2s; box-sizing: border-box;
+}
+.btn:last-child { margin-bottom: 0; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { 
+  background-color: var(--kb-yellow); 
+  color: var(--kb-dark); 
+  box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+}
+.btn-secondary { 
+  background-color: #EFF6FF; 
+  color: var(--kb-blue); 
+}
+.btn-outline { 
+  background-color: var(--surface); 
+  color: var(--text-primary); 
+  border: 1px solid var(--border); 
+}
+.btn-small { 
+  padding: 10px 14px; 
+  font-size: 13px; 
+  border-radius: 10px; 
+  display: inline-block; 
+  width: auto; 
+  margin: 0;
+}
+
+/* Bottom Actions */
+.bottom-area { 
+  padding: 16px 20px 24px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(226, 232, 240, 0.8); 
+  position: sticky; 
+  bottom: 0; 
+  z-index: 40; 
+  display: flex; 
+  gap: 12px;
+}
+.bottom-area .btn { margin-bottom: 0; }
+
+/* -------------------------------------
+   Screen 1: 예약 (Lock Window)
+------------------------------------- */
+.lock-band-container {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.lock-band-title { 
+  font-size: 14px; 
+  font-weight: 700; 
+  color: var(--danger); 
+  margin-bottom: 20px; 
+  display: flex; 
+  align-items: center; 
+}
+.lock-timeline {
+  display: flex; justify-content: space-between; align-items: flex-start; position: relative; margin-bottom: 16px;
+}
+.lock-timeline::before {
+  content: ''; position: absolute; top: 12px; left: 24px; right: 24px; height: 3px; 
+  background: linear-gradient(90deg, var(--danger) 0%, rgba(239, 68, 68, 0.2) 100%); 
+  z-index: 0;
+  border-radius: 2px;
+}
+.lock-point { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 80px; }
+.lock-dot { 
+  width: 12px; height: 12px; border-radius: 50%; background: var(--danger); margin-bottom: 8px; 
+  border: 4px solid var(--surface); box-shadow: 0 0 0 1px var(--danger);
+}
+.lock-point:last-child .lock-dot {
+  background: var(--surface); border-color: var(--danger); box-shadow: none; border-width: 3px;
+}
+.lock-date { font-size: 14px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px;}
+.lock-label { font-size: 12px; color: var(--text-secondary); font-weight: 500;}
+
+.lock-duration-box { text-align: center; }
+.lock-duration { 
+  font-size: 13px; font-weight: 700; color: var(--kb-blue); 
+  background: #EFF6FF; display: inline-block; padding: 6px 14px; border-radius: 20px; 
+}
+
+/* Calendar Widget */
+.calendar { margin-top: 24px; border-top: 1px solid var(--border-light); padding-top: 20px; }
+.cal-month { font-weight: 800; font-size: 15px; text-align: left; margin-bottom: 12px; color: var(--text-primary);}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 13px; margin-bottom: 12px;}
+.cal-header { color: var(--text-tertiary); font-size: 11px; font-weight: 600; margin-bottom: 8px;}
+.cal-day { padding: 6px 0; border-radius: 8px; color: var(--text-primary); font-weight: 500; }
+.cal-day.weekend { color: var(--text-tertiary); }
+.cal-day.locked { background-color: var(--danger-bg); color: var(--danger); font-weight: 700; }
+.cal-day.start { background-color: var(--danger); color: white; border-radius: 8px 0 0 8px; box-shadow: -2px 0 8px rgba(239, 68, 68, 0.4);}
+.cal-day.end { background-color: var(--danger); color: white; border-radius: 0 8px 8px 0; }
+.cal-day.locked-mid { border-radius: 0; }
+
+/* Item List Group */
+.item-group { margin-bottom: 28px; }
+.item-group-title { font-size: 15px; font-weight: 800; display: flex; align-items: center; margin-bottom: 14px; letter-spacing: -0.3px;}
+
+.item-card { 
+  background: var(--surface); border-radius: 16px; padding: 20px; margin-bottom: 12px; 
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid transparent;
+}
+.item-card.highlight { border-color: var(--warning); background: #FFFAF0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);}
+.item-card.danger { border-color: rgba(239,68,68,0.3); background: #FEF2F2; }
+
+.item-row { display: flex; justify-content: space-between; align-items: center; }
+.item-name { font-weight: 700; font-size: 15px; color: var(--text-primary); }
+.item-amount { font-weight: 800; font-size: 15px; color: var(--text-primary); }
+.item-desc { font-size: 13px; color: var(--text-secondary); margin-top: 10px; line-height: 1.6; }
+
+.val-up { color: var(--danger); font-weight: 700; }
+.val-down { color: var(--kb-blue); font-weight: 700; }
+
+.item-actions { margin-top: 16px; display: flex; gap: 8px; }
+
+/* -------------------------------------
+   Screen 2: 현황판 본체
+------------------------------------- */
+.status-banner {
+  background: linear-gradient(135deg, var(--kb-dark) 0%, #333 100%);
+  color: white; padding: 20px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.status-banner-text { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 6px;}
+.status-banner-sub { font-size: 13px; color: #94A3B8; margin-top: 6px; font-weight: 500;}
+.status-dday { 
+  background: var(--kb-yellow); color: var(--kb-dark); font-weight: 900; 
+  font-size: 13px; padding: 6px 12px; border-radius: 16px; box-shadow: 0 2px 8px rgba(255,204,0,0.3);
+}
+
+/* Pizza Tracker (Screen 2) */
+.tracker-container { background: var(--surface); padding: 32px 24px 24px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);}
+.pizza-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 24px; }
+.pizza-tracker::before { content: ''; position: absolute; top: 12px; left: 16px; right: 16px; height: 4px; background: var(--border-light); z-index: 1; border-radius: 2px;}
+.pizza-tracker-progress { position: absolute; top: 12px; left: 16px; width: 50%; height: 4px; background: var(--kb-blue); z-index: 2; border-radius: 2px; transition: width 0.5s ease;}
+.tracker-step { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; width: 48px;}
+.tracker-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); display: flex; justify-content: center; align-items: center; font-size: 11px; font-weight: 800; color: var(--text-tertiary); margin-bottom: 8px; box-sizing: border-box;}
+.tracker-step.done .tracker-icon { background: var(--kb-blue); border-color: var(--kb-blue); color: white; }
+.tracker-step.active .tracker-icon { background: var(--surface); border-color: var(--kb-blue); color: var(--kb-blue); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); animation: pulse 2s infinite;}
+.tracker-label { font-size: 12px; font-weight: 700; color: var(--text-tertiary); white-space: nowrap;}
+.tracker-step.done .tracker-label { color: var(--text-primary); }
+.tracker-step.active .tracker-label { color: var(--kb-blue); }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* Focus Card */
+.focus-card { background: #F8FAFC; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(59, 130, 246, 0.05);}
+.focus-header { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center;}
+.focus-title { font-size: 16px; font-weight: 800; color: var(--kb-blue); }
+.focus-time { font-size: 12px; color: var(--text-secondary); font-weight: 500;}
+.focus-desc { font-size: 13px; color: var(--text-primary); line-height: 1.5; margin-bottom: 16px; font-weight: 600;}
+.focus-action { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);}
+.focus-action-title { font-size: 14px; font-weight: 800; display: flex; align-items: flex-start; gap: 8px; color: var(--text-primary);}
+
+/* Progress Track */
+.track-header { display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; margin-bottom: 16px; color: var(--text-primary);}
+.track-list { background: var(--surface); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);}
+.track-item { display: flex; align-items: center; margin-bottom: 16px; font-size: 14px; }
+.track-item:last-child { margin-bottom: 0; }
+.track-name { flex: 1; color: var(--text-primary); font-weight: 600; }
+.track-status { color: var(--text-secondary); text-align: right; font-size: 13px; font-weight: 500;}
+.track-status.highlight { color: var(--kb-blue); font-weight: 700; }
+
+/* Restriction Box */
+.restrict-box { background: var(--surface); padding: 24px; border-radius: 16px; margin: 0 20px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);}
+.restrict-title { font-size: 15px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;}
+.restrict-list { font-size: 14px; color: var(--text-secondary); }
+.restrict-row { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+.restrict-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.restrict-val { font-weight: 800; font-size: 13px;}
+.val-no { color: var(--text-tertiary); }
+.val-yes { color: var(--kb-blue); }
+
+/* -------------------------------------
+   Screen 3: 완료
+------------------------------------- */
+.success-header { text-align: center; padding: 48px 20px 32px; }
+.success-icon { 
+  width: 64px; height: 64px; border-radius: 50%; background-color: var(--success); 
+  color: white; font-size: 32px; line-height: 64px; margin: 0 auto 20px;
+  display: flex; justify-content: center; align-items: center;
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.25);
+}
+.success-title { font-size: 26px; font-weight: 800; color: var(--text-primary); margin-bottom: 10px; letter-spacing: -0.5px;}
+.success-time { font-size: 14px; color: var(--text-secondary); font-weight: 500;}
+
+.summary-card { background: var(--surface); margin: 0 20px 24px; border-radius: 20px; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+.summary-total { font-size: 14px; color: var(--text-secondary); text-align: center; margin-bottom: 8px; font-weight: 600;}
+.summary-amount { font-size: 32px; font-weight: 900; color: var(--text-primary); text-align: center; margin-bottom: 28px; letter-spacing: -0.5px;}
+.summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px dashed var(--border); }
+.summary-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.summary-label { color: var(--text-secondary); display: flex; align-items: center; font-weight: 500;}
+.summary-val { font-weight: 800; color: var(--text-primary); text-align: right; font-size: 15px;}
+.summary-sub { font-size: 11px; color: var(--text-secondary); margin-left: 8px; background: var(--border-light); padding: 4px 8px; border-radius: 6px; font-weight: 700;}
+
+.unlock-msg { text-align: center; font-size: 15px; font-weight: 700; color: var(--kb-blue); margin-bottom: 24px; background: #EFF6FF; margin: 0 20px 24px; padding: 16px; border-radius: 12px;}
+
+.compare-box { margin: 0 20px 24px; background: var(--surface); border-radius: 16px; padding: 20px; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+.compare-title { font-weight: 800; font-size: 15px; margin-bottom: 16px; color: var(--text-primary); }
+.compare-row { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--text-secondary); }
+.compare-row:last-child { margin-bottom: 0; }
+.compare-val { font-weight: 700; color: var(--text-primary); }
+.compare-val.match { color: var(--success); display: flex; align-items: center; gap: 6px; }
+
+/* Dev Nav */
+.dev-nav {
+  display: flex; background: #111; padding: 10px; gap: 8px;
+}
+.dev-nav button {
+  flex: 1; padding: 8px; font-size: 12px; font-weight: 700; border-radius: 6px; border: none; background: #333; color: white; cursor: pointer; transition: 0.2s;
+}
+.dev-nav button:hover { background: #444; }
+.dev-nav button.active { background: var(--kb-yellow); color: var(--kb-dark); }
+
+/* Override some f1 base styles to match launcher */
+body { background-color: #f0f0f0; }
+
+/* CSS Reset and Variables */
+:root {
+  --kb-yellow: #FFCC00;
+  --kb-gray: #645B4C;
+  --kb-dark: #2b2b2b;
+  --bg-color: #F8FAFC;
+  --surface: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border: #E2E8F0;
+  --danger: #EF4444;
+  --kb-blue: #2563EB;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  background-color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+/* Mobile Device Mockup Container */
+.device {
+  width: 375px;
+  height: 812px;
+  background-color: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  border: 14px solid #1f2937;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screens */
+.screen {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  animation: fadeIn 0.3s ease;
+}
+.screen.active {
+  display: flex;
+}
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Header */
+.header {
+  height: 60px;
+  min-height: 60px;
+  background-color: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+}
+.header .back-btn {
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+/* Common Padding */
+.section-padding {
+  padding: 24px 20px;
+}
+.title-large {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* Menu List */
+.menu-list {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 8px 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.menu-item {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-item:last-child {
+  border-bottom: none;
+}
+.menu-item:hover {
+  background: #F1F5F9;
+}
+.menu-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+.menu-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.menu-icon {
+  color: var(--text-secondary);
+  font-size: 20px;
+}
+.new-badge {
+  background: var(--danger);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+/* Sub Title Dropdown */
+.sub-header {
+  text-align: center;
+  padding: 12px 0 16px;
+  background-color: var(--surface);
+}
+.account-selector {
+  display: inline-flex;
+  align-items: center;
+  background-color: #F1F5F9;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.account-selector::after {
+  content: '▼';
+  font-size: 10px;
+  margin-left: 6px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--surface);
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+}
+.tab.active {
+  color: var(--text-primary);
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* Dark Card */
+.dark-card {
+  background-color: #1a233a;
+  border-radius: 12px;
+  padding: 24px 20px;
+  color: white;
+  text-align: center;
+  margin: 20px;
+}
+.dark-card-title {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark-card-title .info-icon {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1px solid #94a3b8;
+  font-size: 10px;
+  line-height: 14px;
+  margin-left: 4px;
+  color: #94a3b8;
+}
+.dark-card-amount {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.dark-card-amount .highlight {
+  color: var(--kb-yellow);
+}
+.dark-card-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+.dark-card-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Title Area */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  word-break: keep-all;
+  line-height: 1.4;
+}
+
+/* Simulator Box */
+.simulator-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.order-list {
+  position: relative;
+  padding-left: 36px;
+}
+.order-list::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  bottom: 20px;
+  width: 2px;
+  background-color: var(--border);
+}
+.order-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+.order-item:last-child {
+  margin-bottom: 0;
+}
+.order-badge {
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--border);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  z-index: 1;
+}
+.order-content {
+  background: #F8FAFC;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.order-item.highlight .order-badge {
+  background: var(--kb-yellow);
+  color: var(--kb-dark);
+}
+.order-item.highlight .order-content {
+  border-color: var(--kb-yellow);
+  background: #FFFBEB;
+}
+.order-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-tax {
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.order-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 12px;
+  text-align: right;
+}
+.tag-free {
+  background-color: #E0F2FE;
+  color: #0284C7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Action Checkbox & Buttons */
+.notice-box {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.notice-box input[type="checkbox"] {
+  margin-top: 4px;
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+}
+.notice-box label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.action-card {
+  background: var(--surface);
+  border: 1px solid var(--kb-blue);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.action-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: var(--kb-blue);
+}
+.action-card p {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* Button Styles */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: opacity 0.2s;
+  box-sizing: border-box;
+}
+.btn:last-child {
+  margin-bottom: 0;
+}
+.btn:active {
+  opacity: 0.8;
+}
+.btn-primary {
+  background-color: var(--kb-yellow);
+  color: var(--kb-dark);
+}
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--kb-blue);
+  border: 1px solid var(--kb-blue);
+}
+.btn-outline {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+/* Fixed Bottom Button Area */
+.bottom-area {
+  padding: 16px 20px;
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+/* ==================================
+   Modal Styles (Bottom Sheet Type) 
+   ================================== */
+.modal-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  align-items: flex-end; 
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: var(--surface);
+  width: 100%;
+  border-radius: 24px 24px 0 0;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease;
+  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.modal-close {
+  cursor: pointer;
+  font-size: 28px;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+.modal-body {
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 20px;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+
+
+    :root {
+      --kb-yellow: #FFD200;
+      --kb-gray: #F4F4F4;
+      --kb-dark: #222222;
+      --text-primary: #1A1A1A;
+      --text-secondary: #666666;
+      --border: #E5E7EB;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+    body { background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    
+    .device {
+      width: 375px; height: 812px; background: white;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+    }
+    
+    .status-bar {
+      height: 44px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; font-weight: 600; flex-shrink: 0; background: white; z-index: 10;
+    }
+
+    .screen { display: none; flex-direction: column; height: calc(100% - 44px); overflow-y: auto; background: white; }
+    .screen.active { display: flex; }
+
+    /* Screen A (Menu) Styles */
+    .menu-header { display: flex; align-items: center; padding: 12px 16px; gap: 12px; border-bottom: 1px solid var(--border); }
+    .search-bar { flex: 1; background: #F5F5F5; border-radius: 8px; padding: 10px 12px; color: #999; font-size: 14px; }
+    .menu-tabs { display: flex; overflow-x: auto; padding: 0 16px; border-bottom: 1px solid var(--border); }
+    .menu-tab { padding: 16px 12px; font-size: 15px; color: var(--text-secondary); white-space: nowrap; }
+    .menu-tab.active { color: var(--text-primary); font-weight: 700; border-bottom: 2px solid var(--text-primary); }
+    
+    .menu-body { display: flex; flex: 1; overflow: hidden; }
+    .menu-sidebar { width: 110px; background: #F9FAFB; overflow-y: auto; border-right: 1px solid var(--border); }
+    .sidebar-item { padding: 16px; font-size: 15px; color: var(--text-secondary); }
+    .sidebar-item.active { background: #333; color: white; font-weight: 700; }
+    
+    .menu-content { flex: 1; overflow-y: auto; padding: 20px 16px; }
+    .menu-group-title { font-size: 13px; color: #888; margin-bottom: 12px; margin-top: 24px; }
+    .menu-group-title:first-child { margin-top: 0; }
+    .menu-link { display: block; padding: 12px 0; font-size: 16px; color: var(--text-primary); text-decoration: none; cursor: pointer; }
+
+    /* Screen B (Manage) Styles */
+    .header-nav { display: flex; align-items: center; padding: 16px; font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); }
+    .back-btn { font-size: 20px; color: var(--text-primary); cursor: pointer; margin-right: 12px; }
+    
+    .manage-tabs { display: flex; border-bottom: 1px solid var(--border); }
+    .manage-tab { flex: 1; text-align: center; padding: 16px 0; font-size: 15px; color: var(--text-secondary); }
+    .manage-tab.active { color: var(--text-primary); font-weight: 700; border-bottom: 2px solid var(--text-primary); }
+    
+    .manage-section { padding: 24px 20px 0; }
+    .manage-section-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+    
+    .manage-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #F3F4F6; cursor: pointer; text-decoration: none; }
+    .manage-item-left { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--text-primary); }
+    .manage-icon { width: 28px; height: 28px; background: #F3F4F6; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; }
+    .manage-arrow { color: #CCC; font-size: 16px; }
+
+  
+/* Ensure screens are hidden properly */
+.screen { display: none !important; }
+.screen.active { display: flex !important; }
+
+/* ==================================================
+   Lock Window & User's V1 Calendar Grid
+   ================================================== */
+.lock-band-container { background: var(--surface); border-radius: 20px; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+.lock-band-title { font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-bottom: 16px; text-align: center;}
+
+/* Reverting to User's V1 7-Column Grid Calendar */
+.calendar { margin-top: 8px; border-top: 1px solid var(--border-light); padding-top: 20px; }
+.cal-month { font-weight: 800; font-size: 15px; text-align: left; margin-bottom: 12px; color: var(--text-primary);}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 13px; margin-bottom: 12px;}
+.cal-header { color: var(--text-tertiary); font-size: 11px; font-weight: 600; margin-bottom: 8px;}
+.cal-day { padding: 6px 0; border-radius: 8px; color: var(--text-primary); font-weight: 500; transition: all 0.3s; }
+.cal-day.weekend { color: var(--text-tertiary); }
+.cal-day.locked { background-color: var(--danger-bg); color: var(--danger); font-weight: 700; }
+.cal-day.est { background: repeating-linear-gradient(115deg, var(--warning-bg) 0 4px, #FDE68A 4px 8px); color: #B45309; font-weight: 700; }
+.cal-day.start { background-color: var(--danger); color: white; border-radius: 8px 0 0 8px; box-shadow: -2px 0 8px rgba(239, 68, 68, 0.4);}
+.cal-day.end { background-color: var(--warning); color: white; border-radius: 0 8px 8px 0; box-shadow: 2px 0 8px rgba(245, 158, 11, 0.4);}
+.cal-day.locked-mid { border-radius: 0; }
+
+.lock-duration-box { text-align: center; margin-top: 24px; }
+.lock-duration { font-size: 13px; font-weight: 700; color: var(--kb-blue); background: #EFF6FF; display: inline-block; padding: 6px 14px; border-radius: 20px; transition: all 0.3s ease; }
+
+/* Item List Group */
+.item-group { margin-bottom: 28px; }
+.item-group-title { font-size: 15px; font-weight: 800; display: flex; align-items: center; margin-bottom: 14px; letter-spacing: -0.3px;}
+.item-card { background: var(--surface); border-radius: 16px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid transparent; transition: all 0.3s ease; }
+.item-card.highlight { border-color: var(--warning); background: #FFFAF0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);}
+.item-card.danger { border-color: rgba(239,68,68,0.3); background: #FEF2F2; }
+.item-row { display: flex; justify-content: space-between; align-items: center; }
+.item-name { font-weight: 700; font-size: 14px; color: var(--text-primary); display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: visible; }
+.item-amount { font-weight: 800; font-size: 14px; color: var(--text-primary); white-space: nowrap; }
+.item-desc { font-size: 13px; color: var(--text-secondary); margin-top: 10px; line-height: 1.6; }
+.val-up { color: var(--danger); font-weight: 700; }
+.val-down { color: var(--kb-blue); font-weight: 700; }
+.item-actions { margin-top: 16px; display: flex; gap: 8px; }
+
+/* Status Banner */
+.status-banner { background: linear-gradient(135deg, var(--kb-dark) 0%, #333 100%); color: white; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+.status-banner.alert { background: linear-gradient(135deg, var(--danger) 0%, #991B1B 100%); }
+.status-banner.warning { background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%); }
+.status-banner.success { background: linear-gradient(135deg, var(--success) 0%, #047857 100%); }
+.status-banner-text { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 6px; word-break: keep-all; letter-spacing: -0.5px;}
+.status-banner-sub { font-size: 13px; color: #94A3B8; margin-top: 6px; font-weight: 500; word-break: keep-all; letter-spacing: -0.5px;}
+.status-banner.warning .status-banner-sub, .status-banner.alert .status-banner-sub, .status-banner.success .status-banner-sub { color: rgba(255,255,255,0.9); }
+.status-dday { background: var(--kb-yellow); color: var(--kb-dark); font-weight: 900; font-size: 13px; padding: 6px 12px; border-radius: 16px; box-shadow: 0 2px 8px rgba(255,204,0,0.3); white-space: nowrap; flex-shrink: 0; }
+
+/* Pizza Tracker */
+.tracker-container { background: var(--surface); padding: 32px 24px 24px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);}
+.pizza-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 24px; }
+.pizza-tracker::before { content: ''; position: absolute; top: 12px; left: 16px; right: 16px; height: 4px; background: var(--border-light); z-index: 1; border-radius: 2px;}
+.pizza-tracker-progress { position: absolute; top: 12px; left: 16px; width: 0%; height: 4px; background: var(--kb-blue); z-index: 2; border-radius: 2px; transition: width 0.5s ease;}
+.tracker-step { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; width: 48px;}
+.tracker-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); display: flex; justify-content: center; align-items: center; font-size: 11px; font-weight: 800; color: var(--text-tertiary); margin-bottom: 8px; box-sizing: border-box; transition: all 0.3s; }
+.tracker-step.done .tracker-icon { background: var(--kb-blue); border-color: var(--kb-blue); color: white; }
+.tracker-step.active .tracker-icon { background: var(--surface); border-color: var(--kb-blue); color: var(--kb-blue); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); animation: pulse 2s infinite;}
+.tracker-label { font-size: 12px; font-weight: 700; color: var(--text-tertiary); white-space: nowrap; transition: color 0.3s; }
+.tracker-step.done .tracker-label { color: var(--text-primary); }
+.tracker-step.active .tracker-label { color: var(--kb-blue); }
+
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); } 70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+
+/* Focus Card */
+.focus-card { background: #F8FAFC; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(59, 130, 246, 0.05);}
+.focus-header { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center;}
+.focus-title { font-size: 16px; font-weight: 800; color: var(--kb-blue); }
+.focus-time { font-size: 12px; color: var(--text-secondary); font-weight: 500;}
+.focus-desc { font-size: 13px; color: var(--text-primary); line-height: 1.5; margin-bottom: 16px; font-weight: 600;}
+.focus-action { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);}
+.focus-action-title { font-size: 14px; font-weight: 800; display: flex; align-items: flex-start; gap: 8px; color: var(--text-primary);}
+
+/* Progress Track */
+.track-header { display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; margin-bottom: 16px; color: var(--text-primary);}
+.track-list { background: var(--surface); border-radius: 16px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);}
+.track-item { display: flex; align-items: center; margin-bottom: 16px; font-size: 14px; }
+.track-item:last-child { margin-bottom: 0; }
+.track-name { flex: 1; color: var(--text-primary); font-weight: 600; margin-left: 8px; }
+.track-status { color: var(--text-secondary); text-align: right; font-size: 13px; font-weight: 500;}
+.track-status.highlight { color: var(--kb-blue); font-weight: 700; }
+
+/* Restriction Box */
+.restrict-box { background: var(--surface); padding: 24px; border-radius: 16px; margin: 0 20px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);}
+.restrict-title { font-size: 15px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;}
+.restrict-list { font-size: 14px; color: var(--text-secondary); }
+.restrict-row { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+.restrict-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.restrict-val { font-weight: 800; font-size: 13px;}
+.val-no { color: var(--text-tertiary); }
+.val-yes { color: var(--kb-blue); }
+
+/* Success Summary */
+.success-header { text-align: center; padding: 48px 20px 32px; }
+.success-icon { width: 64px; height: 64px; border-radius: 50%; background-color: var(--success); color: white; font-size: 32px; line-height: 64px; margin: 0 auto 20px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 16px rgba(16, 185, 129, 0.25); }
+.success-title { font-size: 26px; font-weight: 800; color: var(--text-primary); margin-bottom: 10px; letter-spacing: -0.5px;}
+.success-time { font-size: 14px; color: var(--text-secondary); font-weight: 500;}
+
+.summary-card { background: var(--surface); margin: 0 20px 24px; border-radius: 20px; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+.summary-total { font-size: 14px; color: var(--text-secondary); text-align: center; margin-bottom: 8px; font-weight: 600;}
+.summary-amount { font-size: 32px; font-weight: 900; color: var(--text-primary); text-align: center; margin-bottom: 28px; letter-spacing: -0.5px;}
+.summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px dashed var(--border); }
+.summary-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.summary-label { color: var(--text-secondary); display: flex; align-items: center; font-weight: 500;}
+.summary-val { font-weight: 800; color: var(--text-primary); text-align: right; font-size: 15px;}
+.summary-sub { font-size: 11px; color: var(--text-secondary); margin-left: 8px; background: var(--border-light); padding: 4px 8px; border-radius: 6px; font-weight: 700;}
+
+.unlock-msg { text-align: center; font-size: 15px; font-weight: 700; color: var(--kb-blue); margin-bottom: 24px; background: #EFF6FF; margin: 0 20px 24px; padding: 16px; border-radius: 12px;}
+
+/* Push Notifications / Toast */
+.push-noti {
+  position: absolute; left: 16px; right: 16px; top: 16px; background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); border-radius: 16px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 100; transform: translateY(-150%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-light);
+}
+.push-noti.show { transform: translateY(0); }
+.push-header { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); font-weight: 600; margin-bottom: 6px; }
+.push-app-icon { width: 14px; height: 14px; background: var(--kb-yellow); border-radius: 4px; display: inline-block; }
+.push-title { font-size: 14px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+.push-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+#toast {
+  position: absolute; left: 20px; right: 20px; bottom: 30px; background: rgba(30,30,30,0.95); color: #fff;
+  border-radius: 12px; padding: 12px 14px; font-size: 13px; font-weight: 500; text-align: center; z-index: 100;
+  letter-spacing: -0.5px; word-break: keep-all; line-height: 1.5;
+  transform: translateY(150%); transition: transform 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+#toast.show { transform: translateY(0); }
+
+/* Scenario Floating Button */
+.demo-fab {
+  position: absolute; bottom: 100px; right: 20px; background: var(--kb-dark); color: white;
+  border: none; border-radius: 30px; padding: 12px 20px; font-size: 13px; font-weight: 700;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); cursor: pointer; z-index: 90; display: none;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* ==================================================
+   V6 · 퇴직연금 실물이전 제도 정합 컴포넌트
+   신규 토큰 없음 — 기존 변수/라운딩/섀도 규칙만 재사용
+   ================================================== */
+
+/* 3줄 요약 */
+.brief-list { background: var(--surface); border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.03); margin-bottom: 24px; text-align: left; }
+.brief-row { display: flex; gap: 10px; font-size: 13px; line-height: 1.55; color: var(--text-secondary); padding: 11px 0; border-bottom: 1px dashed var(--border); word-break: keep-all; letter-spacing: -0.3px; }
+.brief-row:first-child { padding-top: 0; }
+.brief-row:last-child { border-bottom: none; padding-bottom: 0; }
+.brief-num { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--kb-yellow); color: var(--kb-dark); font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.brief-row strong { color: var(--text-primary); font-weight: 800; }
+
+/* 이관회사 → 수관회사 흐름 */
+.flow-card { background: #F8FAFC; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 24px; text-align: left; }
+.flow-caption { font-size: 11.5px; font-weight: 800; color: var(--text-tertiary); letter-spacing: -0.3px; margin-bottom: 12px; }
+.flow-line { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.flow-line:last-child { margin-bottom: 0; }
+.flow-tag { flex-shrink: 0; width: 50px; font-size: 10.5px; font-weight: 800; color: var(--text-tertiary); letter-spacing: -0.3px; line-height: 1.3; }
+.flow-pill { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; font-size: 11.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.4; word-break: keep-all; letter-spacing: -0.3px; }
+.flow-line.now .flow-tag { color: var(--kb-blue); }
+.flow-line.now .flow-pill { background: #EFF6FF; border-color: rgba(59,130,246,0.35); color: var(--kb-blue); }
+.flow-arrow { flex-shrink: 0; font-size: 11px; color: var(--text-tertiary); font-weight: 800; }
+
+/* 계좌 유형 세그먼트 */
+.seg { display: flex; background: var(--border-light); border-radius: 12px; padding: 4px; margin-bottom: 14px; }
+.seg-item { flex: 1; text-align: center; padding: 9px 0; font-size: 13px; font-weight: 700; color: var(--text-secondary); border-radius: 9px; cursor: pointer; transition: all 0.2s; letter-spacing: -0.3px; }
+.seg-item.on { background: var(--surface); color: var(--text-primary); box-shadow: 0 2px 6px rgba(0,0,0,0.07); }
+
+/* 이전 방식 선택 */
+.mode-picker { display: flex; gap: 10px; margin-bottom: 14px; }
+.mode-opt { flex: 1; border: 1.5px solid var(--border); background: var(--surface); border-radius: 14px; padding: 14px 12px; text-align: left; cursor: pointer; transition: all 0.2s; }
+.mode-opt.on { border-color: var(--kb-blue); background: #EFF6FF; box-shadow: 0 4px 12px rgba(59,130,246,0.1); }
+.mode-opt-t { font-size: 13.5px; font-weight: 800; color: var(--text-primary); margin-bottom: 5px; letter-spacing: -0.3px; }
+.mode-opt.on .mode-opt-t { color: var(--kb-blue); }
+.mode-opt-d { font-size: 11px; color: var(--text-secondary); line-height: 1.45; word-break: keep-all; letter-spacing: -0.3px; }
+
+/* 3조건 판정 카드 */
+.cond-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 15px 17px; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+.cond-card.pass { border-color: rgba(16,185,129,0.35); background: #F0FDF4; }
+.cond-card.fail { border-color: rgba(245,158,11,0.4); background: #FFFAF0; }
+.cond-head { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.3px; }
+.cond-no { flex-shrink: 0; width: 20px; height: 20px; border-radius: 6px; background: var(--border-light); color: var(--text-secondary); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.cond-card.pass .cond-no { background: var(--success); color: #fff; }
+.cond-card.fail .cond-no { background: var(--warning); color: #fff; }
+.cond-verdict { margin-left: auto; font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; white-space: nowrap; background: var(--border-light); color: var(--text-secondary); }
+.cond-card.pass .cond-verdict { background: var(--success-bg); color: #047857; }
+.cond-card.fail .cond-verdict { background: var(--warning-bg); color: #B45309; }
+.cond-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-top: 9px; word-break: keep-all; letter-spacing: -0.3px; }
+.cond-body strong { color: var(--text-primary); font-weight: 700; }
+
+/* 사전조회 결과 요약 밴드 */
+.pre-summary { background: linear-gradient(135deg, var(--kb-dark) 0%, #333 100%); color: #fff; border-radius: 18px; padding: 20px; margin-bottom: 22px; }
+.pre-summary-t { font-size: 11.5px; color: rgba(255,255,255,0.65); font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+.pre-summary-amt { font-size: 26px; font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
+.pre-summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 9px 0; border-top: 1px dashed rgba(255,255,255,0.18); letter-spacing: -0.3px; }
+.pre-summary-row span { color: rgba(255,255,255,0.82); }
+.pre-summary-row b { font-weight: 800; color: #fff; }
+.pre-summary-row.hl b { color: var(--kb-yellow); }
+
+/* 제도 근거 / 규칙 노트 */
+.rule-note { display: flex; align-items: flex-start; gap: 8px; background: #F8FAFC; border: 1px solid var(--border); border-radius: 12px; padding: 13px 15px; font-size: 12.5px; line-height: 1.55; color: var(--text-secondary); margin-bottom: 16px; word-break: keep-all; letter-spacing: -0.3px; text-align: left; }
+.rule-note strong { color: var(--text-primary); font-weight: 700; }
+.src-note { font-size: 11px; line-height: 1.5; color: var(--text-tertiary); word-break: keep-all; letter-spacing: -0.3px; margin-top: 12px; }
+
+/* 상품별 실물이전 가능 여부 표 */
+.ptable { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ptable th { background: var(--border-light); color: var(--text-secondary); font-size: 11px; font-weight: 800; padding: 9px 8px; text-align: left; letter-spacing: -0.3px; }
+.ptable th:last-child { text-align: right; }
+.ptable td { padding: 11px 8px; border-bottom: 1px solid var(--border-light); color: var(--text-primary); line-height: 1.45; word-break: keep-all; letter-spacing: -0.3px; }
+.ptable td.grp { color: var(--text-secondary); font-weight: 800; font-size: 11.5px; white-space: nowrap; vertical-align: top; }
+.ptable td.yn { text-align: right; font-weight: 800; white-space: nowrap; font-size: 11.5px; }
+.ptable td.yn.o { color: var(--success); }
+.ptable td.yn.x { color: var(--text-tertiary); }
+
+/* 이전 취소 가능 여부 chip */
+.cancel-chip { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 800; white-space: nowrap; letter-spacing: -0.3px; margin-top: 8px; }
+.cancel-chip.open { background: rgba(255,255,255,0.26); color: #fff; }
+.cancel-chip.closed { background: rgba(0,0,0,0.28); color: rgba(255,255,255,0.9); }
+
+/* FAQ 아코디언 */
+.faq-item { border-bottom: 1px solid var(--border-light); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { display: flex; gap: 8px; align-items: flex-start; padding: 15px 0; font-size: 13.5px; font-weight: 800; color: var(--text-primary); cursor: pointer; word-break: keep-all; letter-spacing: -0.3px; line-height: 1.5; }
+.faq-q .qm { flex-shrink: 0; color: var(--kb-blue); font-weight: 900; }
+.faq-q .caret { margin-left: auto; flex-shrink: 0; color: var(--text-tertiary); font-size: 11px; transition: transform 0.2s; }
+.faq-item.open .faq-q .caret { transform: rotate(180deg); }
+.faq-a { font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; padding: 0 0 15px 19px; word-break: keep-all; letter-spacing: -0.3px; display: none; }
+.faq-item.open .faq-a { display: block; }
+.faq-a strong { color: var(--text-primary); font-weight: 700; }
+
+/* 판정 그룹 부제 */
+.item-group-sub { font-size: 11.5px; color: var(--text-tertiary); font-weight: 600; margin: -8px 0 12px 16px; letter-spacing: -0.3px; word-break: keep-all; line-height: 1.45; }
+
+/* ---- UI 깨짐 방지 가드 ---- */
+/* 배지는 flex 컨테이너 안에서 수축/줄바꿈되면 안 됨 (예: "제도 기준"이 2줄로 쪼개지던 문제) */
+.badge-text { white-space: nowrap; flex-shrink: 0; }
+/* 표 머리글 줄바꿈 금지 */
+.ptable th { white-space: nowrap; }
+/* 시연용 탭: 5개 버튼이 375px 안에서 한 줄로 들어가도록 여백·자간 조정 */
+.dev-nav { padding: 8px; gap: 4px; }
+.dev-nav button { padding: 8px 2px; font-size: 11px; white-space: nowrap; letter-spacing: -0.3px; }
+</style>
+</head>
+<body>
+<div class="device">
+<!-- Launcher Screens -->
+<div class="status-bar">
+<span>9:41</span>
+<span style="letter-spacing: 2px;">LTE 🔋</span>
+</div>
+<!-- Screen A: 앱 전체 메뉴 (가져오기 진입점) -->
+<div class="screen active" id="screen-menu">
+<div class="menu-header">
+<span style="font-size: 20px;">〈</span>
+<div class="search-bar">🔍 메뉴명을 검색해보세요</div>
+</div>
+<div class="menu-body">
+<div class="menu-sidebar">
+<div class="sidebar-item active">My연금</div>
+<div class="sidebar-item">퇴직연금</div>
+<div class="sidebar-item">연금저축</div>
+</div>
+<div class="menu-content">
+<div style="font-size: 18px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+  <span>My연금</span>
+  <button class="btn btn-outline btn-small" onclick="EV.reset()" style="width: auto; font-size: 11px; padding: 4px 10px; border-color: #CBD5E1; color: #64748B; border-radius: 20px;">↺ Reset</button>
+</div>
+<div class="menu-group-title">퇴직연금</div>
+<div class="menu-link">IRP 상품 매매</div>
+<div class="menu-link" onclick="nav('screen-f1-pre')">실물이전 가능 상품 사전조회</div>
+<div class="menu-group-title" style="color: #2563eb; font-weight: 800;">연금플러스 🌟</div>
+<a class="menu-link" href="#" onclick="nav('screen-f1-0')" style="display: flex; align-items: center; text-decoration: none;">
+<span>타사 퇴직연금 가져오기</span>
+<span style="font-size: 10px; font-weight: bold; color: #1E1E1E; background: #FFCC00; padding: 2px 4px; border-radius: 4px; margin-left: 6px;">NEW</span>
+</a>
+<div class="menu-link" onclick="nav('screen-manage')" style="display: flex; align-items: center;">
+<span>연금저축 관리</span>
+<span style="font-size: 10px; font-weight: bold; color: #1E1E1E; background: #FFCC00; padding: 2px 4px; border-radius: 4px; margin-left: 6px;">NEW</span>
+</div>
+<div class="menu-group-title">연금저축</div>
+<div class="menu-link">연금저축 ETF/리츠 매매</div>
+</div>
+</div>
+</div>
+<!-- Screen B: 연금저축 관리 (인출 시뮬레이터 진입점) -->
+<div class="screen" id="screen-manage">
+<div class="header-nav">
+<span class="back-btn" onclick="nav('screen-menu')">〈</span>
+      연금저축 관리
+    </div>
+<div class="manage-tabs">
+<div class="manage-tab active">입출금 관리</div>
+<div class="manage-tab">서비스 관리</div>
+</div>
+<div style="flex:1; overflow-y:auto; padding-bottom: 40px; background: white;">
+<div class="manage-section">
+<div class="manage-section-title">입금 관리</div>
+<div class="manage-item">
+<div class="manage-item-left"><div class="manage-icon">📅</div> 입금한도 설정</div>
+<div class="manage-arrow">〉</div>
+</div>
+<div class="manage-item">
+<div class="manage-item-left"><div class="manage-icon">🧾</div> 입금지급내역</div>
+<div class="manage-arrow">〉</div>
+</div>
+</div>
+<div style="height: 12px; background: #F9FAFB; margin-top: 24px;"></div>
+<div class="manage-section">
+<div class="manage-section-title">출금 관리</div>
+<div class="manage-item">
+<div class="manage-item-left"><div class="manage-icon" style="background:#f3e8ff;">💰</div> 연금수령</div>
+<div class="manage-arrow">〉</div>
+</div>
+<!-- F2 연결 포인트: 연금 외 수령 -->
+<a class="manage-item" href="#" onclick="nav('screen-f2-detail')" style="background: #F0FDF4; margin: 8px -20px; padding: 16px 20px; border-bottom: none;">
+<div class="manage-item-left"><div class="manage-icon" style="background:white;">💸</div>
+<div>
+<div style="font-weight: 700; color: #15803d;">연금 외 수령</div>
+<div style="font-size: 13px; color: #166534; margin-top: 4px;">해지 없이 꼭 필요한 금액만 빼기</div>
+</div>
+</div>
+<div class="manage-arrow" style="color: #15803d;">〉</div>
+</a>
+<div class="manage-item">
+<div class="manage-item-left"><div class="manage-icon">🚫</div> 연금저축 해지</div>
+<div class="manage-arrow">〉</div>
+</div>
+</div>
+</div>
+</div>
+<!-- F1 Screens -->
+<div class="dev-nav" style="display:none;">
+<button class="active" id="nav-btn-0" onclick="nav('screen-f1-0')">0.진입</button>
+<button id="nav-btn-pre" onclick="nav('screen-f1-pre')">1.사전조회</button>
+<button id="nav-btn-1" onclick="nav('screen-f1-1')">2.판정</button>
+<button id="nav-btn-2" onclick="nav('screen-f1-2')">3.현황판</button>
+<button id="nav-btn-3" onclick="nav('screen-f1-3')">4.완료</button>
+</div>
+<!-- ==============================================
+       Screen 0: 진입 화면 (타사 연금 가져오기)
+       ============================================== -->
+<!-- ==============================================
+       Screen 1: 이전 예약 · 잠금 창 미리보기
+       ============================================== -->
+<!-- ==============================================
+       Screen 2: 현황판 본체
+       ============================================== -->
+<!-- ==============================================
+       Screen 3: 완료 · 재편입
+       ============================================== -->
+<!-- F2 Screens -->
+<!-- Screen 0: 진입 화면 (출금 관리) -->
+<div class="push-noti" id="pushNoti">
+<div class="push-header"><span class="push-app-icon"></span> KB증권 · 지금</div>
+<div class="push-title" id="pushTitle">알림 제목</div>
+<div class="push-desc" id="pushDesc">알림 내용</div>
+</div>
+<div class="screen" id="screen-f1-0">
+<div class="header">
+<span class="back-btn" onclick="nav('screen-menu')">〈</span>
+<span>타사 퇴직연금 가져오기</span>
+</div>
+<div class="scroll-area" style="display: flex; flex-direction: column; padding: 28px 24px; background: white; text-align: center;">
+<div style="font-size: 30px; font-weight: 900; color: var(--text-primary); line-height: 1.32; margin-top: 12px; margin-bottom: 24px; letter-spacing: -1px;">
+        운용 상품 그대로<br/>KB증권으로
+      </div>
+<div style="background: #F8FAFC; border-radius: 16px; padding: 18px 20px; margin-bottom: 24px; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 4px 12px rgba(59,130,246,0.05);">
+<div style="font-size: 13px; font-weight: 800; color: var(--kb-blue); margin-bottom: 8px;">KB증권만의 사전조회 · 일정 미리보기</div>
+<div style="font-size: 15px; color: var(--text-primary); font-weight: 700; line-height: 1.5; letter-spacing: -0.5px; word-break: keep-all;">
+          어떤 상품이 그대로 옮겨지고 어떤 상품이<br/>
+          현금화되는지, <span style="background: linear-gradient(180deg, transparent 65%, rgba(245, 158, 11, 0.3) 65%);">신청 전에 먼저 확인</span>하세요
+        </div>
+</div>
+<div class="brief-list">
+<div class="brief-row">
+<span class="brief-num">1</span>
+<div>퇴직연금 실물이전은 계좌에서 <strong>보유한 상품을 해지하지 않고</strong> 그대로 다른 금융기관으로 옮기는 제도입니다.</div>
+</div>
+<div class="brief-row">
+<span class="brief-num">2</span>
+<div><strong>퇴직연금 유형과 상품이 같을 때만</strong> 실물이전이 가능하며, 실물이전이 불가능한 상품은 <strong>현금화 후</strong> 이전됩니다.</div>
+</div>
+<div class="brief-row">
+<span class="brief-num">3</span>
+<div>가입자 <strong>선택권 확대</strong>와 퇴직연금 사업자 간 경쟁 촉진을 위해 <strong>2024년 10월</strong> 시행됐습니다.</div>
+</div>
+</div>
+<div class="flow-card">
+<div class="flow-caption">실물이전 시행 전후 비교</div>
+<div class="flow-line">
+<div class="flow-tag">시행 전</div>
+<div class="flow-pill">운용 중인 예금·펀드 해지 후 이전 → 수관사에서 새로 가입</div>
+</div>
+<div class="flow-line now">
+<div class="flow-tag">시행 후</div>
+<div class="flow-pill">운용 중인 예금·펀드를 <b>해지 없이 그대로</b> 이전</div>
+</div>
+<div style="border-top: 1px dashed var(--border); margin-top: 14px; padding-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-secondary); letter-spacing: -0.3px;">
+<span style="font-weight: 800; color: var(--text-primary);">이관회사</span>
+<span class="flow-arrow">→</span>
+<span>기존 금융기관</span>
+<span style="margin-left: auto; font-weight: 800; color: var(--kb-blue);">수관회사</span>
+<span class="flow-arrow">→</span>
+<span>KB증권</span>
+</div>
+</div>
+<div style="flex: 1;"></div>
+<div class="rule-note" style="margin-bottom: 0;">
+<span class="badge-text info" style="margin-top: 1px;">안내</span>
+<div>본 화면은 <strong>사전조회</strong> 단계입니다. 사전조회만으로는 이전이 시작되지 않고 <strong>매매 제한도 발생하지 않습니다.</strong></div>
+</div>
+</div>
+<div class="bottom-area">
+<button class="btn btn-outline" onclick="openModal('prod-modal')" style="flex: 1;">가능 상품 보기</button>
+<button class="btn btn-primary" onclick="nav('screen-f1-pre')" style="flex: 1.4;">실물이전 사전조회</button>
+</div>
+</div>
+<div class="screen" id="screen-f1-pre">
+<div class="header">
+<span class="back-btn" onclick="nav('screen-f1-0')">〈</span>
+<span>실물이전 사전조회</span>
+</div>
+<div class="scroll-area section-padding">
+<div class="title-large" style="font-size: 21px; margin-bottom: 6px;">이전 조건을 먼저 확인합니다</div>
+<p class="subtitle" style="margin-bottom: 22px;">퇴직연금 실물이전은 아래 <strong>3가지 조건을 모두 충족</strong>해야 진행할 수 있습니다.</p>
+<div class="section-title" style="font-size: 15px; margin-bottom: 10px;">1. 이전할 퇴직연금 유형</div>
+<div class="seg" id="seg-type">
+<div class="seg-item on" onclick="EV.setType('IRP', this)">개인형 IRP</div>
+<div class="seg-item" onclick="EV.setType('DC', this)">DC형</div>
+<div class="seg-item" onclick="EV.setType('DB', this)">DB형</div>
+</div>
+<div class="rule-note" id="type-note">
+<span class="badge-text info" style="margin-top: 1px;">규칙</span>
+<div><strong>개인형 IRP ↔ 개인형 IRP</strong>처럼 같은 유형끼리만 이전할 수 있습니다. 유형이 다른 계좌로는 실물이전이 불가합니다.</div>
+</div>
+<div class="section-title" style="font-size: 15px; margin-bottom: 10px; margin-top: 26px;">2. 이관회사 계좌</div>
+<div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 15px 17px; margin-bottom: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<div style="font-size: 11px; color: var(--text-tertiary); font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px;">이관회사 (기존 금융기관)</div>
+<div style="font-size: 14.5px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.3px;" id="pre-acct">○○은행 개인형 IRP 620-01-9944</div>
+</div>
+<span style="color: var(--text-tertiary); font-size: 11px;">변경 ▼</span>
+</div>
+<div style="border-top: 1px dashed var(--border); margin-top: 13px; padding-top: 12px; display: flex; justify-content: space-between; font-size: 13px; letter-spacing: -0.3px;">
+<span style="color: var(--text-secondary);">보유 상품 · 총 평가금액</span>
+<span style="font-weight: 800; color: var(--text-primary);">6종 · 44,890,000원</span>
+</div>
+</div>
+<div class="section-title" style="font-size: 15px; margin-bottom: 10px;">3. 이전 방식</div>
+<div class="mode-picker" id="mode-picker">
+<div class="mode-opt on" id="mode-real" onclick="EV.setMode('real')">
+<div class="mode-opt-t">실물이전</div>
+<div class="mode-opt-d">운용 상품을 그대로 가져옴<br/>(불가 상품은 현금화)</div>
+</div>
+<div class="mode-opt" id="mode-cash" onclick="EV.setMode('cash')">
+<div class="mode-opt-t">현금이전</div>
+<div class="mode-opt-d">전액 매도 후<br/>현금으로 가져옴</div>
+</div>
+</div>
+<div class="rule-note" id="mode-note">
+<span class="badge-text info" style="margin-top: 1px;">안내</span>
+<div id="mode-note-txt">실물이전을 선택해도 <strong>실물이전이 불가한 상품은 매도 후 현금으로</strong> 이전됩니다.</div>
+</div>
+<div class="section-title" style="margin-top: 30px;">조건 판정 결과</div>
+<div class="cond-card pass" id="cond1">
+<div class="cond-head">
+<span class="cond-no">1</span>
+<span>동일한 퇴직연금 유형</span>
+<span class="cond-verdict" id="cond1-v">충족</span>
+</div>
+<div class="cond-body" id="cond1-b">이관회사 <strong>개인형 IRP</strong> → KB증권 <strong>개인형 IRP</strong>. 같은 유형이므로 이전 가능합니다.</div>
+</div>
+<div class="cond-card fail" id="cond2">
+<div class="cond-head">
+<span class="cond-no">2</span>
+<span>수관회사의 동일 상품 판매</span>
+<span class="cond-verdict" id="cond2-v">일부 미충족</span>
+</div>
+<div class="cond-body">보유 6종 중 <strong>1종(미래에셋 글로벌채권)</strong>은 KB증권 IRP에서 판매하지 않아 <strong>매도 후 현금으로</strong> 이전됩니다.</div>
+</div>
+<div class="cond-card fail" id="cond3">
+<div class="cond-head">
+<span class="cond-no">3</span>
+<span>실물이전 가능 상품</span>
+<span class="cond-verdict" id="cond3-v">일부 미충족</span>
+</div>
+<div class="cond-body">보유 6종 중 <strong>1종(디폴트옵션)</strong>은 제도상 실물이전 대상에서 제외되어 <strong>현금화</strong>됩니다. <span style="color: var(--kb-blue); font-weight: 700; text-decoration: underline; cursor: pointer;" onclick="openModal('prod-modal')">상품별 가능 여부 보기</span></div>
+</div>
+<div class="src-note">※ 사전조회는 이관회사에 실물이전 가능 여부를 조회하는 절차입니다. 조회 결과만으로는 이전이 신청되지 않습니다.</div>
+</div>
+<div class="bottom-area">
+<button class="btn btn-primary" onclick="nav('screen-f1-1')">사전조회 결과 보기</button>
+</div>
+</div>
+<div class="screen" id="screen-f1-1">
+<div class="header">
+<span class="back-btn" onclick="nav('screen-f1-pre')">〈</span>
+<span>사전조회 결과</span>
+</div>
+<div class="scroll-area section-padding">
+<div class="pre-summary">
+<div class="pre-summary-t">이관회사 보유 상품 · 총 평가금액</div>
+<div class="pre-summary-amt">44,890,000원</div>
+<div class="pre-summary-row hl">
+<span>그대로 이전 (실물이전) · 4종</span>
+<b id="sum-real">34,950,000원</b>
+</div>
+<div class="pre-summary-row">
+<span>현금으로 이전 (매도 후) · 2종</span>
+<b id="sum-cash">9,940,000원</b>
+</div>
+</div>
+<div class="info-box highlight" id="cashModeBanner" style="display: none; align-items: flex-start; gap: 8px;">
+<span class="badge-text alert" style="margin-top: 2px;">현금이전</span>
+<div style="flex: 1; word-break: keep-all; line-height: 1.6;">
+<strong>현금이전을 선택했습니다.</strong><br/>
+아래 실물이전 판정과 무관하게 <strong>보유 6종 전액이 매도된 뒤 현금으로</strong> 이전됩니다. 정기예금도 중도해지되어 약정 금리를 받을 수 없습니다.
+</div>
+</div>
+<div class="lock-band-container">
+<div class="title-large" style="font-size: 20px; letter-spacing: -0.5px; margin-bottom: 22px; text-align: center;">
+          지금 신청하면 이 기간에<br/>
+<span style="background: linear-gradient(180deg, transparent 65%, rgba(245, 158, 11, 0.25) 65%); padding: 0 4px;">매매가 제한됩니다</span>
+</div>
+<div class="lock-band-title" style="justify-content: center;">
+<span>매매 제한 예상 구간</span>
+</div>
+<div class="calendar" id="calendarGrid">
+<!-- Calendar is rendered by JS -->
+</div>
+<div class="lock-duration-box">
+<div class="lock-duration" id="durationTxt1">예상 영업일 7~9일</div>
+<div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 10px; line-height: 1.5; word-break: keep-all; letter-spacing: -0.3px;" id="durationBreak">
+            실물이전 <strong>3영업일</strong> + 현금화 대상 결제 <strong>5영업일</strong>
+          </div>
+</div>
+</div>
+<div class="rule-note">
+<span class="badge-text info" style="margin-top: 1px;">제도 기준</span>
+<div>실물이전만 진행되면 신청부터 완료까지 <strong>영업일 기준 약 3일</strong>이 걸립니다. 실물이전 불가 상품을 보유한 경우 <strong>현금화 소요 시간이 별도로 발생</strong>해 일정이 늘어납니다.</div>
+</div>
+<div class="info-box" style="display: flex; align-items: flex-start; gap: 8px;">
+<span class="badge-text warn" style="margin-top: 2px;">변동</span>
+<div style="flex: 1; word-break: keep-all;">
+          이관회사의 매도·결제 처리 속도에 따라 <strong>완료 일정이 변동될 수 있습니다.</strong> 노란색 밴드 기간 내에 이전이 완료됩니다.
+        </div>
+</div>
+<div class="section-title" style="margin-top: 32px;">보유 6종 실물이전 판정</div>
+<div class="item-group">
+<div class="item-group-title" style="color: var(--success);"><span class="status-dot-small success"></span> 그대로 옮겨집니다 (4건)</div>
+<div class="item-group-sub">3가지 조건을 모두 충족 · 해지나 매도 없이 이전</div>
+<div class="item-card">
+<div class="item-row" style="margin-bottom: 12px;">
+<div class="item-name">KODEX 미국S&amp;P500TR</div>
+<div class="item-amount">12,480,000원</div>
+</div>
+<div class="item-row" style="margin-bottom: 12px;">
+<div class="item-name">TIGER 미국나스닥100</div>
+<div class="item-amount">8,320,000원</div>
+</div>
+<div class="item-row">
+<div class="item-name">KODEX 200</div>
+<div class="item-amount">4,150,000원</div>
+</div>
+<div class="item-desc" style="border-top: 1px dashed var(--border); padding-top: 10px;">
+            실적배당형 <strong>ETF</strong> · 실물이전 가능 상품이며 KB증권 IRP에서도 판매 중입니다.
+          </div>
+</div>
+<div class="item-card" style="border-color: rgba(16,185,129,0.35); background: #F0FDF4;">
+<div class="item-row">
+<div class="item-name">
+              정기예금
+              <span class="badge-text info" style="margin-right:0; margin-left:6px; background:#D1FAE5; color:#047857; font-size:9px;">해지 없음</span>
+</div>
+<div class="item-amount">10,000,000원</div>
+</div>
+<div class="item-desc">
+<strong style="color: #047857;">원리금보장형 예금은 실물이전 가능 상품입니다.</strong><br/>
+            만기(2027-03-11) 전이라도 <strong>해지하지 않고 그대로</strong> 옮겨지므로 중도해지 이자 손실이 발생하지 않습니다.
+          </div>
+</div>
+</div>
+<div class="item-group">
+<div class="item-group-title" style="color: var(--warning);"><span class="status-dot-small warning"></span> 현금으로 이전됩니다 (2건)</div>
+<div class="item-group-sub">조건 ②·③ 미충족 · 매도 후 현금으로 입고</div>
+<div class="item-card highlight" id="hCritical">
+<div class="item-row">
+<div class="item-name">
+              디폴트옵션
+              <span class="badge-text alert" style="margin-right:0; margin-left:6px; font-size:9px;">조건 ③</span>
+</div>
+<div class="item-amount">3,240,000원</div>
+</div>
+<div class="item-desc" id="hCriticalDesc">
+<strong style="color: #B91C1C;">디폴트옵션(BF 고위험형)은 제도상 실물이전 대상에서 제외됩니다.</strong><br/>
+<strong style="color: #B45309;">※ 해지·결제 5영업일 — 이 상품이 전체 일정을 정합니다.</strong><br/>
+            지금 팔면 예상 손익: <span class="val-down">-312,000원</span>
+</div>
+<div class="item-actions" id="hCriticalAction">
+<button class="btn btn-outline btn-small" onclick="EV.sell()" style="background: white; border-color: rgba(245,158,11,0.5);">먼저 현금화해 일정 당기기</button>
+</div>
+</div>
+<div class="item-card">
+<div class="item-row">
+<div class="item-name">
+              미래에셋 글로벌채권
+              <span class="badge-text warn" style="margin-right:0; margin-left:6px; font-size:9px;">조건 ②</span>
+</div>
+<div class="item-amount">6,700,000원</div>
+</div>
+<div class="item-desc">
+            공모펀드로 실물이전은 가능하지만 <strong>KB증권 IRP에서 판매하지 않는 상품</strong>이라 매도 후 현금으로 이전됩니다.<br/>
+            결제 3영업일 · 지금 팔면 예상 손익: <span class="val-up">+214,000원</span>
+</div>
+</div>
+</div>
+<div class="info-box highlight" style="display: flex; align-items: flex-start; gap: 8px;">
+<span class="badge-text alert" style="margin-top: 2px;">주의</span>
+<div style="flex: 1; word-break: keep-all; line-height: 1.6;">
+<strong>신청 전 확인하세요</strong><br/>
+          · 실물이전이 불가한 상품은 <strong>매도 후 현금으로</strong> 이전됩니다.<br/>
+          · 금융기관별로 <strong>수수료 등 조건이 다를 수 있어</strong> 이전 전 꼼꼼하게 비교해 보세요.<br/>
+          · <strong>DC형</strong> 가입자는 소속 회사의 규약으로 정해진 금융기관 내에서만 이전할 수 있습니다.
+        </div>
+</div>
+<div style="display: flex; gap: 10px; margin-bottom: 8px;">
+<button class="btn btn-outline btn-small" onclick="openModal('prod-modal')" style="flex: 1; width: auto;">상품별 가능 여부</button>
+<button class="btn btn-outline btn-small" onclick="openModal('faq-modal')" style="flex: 1; width: auto;">자주 묻는 질문</button>
+</div>
+<div class="src-note">※ 상품별 실물이전 가능 여부는 계약 형태·상품 특성에 따라 달라질 수 있으며, 최종 판정은 이관회사 조회 결과를 따릅니다.</div>
+</div>
+<div class="bottom-area">
+<button class="btn btn-secondary" onclick="showToast('사전조회 결과를 저장했습니다.')" style="flex: 1;">
+<span style="display: block; font-size: 16px; margin-bottom: 4px;">결과 저장</span>
+<span style="font-size: 12px; font-weight: 500;">제한 없음</span>
+</button>
+<button class="btn btn-primary" onclick="EV.submit()" style="flex: 1.2;">
+<span style="display: block; font-size: 16px; margin-bottom: 4px;">이전 신청하기</span>
+<span style="font-size: 12px; font-weight: 500; color: rgba(0,0,0,0.6);">당일만 취소 가능</span>
+</button>
+</div>
+</div>
+<div class="screen" id="screen-f1-2">
+<div class="header" style="border-bottom: none;">
+<span class="back-btn" onclick="nav('screen-f1-1')">〈</span>
+<span>이전 진행 현황</span>
+</div>
+<!-- Trading Window Banner -->
+<div class="status-banner warning" id="s2-banner">
+<div>
+<div class="status-banner-text" id="s2-banner-title">지금은 매도만 가능합니다</div>
+<div class="status-banner-sub" id="s2-banner-sub">매수 재개 예상: 9/2(수) ~ 9/3(목)</div>
+<div class="cancel-chip open" id="s2-cancel-chip">신청 당일 · 취소 가능</div>
+</div>
+<div class="status-dday" id="s2-dday">D-5 영업일</div>
+</div>
+<div class="scroll-area">
+<div class="tracker-container">
+<!-- Pizza Tracker : 제도 절차 4단계 + 현금화 처리 -->
+<div class="pizza-tracker">
+<div class="pizza-tracker-progress" id="pizza-progress" style="width: 50%;"></div>
+<div class="tracker-step done">
+<div class="tracker-icon">1</div>
+<div class="tracker-label">신청</div>
+</div>
+<div class="tracker-step done">
+<div class="tracker-icon">2</div>
+<div class="tracker-label">통보</div>
+</div>
+<div class="tracker-step active" id="tracker-step-3">
+<div class="tracker-icon">3</div>
+<div class="tracker-label">확인</div>
+</div>
+<div class="tracker-step" id="tracker-step-4">
+<div class="tracker-icon">4</div>
+<div class="tracker-label">처리</div>
+</div>
+<div class="tracker-step" id="tracker-step-5">
+<div class="tracker-icon">5</div>
+<div class="tracker-label">완료</div>
+</div>
+</div>
+<!-- Current Step Focus Card -->
+<div class="focus-card">
+<div class="focus-header">
+<span class="focus-title" id="focus-title">3. 이관회사 의사 확인</span>
+<span class="focus-time" id="focus-time">보통 1~3영업일</span>
+</div>
+<div class="focus-desc" id="focus-desc" style="word-break: keep-all; letter-spacing: -0.5px;">
+            기존 금융기관(이관회사)에서 퇴직연금을 이전하는 것이 맞는지 최종 확인합니다.<br/><strong>이때 동의해야 이전이 진행됩니다.</strong>
+</div>
+<div class="focus-action" id="focus-action">
+<div class="focus-action-title">
+<span class="badge-text info" style="margin-top: 2px;">알림</span>
+<span>이 번호로 확인 전화가 옵니다</span>
+</div>
+<div style="font-size: 15px; font-weight: 800; color: var(--kb-dark);">1588-0000 · 이관회사 대표번호</div>
+<button class="btn btn-primary btn-small" onclick="showToast('연락처에 번호를 저장합니다.')" style="width: 100%; box-shadow: none;">연락처에 번호 저장하기</button>
+</div>
+</div>
+</div>
+<div class="section-padding">
+<!-- 취소 가능 여부 -->
+<div class="info-box" id="cancel-box" style="display: flex; align-items: flex-start; gap: 8px; border: 1px solid rgba(59,130,246,0.25); background: #F8FAFC;">
+<span class="badge-text info" style="margin-top: 2px;">취소</span>
+<div style="flex: 1; word-break: keep-all; line-height: 1.6;" id="cancel-box-txt">
+<strong style="color: var(--kb-blue);">신청 당일에만 취소할 수 있습니다.</strong><br/>
+            수관회사(KB증권)에 취소 의사를 전달하거나, 이관회사가 이전 의사를 재확인할 때 취소 의사를 밝히면 됩니다.
+            <strong>단, 이전 의사 재확인을 마쳤다면 신청 당일이라도 취소가 불가능합니다.</strong>
+</div>
+</div>
+<button class="btn btn-outline btn-small" id="cancel-btn" onclick="EV.cancel()" style="width: 100%; margin-bottom: 24px;">이전 신청 취소하기</button>
+<div class="track-header">
+<span>종목별 처리 현황</span>
+<span style="color: var(--kb-blue);" id="track-count">4 / 6 확정</span>
+</div>
+<div class="track-list">
+<div class="track-item">
+<span class="status-dot-small success"></span>
+<div class="track-name">KODEX 미국S&amp;P500TR</div>
+<div class="track-status">실물이전 확정</div>
+</div>
+<div class="track-item">
+<span class="status-dot-small success"></span>
+<div class="track-name">TIGER 미국나스닥100</div>
+<div class="track-status">실물이전 확정</div>
+</div>
+<div class="track-item">
+<span class="status-dot-small success"></span>
+<div class="track-name">KODEX 200</div>
+<div class="track-status">실물이전 확정</div>
+</div>
+<div class="track-item">
+<span class="status-dot-small success"></span>
+<div class="track-name">정기예금</div>
+<div class="track-status">실물이전 확정 · 해지 없음</div>
+</div>
+<div class="track-item">
+<span class="status-dot-small active"></span>
+<div class="track-name">미래에셋 글로벌채권</div>
+<div class="track-status highlight">매도 체결 · 08-27 결제</div>
+</div>
+<div class="track-item">
+<span class="status-dot-small pending"></span>
+<div class="track-name">디폴트옵션 (BF 고위험)</div>
+<div class="track-status">현금화 접수 대기</div>
+</div>
+</div>
+</div>
+<!-- Restrictions -->
+<div class="restrict-box">
+<div class="restrict-title">이전 중에 제한되는 것</div>
+<div class="restrict-list">
+<div class="restrict-row">
+<span>새로 사기 (매수)</span>
+<span class="restrict-val val-no">불가</span>
+</div>
+<div class="restrict-row">
+<span>팔기 (매도)</span>
+<span class="restrict-val val-yes" id="restrict-sell">가능</span>
+</div>
+<div class="restrict-row">
+<span>추가 납입</span>
+<span class="restrict-val val-no">불가</span>
+</div>
+<div class="restrict-row">
+<span>연금 수령 신청</span>
+<span class="restrict-val val-no">불가</span>
+</div>
+</div>
+<div class="rule-note" style="margin-top: 18px; margin-bottom: 0;">
+<span class="badge-text info" style="margin-top: 1px;">참고</span>
+<div><strong>실물이전 대상 4종은 매도할 필요가 없습니다.</strong> 현금화 대상 2종에 대해서만 매도·결제 절차가 진행됩니다.</div>
+</div>
+<div class="src-note">※ 이전 기간 중 거래 제한 항목은 제도가 아닌 금융기관 운영 기준에 따르며, 기관별로 다를 수 있습니다.</div>
+</div>
+</div>
+</div>
+<div class="screen" id="screen-f1-3">
+<div class="header">
+<span class="back-btn" onclick="nav('screen-f1-2')">〈</span>
+<span>이전 완료</span>
+</div>
+<div class="scroll-area" style="background-color: var(--bg-color);">
+<div class="success-header">
+<div class="success-icon">✓</div>
+<div class="success-title">이전이 완료됐습니다</div>
+<div class="success-time">09월 02일 (수) 11:07 · 문자 알림 발송</div>
+</div>
+<div class="summary-card">
+<div class="summary-total">최종 입고 금액</div>
+<div class="summary-amount">44,792,000원</div>
+<div class="summary-row">
+<div class="summary-label">
+            실물이전 4종 <span class="summary-sub">그대로 입고</span>
+</div>
+<div class="summary-val">34,950,000원</div>
+</div>
+<div class="summary-row">
+<div class="summary-label">
+            현금 입고 <span class="summary-sub">예수금</span>
+</div>
+<div class="summary-val" style="color: var(--kb-blue);">9,842,000원</div>
+</div>
+<div class="summary-row">
+<div class="summary-label">
+            매도 확정 손익
+          </div>
+<div class="summary-val" style="color: var(--danger);">-98,000원</div>
+</div>
+</div>
+<div class="info-box" style="margin: 0 20px 24px; display: flex; align-items: flex-start; gap: 8px; border: 1px solid rgba(16,185,129,0.3); background: #F0FDF4;">
+<span class="badge-text info" style="margin-top: 2px; background: #D1FAE5; color: #047857;">유지</span>
+<div style="flex: 1; word-break: keep-all; line-height: 1.6; color: #047857;">
+<strong>정기예금 10,000,000원은 해지되지 않았습니다.</strong><br/>
+<span style="font-size: 13px;">만기(2027-03-11)와 약정 금리가 그대로 유지된 상태로 입고됐습니다.</span>
+</div>
+</div>
+<div class="unlock-msg">
+        매매 거래가 재개되었습니다. 이관된 잔고를 확인해 주세요.
+      </div>
+<div class="info-box highlight" style="margin: 0 20px 24px; display: flex; align-items: flex-start; gap: 8px;">
+<span class="badge-text alert" style="margin-top: 2px;">주의</span>
+<div style="flex: 1; word-break: keep-all;">
+<strong>예수금 9,842,000원</strong>이 현금으로 남아있습니다.<br/>
+<span style="font-size: 13px; margin-top: 4px; display: inline-block; color: #B45309;">바로 상품을 매수하여 운용하지 않으면 수익이 발생하지 않습니다.</span>
+</div>
+</div>
+<div class="section-padding" style="padding-top: 0; display: flex; gap: 12px;">
+<button class="btn btn-secondary" onclick="showToast('KB증권 IRP 상품 랭킹 화면으로 이동합니다.')" style="flex: 1;">다른 상품 보기</button>
+<button class="btn btn-primary" onclick="showToast('현금화된 2종의 비중 그대로 주문 화면으로 이동합니다.')" style="flex: 1.5;">이전 비중 그대로 담기</button>
+</div>
+</div>
+</div><button class="demo-fab" id="demoAdvanceBtn" onclick="EV.nextStep()">시연용 다음단계 ⏩</button>
+<div id="toast"></div>
+<div class="screen" id="screen-f2-entry">
+<div class="header">
+<span class="back-btn" onclick="nav('screen-menu')">〈</span>
+<span>출금 관리</span>
+</div>
+<div class="scroll-area section-padding">
+<div class="title-large">연금저축 출금 관리</div>
+<p class="subtitle">필요하신 업무를 선택해주세요.</p>
+<div class="menu-list">
+<div class="menu-item" onclick="alert('기존 연금수령 플로우입니다.')">
+<div>
+<div class="menu-title">연금수령</div>
+<div class="menu-desc">만 55세 이상, 가입 5년 경과 시</div>
+</div>
+<div class="menu-icon">›</div>
+</div>
+<div class="menu-item" onclick="alert('기존 연금저축 해지 플로우입니다.')">
+<div>
+<div class="menu-title">연금저축 해지</div>
+<div class="menu-desc">계좌 전체를 해지하고 전액 출금</div>
+</div>
+<div class="menu-icon">›</div>
+</div>
+<div class="menu-item" onclick="nav('screen-f2-detail')">
+<div>
+<div class="menu-title">연금 외 수령 <span class="new-badge">NEW</span></div>
+<div class="menu-desc">중도인출, 비과세인출, 상속인 조회 등</div>
+</div>
+<div class="menu-icon">›</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Screen 1: 상세 화면 (연금 외 수령) -->
+<div class="screen" id="screen-f2-detail">
+<div class="header" style="border-bottom: none;">
+<span class="back-btn" onclick="nav('screen-menu')">〈</span>
+<span>연금 외 수령</span>
+</div>
+<div class="scroll-area">
+<div class="sub-header">
+<div class="account-selector">신연금저축 394-104-153 01</div>
+</div>
+<div class="tabs">
+<div class="tab active" onclick="switchTab('tab-self', this)">본인 · 중도인출</div>
+<div class="tab" onclick="switchTab('tab-other', this)">타 명의 · 상속</div>
+</div>
+<!-- Tab Content 1: 본인 (중도인출) -->
+<div class="tab-content active" id="tab-self">
+<div class="dark-card">
+<div class="dark-card-title">예상 인출가능 금액 <span class="info-icon">i</span></div>
+<div class="dark-card-amount">세후 <span class="highlight">15,950,000</span>원</div>
+<div class="dark-card-row">
+<span>총 평가금액(적립금)</span>
+<span>18,500,000원</span>
+</div>
+<div class="dark-card-row">
+<span>세금합계 <span class="info-icon">i</span></span>
+<span>2,550,000원</span>
+</div>
+</div>
+<div class="section-padding" style="padding-top: 0;">
+<!-- Trigger Button for Modal -->
+<div class="action-card" style="text-align: center; border-color: var(--border);">
+<h4 style="color: var(--text-primary); font-size: 16px; margin-bottom: 14px;">내 인출 순서와 세금은?</h4>
+<p style="letter-spacing: -0.3px;">법령에 따른 인출 순서와 비과세 혜택을 미리 확인해보세요.</p>
+<button class="btn btn-outline" onclick="openModal('tax-modal')">인출 항목 및 세금 시뮬레이션 보기</button>
+</div>
+<div class="notice-box" style="margin-top: 32px;">
+<input id="chk1" type="checkbox"/>
+<label for="chk1">본인은 「소득세법 시행령」 제 40조의 2제 6항에 따라 신연금 계좌의 중도인출을 신청합니다.</label>
+</div>
+</div>
+<div class="bottom-area">
+<button class="btn btn-primary" onclick="alert('출금이 진행됩니다.')">해지없이 출금하기</button>
+</div>
+</div>
+<!-- Tab Content 2: 타 명의 (상속 등) -->
+<div class="tab-content" id="tab-other">
+<div class="section-padding">
+<div class="section-title" style="font-size: 20px;">타 명의 계좌 조회 안내</div>
+<p class="subtitle" style="font-size: 14px;">상속 예정이거나 본인 명의가 아닌 계좌의 조회를 희망하시는 경우, 관련 법령에 따라 직접 조회가 제한됩니다.</p>
+<div class="action-card" style="border-color: var(--border);">
+<h4 style="color: var(--text-primary); font-size: 16px;">상속인 금융거래 조회</h4>
+<p>상속인의 편의를 위해 피상속인(사망자) 명의의 모든 금융채권 및 채무를 확인하실 수 있는 서비스입니다.</p>
+<button class="btn btn-outline" onclick="alert('금융감독원 상속인금융거래조회서비스로 이동합니다.')">금감원 상속인금융거래조회 바로가기</button>
+</div>
+<div class="action-card" style="background-color: #F1F5F9; border: none;">
+<h4 style="color: var(--text-primary); font-size: 16px;">KB증권 고객센터 안내</h4>
+<p>타 명의 계좌 인출 및 상속 절차에 대한 상세한 안내가 필요하신 경우 고객센터로 문의해 주시기 바랍니다.</p>
+<div style="font-size: 26px; font-weight: 800; color: var(--kb-dark); text-align: center; margin-top: 20px;">
+              📞 1588-6611
+            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==============================================
+       Modal: 인출 순서 및 세금 시뮬레이터 (v2 팝업) 
+       ============================================== -->
+<div class="modal-overlay" id="tax-modal">
+<div class="modal-content">
+<div class="modal-header">
+<div class="modal-title">인출 항목 및 세금 시뮬레이터</div>
+<div class="modal-close" onclick="closeModal('tax-modal')">×</div>
+</div>
+<div class="modal-body">
+<p class="subtitle" style="margin-bottom: 20px;">법령에 따라 아래 순서대로 인출되며, 항목별로 세금이 다르게 부과됩니다.</p>
+<div class="simulator-box" style="border: none; padding: 0; margin-bottom: 30px; box-shadow: none;">
+<div class="order-list">
+<!-- 1순위 -->
+<div class="order-item highlight">
+<div class="order-badge">1</div>
+<div class="order-content">
+<div class="order-name">
+                  과세제외금액
+                  <span class="tag-free">비과세</span>
+</div>
+<div class="order-desc" style="font-size:12px; color:var(--text-secondary); margin-top:4px;">
+                  세액공제를 받지 않은 원금
+                </div>
+<div class="order-amount">3,500,000 원</div>
+</div>
+</div>
+<!-- 2순위 -->
+<div class="order-item">
+<div class="order-badge">2</div>
+<div class="order-content">
+<div class="order-name">
+                  이연퇴직소득
+                </div>
+<div class="order-tax" style="margin-top:6px;">퇴직소득세 70~50%</div>
+<div class="order-amount" style="margin-top:16px;">0 원</div>
+</div>
+</div>
+<!-- 3순위 -->
+<div class="order-item">
+<div class="order-badge">3</div>
+<div class="order-content">
+<div class="order-name">
+                  과세대상소득
+                </div>
+<div class="order-desc" style="font-size:12px; color:var(--text-secondary); margin-top:6px; line-height:1.4;">
+                  세액공제 받은 원금 + 운용수익
+                </div>
+<div class="order-tax" style="margin-top:8px;">연금소득세 3.3~5.5%</div>
+<div class="order-amount" style="margin-top:16px;">12,450,000 원</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Card for Non-taxable -->
+<div class="action-card">
+<h4>💡 비과세 인출을 희망하시나요?</h4>
+<p>은행연합회에서 연금저축 한도를 조회 및 변경하신 후, 비과세용 추가 계좌를 개설하시면 세금 부담 없이 인출하실 수 있습니다.</p>
+<button class="btn btn-secondary" onclick="alert('은행연합회 한도 조회 페이지로 이동합니다.')">은행연합회 연금저축 한도 조회</button>
+<button class="btn btn-primary" onclick="alert('추가 계좌 개설 절차를 시작합니다.')" style="margin-top: 10px;">비과세 인출용 추가 계좌개설</button>
+</div>
+<!-- Modal Close Button at Bottom -->
+<button class="btn btn-outline" onclick="closeModal('tax-modal')" style="margin-top: 10px;">닫기</button>
+</div>
+</div>
+</div>
+<!-- ==============================================
+       Modal: 상품별 실물이전 가능 여부
+       ============================================== -->
+<div class="modal-overlay" id="prod-modal">
+<div class="modal-content">
+<div class="modal-header">
+<div class="modal-title">상품별 실물이전 가능 여부</div>
+<div class="modal-close" onclick="closeModal('prod-modal')">×</div>
+</div>
+<div class="modal-body">
+<p class="subtitle" style="margin-bottom: 18px;">모든 퇴직연금 상품이 실물이전 대상은 아닙니다. 일부 상품은 계약 형태·상품 특성에 따라 대상에서 제외됩니다.</p>
+<table class="ptable">
+<thead>
+<tr><th style="width: 70px;">구분</th><th>상품</th><th style="width: 68px;">가능 여부</th></tr>
+</thead>
+<tbody>
+<tr>
+<td class="grp" rowspan="3">원리금<br/>보장형</td>
+<td>예금 (은행·저축은행·우체국·증권금융)</td>
+<td class="yn o">가능</td>
+</tr>
+<tr>
+<td>원리금보장 ELB · DLB</td>
+<td class="yn o">가능</td>
+</tr>
+<tr>
+<td>GIC (신탁제공형)</td>
+<td class="yn o">가능</td>
+</tr>
+<tr>
+<td class="grp" rowspan="5">실적<br/>배당형</td>
+<td>펀드 / ETF</td>
+<td class="yn o">가능</td>
+</tr>
+<tr>
+<td>사모펀드, MMF, 환매 불가 펀드</td>
+<td class="yn x">불가능</td>
+</tr>
+<tr>
+<td>ELS, ELF (주가연계펀드)</td>
+<td class="yn x">불가능</td>
+</tr>
+<tr>
+<td>금리연동형보험</td>
+<td class="yn x">불가능</td>
+</tr>
+<tr>
+<td>지분증권, 리츠</td>
+<td class="yn x">불가능</td>
+</tr>
+<tr>
+<td class="grp">기타</td>
+<td>디폴트옵션</td>
+<td class="yn x">불가능</td>
+</tr>
+</tbody>
+</table>
+<div class="info-box highlight" style="margin-top: 22px; display: flex; align-items: flex-start; gap: 8px;">
+<span class="badge-text alert" style="margin-top: 2px;">주의</span>
+<div style="flex: 1; word-break: keep-all; line-height: 1.6;">
+            · 보유 상품 중 실물이전이 불가한 상품은 <strong>매도 후 현금으로</strong> 이전됩니다.<br/>
+            · 금융기관별로 <strong>수수료 등 조건이 다를 수 있어</strong> 이전하기 전 꼼꼼하게 조건을 비교해 보세요.<br/>
+            · <strong>DC형</strong> 퇴직연금 가입자는 소속 회사의 규약으로 정해진 금융기관 내에서만 이전 가능합니다.
+          </div>
+</div>
+<div class="src-note" style="margin-bottom: 16px;">※ 위 기준은 퇴직연금 실물이전 제도 시행 기준이며, 실제 판정은 이관회사의 사전조회 결과를 따릅니다.</div>
+<button class="btn btn-outline" onclick="closeModal('prod-modal')">닫기</button>
+</div>
+</div>
+</div>
+<!-- ==============================================
+       Modal: 실물이전 FAQ
+       ============================================== -->
+<div class="modal-overlay" id="faq-modal">
+<div class="modal-content">
+<div class="modal-header">
+<div class="modal-title">실물이전, 이런 점이 궁금해요</div>
+<div class="modal-close" onclick="closeModal('faq-modal')">×</div>
+</div>
+<div class="modal-body">
+<div class="faq-item open" onclick="toggleFaq(this)">
+<div class="faq-q"><span class="qm">Q</span><span>퇴직연금 실물이전이 무엇인가요?</span><span class="caret">▾</span></div>
+<div class="faq-a">퇴직연금을 다른 금융기관으로 옮기는 방법 중 하나입니다. 옮길 때는 <strong>실물이전과 현금이전</strong> 중 원하는 방법을 선택할 수 있습니다. 상품을 모두 매도한 뒤 이전하는 현금이전과 달리, 실물이전은 기존에 가지고 있던 운용 상품을 <strong>해지 없이 그대로</strong> 다른 금융기관으로 옮기는 방식입니다.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q"><span class="qm">Q</span><span>실물이전이 불가능한 상품이 섞여 있으면 전체가 불가한가요?</span><span class="caret">▾</span></div>
+<div class="faq-a">아니요. <strong>실물이전이 가능한 상품은 그대로 이전되고, 안 되는 상품만 매도 후 현금으로</strong> 이전 처리됩니다. 이 화면의 사전조회 결과가 바로 그 구분입니다.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q"><span class="qm">Q</span><span>금융기관을 바꾸려면 꼭 실물이전을 해야 하나요?</span><span class="caret">▾</span></div>
+<div class="faq-a">아니요. 기존 계약이전에 쓰였던 <strong>현금이전(전부 매도하여 현금화 후 이전)</strong>도 선택할 수 있습니다. 이전 신청 시 원하는 방식을 고르면 됩니다.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q"><span class="qm">Q</span><span>실물이전 신청 후 취소할 수 있나요?</span><span class="caret">▾</span></div>
+<div class="faq-a"><strong>이전 신청 당일에만</strong> 취소할 수 있습니다. 수관회사에 취소 의사를 전달하거나, 이관회사가 이전 의사를 재확인할 때 취소 의사를 밝히면 됩니다. 단, 신청 당일이라도 <strong>이전 의사 재확인을 마쳤다면 취소가 불가능</strong>합니다.</div>
+</div>
+<div class="faq-item" onclick="toggleFaq(this)">
+<div class="faq-q"><span class="qm">Q</span><span>보유 상품이 실물이전 가능한지 미리 확인할 수 없나요?</span><span class="caret">▾</span></div>
+<div class="faq-a">가능합니다. 현재 퇴직연금을 운용하고 있는 금융기관에 <strong>실물이전 사전조회</strong>를 신청해 가능 여부를 확인할 수 있습니다. 이 프로토타입의 사전조회 화면이 그 절차를 앱 안으로 가져온 것입니다.</div>
+</div>
+<div class="src-note" style="margin-bottom: 16px;">※ 퇴직연금은 예금자보호 및 세제 취급이 상품별로 다릅니다. 가입 전 상품설명서와 약관을 반드시 확인하세요.</div>
+<button class="btn btn-outline" onclick="closeModal('faq-modal')">닫기</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function nav(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    let targetScreen = document.getElementById(screenId);
+    if(targetScreen) {
+      targetScreen.classList.add('active');
+      let scrollArea = targetScreen.querySelector('.scroll-area');
+      if (scrollArea) scrollArea.scrollTop = 0;
+
+      // 기능 1 화면일 때만 상단 시연용 탭(dev-nav) 표시
+      let devNav = document.querySelector('.dev-nav');
+      if (devNav) {
+        if (screenId.startsWith('screen-f1')) {
+          devNav.style.display = 'flex';
+          let btnKey = screenId.replace('screen-f1-', '');
+          document.querySelectorAll('.dev-nav button').forEach(b => b.classList.remove('active'));
+          let activeBtn = document.getElementById('nav-btn-' + btnKey);
+          if (activeBtn) activeBtn.classList.add('active');
+        } else {
+          devNav.style.display = 'none';
+        }
+      }
+
+      // 화면 2번(시뮬레이터) 재진입 시 탭 초기화
+      if (screenId === 'screen-f2-detail') {
+        let firstTab = document.querySelector('.tab[onclick*="tab-self"]');
+        if (firstTab) switchTab('tab-self', firstTab);
+      }
+
+      let demoBtn = document.getElementById('demoAdvanceBtn');
+      if (demoBtn) {
+        demoBtn.style.display = (screenId === 'screen-f1-2') ? 'block' : 'none';
+      }
+    }
+  }
+
+  function switchTab(tabId, element) {
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    element.classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+  }
+
+  // FAQ 아코디언
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+
+
+// ==================================================
+// Navigation & Toasts
+// ==================================================
+
+
+let tt, pt;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.innerHTML = msg;
+  el.classList.add('show');
+  clearTimeout(tt);
+  tt = setTimeout(() => el.classList.remove('show'), 3400);
+}
+
+function showPush(title, desc) {
+  const el = document.getElementById('pushNoti');
+  document.getElementById('pushTitle').textContent = title;
+  document.getElementById('pushDesc').innerHTML = desc;
+  el.classList.add('show');
+  clearTimeout(pt);
+  pt = setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+// ==================================================
+// 7-Column Calendar Logic
+//  - 기본: 실물이전 3영업일 + 현금화 대상 결제 5영업일 → 7~9영업일
+//  - 사전 현금화 후: 실물이전 3영업일 + 잔여 결제 3영업일 → 4~5영업일
+// ==================================================
+const daysInAug = [
+  {d:23, type:'weekend'}, {d:24, type:'start'}, {d:25, type:'locked locked-mid'}, {d:26, type:'locked locked-mid'},
+  {d:27, type:'locked locked-mid'}, {d:28, type:'locked locked-mid'}, {d:29, type:'weekend locked-mid'}
+];
+const daysInSep = [
+  {d:30, type:'weekend locked-mid'}, {d:31, type:'locked locked-mid'}, {d:1, type:'est locked-mid'},
+  {d:2, type:'est locked-mid'}, {d:3, type:'end'}, {d:4, type:''}, {d:5, type:'weekend'}
+];
+
+// 사전 현금화(디폴트옵션 선처리) 후 단축된 밴드
+const daysInAugFast = [
+  {d:23, type:'weekend'}, {d:24, type:'start'}, {d:25, type:'locked locked-mid'}, {d:26, type:'locked locked-mid'},
+  {d:27, type:'est locked-mid'}, {d:28, type:'end'}, {d:29, type:'weekend'}
+];
+const daysInSepFast = [
+  {d:30, type:'weekend'}, {d:31, type:''}, {d:1, type:''}, {d:2, type:''}, {d:3, type:''}, {d:4, type:''}, {d:5, type:'weekend'}
+];
+
+function renderCalendar(isFast) {
+  const cal = document.getElementById('calendarGrid');
+  if (!cal) return;
+  let html = `
+    <div class="cal-month">8월</div>
+    <div class="cal-grid cal-header">
+      <div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div>
+    </div>
+    <div class="cal-grid">
+  `;
+  const aug = isFast ? daysInAugFast : daysInAug;
+  aug.forEach(o => { html += `<div class="cal-day ${o.type}">${o.d}</div>`; });
+  html += `</div><div class="cal-month" style="margin-top:12px;">9월</div><div class="cal-grid">`;
+  const sep = isFast ? daysInSepFast : daysInSep;
+  sep.forEach(o => { html += `<div class="cal-day ${o.type}">${o.d}</div>`; });
+  html += `</div>`;
+  cal.innerHTML = html;
+}
+renderCalendar(false);
+
+// ==================================================
+// 실물이전 시나리오 상태 (Internal UI logic)
+// ==================================================
+let demoStep = 0; // 화면 f1-2의 진행 단계
+
+const DEFAULT_CRITICAL_HTML = `<div class="item-row"><div class="item-name">디폴트옵션<span class="badge-text alert" style="margin-right:0; margin-left:6px; font-size:9px;">조건 ③</span></div><div class="item-amount">3,240,000원</div></div><div class="item-desc" id="hCriticalDesc"><strong style="color: #B91C1C;">디폴트옵션(BF 고위험형)은 제도상 실물이전 대상에서 제외됩니다.</strong><br/><strong style="color: #B45309;">※ 해지·결제 5영업일 — 이 상품이 전체 일정을 정합니다.</strong><br/>지금 팔면 예상 손익: <span class="val-down">-312,000원</span></div><div class="item-actions" id="hCriticalAction"><button class="btn btn-outline btn-small" onclick="EV.sell()" style="background: white; border-color: rgba(245,158,11,0.5);">먼저 현금화해 일정 당기기</button></div>`;
+
+const TYPE_INFO = {
+  IRP: {
+    label: '개인형 IRP',
+    acct: '○○은행 개인형 IRP 620-01-9944',
+    cond1: '이관회사 <strong>개인형 IRP</strong> → KB증권 <strong>개인형 IRP</strong>. 같은 유형이므로 이전 가능합니다.',
+    note: '<strong>개인형 IRP ↔ 개인형 IRP</strong>처럼 같은 유형끼리만 이전할 수 있습니다. 유형이 다른 계좌로는 실물이전이 불가합니다.',
+    verdict: '충족', pass: true
+  },
+  DC: {
+    label: 'DC형',
+    acct: '○○은행 DC형 620-02-3311',
+    cond1: '이관회사 <strong>DC형</strong> → KB증권 <strong>DC형</strong>. 같은 유형이므로 이전 가능합니다. 단 <strong>소속 회사의 규약으로 정해진 금융기관</strong> 내에서만 이전할 수 있습니다.',
+    note: '<strong>DC형 ↔ DC형</strong>만 이전할 수 있습니다. DC형 가입자는 <strong>소속 회사 규약에 등록된 금융기관</strong>으로만 옮길 수 있어, KB증권이 규약에 없으면 이전이 불가합니다.',
+    verdict: '조건부 충족', pass: true
+  },
+  DB: {
+    label: 'DB형',
+    acct: '○○은행 DB형 (회사 계약)',
+    cond1: '이관회사 <strong>DB형</strong> → KB증권 <strong>DB형</strong>. 같은 유형끼리만 이전 가능합니다. DB형은 회사가 적립금을 운용하는 유형이므로 이전 절차는 <strong>회사(사용자) 규약</strong>에 따릅니다.',
+    note: '<strong>DB형 ↔ DB형</strong>만 이전할 수 있습니다. DB형은 회사가 적립금을 운용·관리하는 유형입니다.',
+    verdict: '충족', pass: true
+  }
+};
+
+const EV = {
+  isSold: false,
+  mode: 'real',
+  acctType: 'IRP',
+
+  // 퇴직연금 유형 선택 (조건 ①)
+  setType(t, el) {
+    this.acctType = t;
+    document.querySelectorAll('#seg-type .seg-item').forEach(s => s.classList.remove('on'));
+    if (el) el.classList.add('on');
+
+    const info = TYPE_INFO[t];
+    const noteEl = document.querySelector('#type-note div');
+    if (noteEl) noteEl.innerHTML = info.note;
+    const acctEl = document.getElementById('pre-acct');
+    if (acctEl) acctEl.textContent = info.acct;
+    const c1b = document.getElementById('cond1-b');
+    if (c1b) c1b.innerHTML = info.cond1;
+    const c1v = document.getElementById('cond1-v');
+    if (c1v) c1v.textContent = info.verdict;
+  },
+
+  // 이전 방식 선택 (실물이전 / 현금이전)
+  setMode(m) {
+    this.mode = m;
+    document.getElementById('mode-real').classList.toggle('on', m === 'real');
+    document.getElementById('mode-cash').classList.toggle('on', m === 'cash');
+
+    const noteTxt = document.getElementById('mode-note-txt');
+    const c2 = document.getElementById('cond2');
+    const c3 = document.getElementById('cond3');
+    const c2v = document.getElementById('cond2-v');
+    const c3v = document.getElementById('cond3-v');
+    const banner = document.getElementById('cashModeBanner');
+    const sumReal = document.getElementById('sum-real');
+    const sumCash = document.getElementById('sum-cash');
+    const dur = document.getElementById('durationTxt1');
+    const durBreak = document.getElementById('durationBreak');
+
+    if (m === 'real') {
+      noteTxt.innerHTML = '실물이전을 선택해도 <strong>실물이전이 불가한 상품은 매도 후 현금으로</strong> 이전됩니다.';
+      c2.className = 'cond-card fail'; c3.className = 'cond-card fail';
+      c2v.textContent = '일부 미충족'; c3v.textContent = '일부 미충족';
+      if (banner) banner.style.display = 'none';
+      if (sumReal) sumReal.textContent = '34,950,000원';
+      if (sumCash) sumCash.textContent = '9,940,000원';
+      renderCalendar(this.isSold);
+      if (dur) dur.textContent = this.isSold ? '예상 영업일 4~5일' : '예상 영업일 7~9일';
+      if (durBreak) durBreak.innerHTML = this.isSold
+        ? '실물이전 <strong>3영업일</strong> + 잔여 현금화 결제 <strong>3영업일</strong>'
+        : '실물이전 <strong>3영업일</strong> + 현금화 대상 결제 <strong>5영업일</strong>';
+    } else {
+      noteTxt.innerHTML = '현금이전은 <strong>보유 상품 전액을 매도한 뒤 현금으로</strong> 가져오는 방식입니다. 실물이전 판정과 무관하게 6종 모두 현금화됩니다.';
+      c2.className = 'cond-card'; c3.className = 'cond-card';
+      c2v.textContent = '해당 없음'; c3v.textContent = '해당 없음';
+      if (banner) banner.style.display = 'flex';
+      if (sumReal) sumReal.textContent = '0원';
+      if (sumCash) sumCash.textContent = '44,890,000원';
+      renderCalendar(false);
+      if (dur) dur.textContent = '예상 영업일 5~7일';
+      if (durBreak) durBreak.innerHTML = '전액 매도 후 현금이전 · 상품별 결제 <strong>3~5영업일</strong>';
+      showToast('현금이전은 정기예금도 중도해지됩니다.');
+    }
+  },
+
+  // 디폴트옵션 사전 현금화 → 일정 단축
+  sell() {
+    if(this.isSold) return;
+    this.isSold = true;
+
+    renderCalendar(true);
+    document.getElementById('durationTxt1').textContent = '예상 영업일 4~5일';
+    document.getElementById('durationBreak').innerHTML = '실물이전 <strong>3영업일</strong> + 잔여 현금화 결제 <strong>3영업일</strong>';
+
+    const card = document.getElementById('hCritical');
+    card.className = 'item-card';
+    card.innerHTML = `
+      <div class="item-row">
+        <div class="item-name">디폴트옵션 <span class="badge-text info" style="margin-left:6px;">사전 현금화</span></div>
+        <div class="item-amount">3,240,000원</div>
+      </div>
+      <div class="item-desc">
+        매도 체결 완료 · 제한 구간이 <strong>4영업일</strong> 앞당겨졌습니다.<br>
+        확정 손익: <span class="val-down">-312,000원</span>
+      </div>
+    `;
+
+    const bSub = document.getElementById('s2-banner-sub');
+    if (bSub) bSub.textContent = '매수 재개 예상: 8/28(금) ~ 8/31(월)';
+
+    showToast('실물이전 불가 상품을 먼저 현금화해<br>이전 일정을 다시 계산했습니다.');
+  },
+
+  submit() {
+    if (this.mode === 'cash') {
+      showToast('현금이전으로 신청합니다. 보유 6종 전액이 매도됩니다.');
+    }
+    nav('screen-f1-2');
+    setTimeout(() => {
+      showPush('이전 신청이 접수되었습니다', '이관회사에 이전 요청이 통보됩니다. 현재 시점부터 매수가 제한되며, 매도는 이용 가능합니다.');
+    }, 400);
+  },
+
+  // 이전 신청 취소 (제도: 신청 당일 & 이전 의사 재확인 전까지만 가능)
+  cancel() {
+    if (demoStep === 0) {
+      showToast('이전 신청이 취소되었습니다.<br>매매 제한이 즉시 해제됩니다.');
+      setTimeout(() => { EV.reset(); }, 900);
+    } else {
+      showToast('이관회사의 이전 의사 재확인이 완료되어<br>더 이상 취소할 수 없습니다.');
+    }
+  },
+
+  nextStep() {
+    if(demoStep === 0) {
+      // STEP 4. 현금화 · 이전 처리
+      const banner = document.getElementById('s2-banner');
+      banner.className = 'status-banner alert';
+      document.getElementById('s2-banner-title').textContent = '현재 모든 거래가 제한됩니다';
+      document.getElementById('s2-banner-sub').textContent = '잔고 반영 후 매매가 재개됩니다';
+      document.getElementById('s2-dday').textContent = 'D-1 영업일';
+
+      const chip = document.getElementById('s2-cancel-chip');
+      chip.className = 'cancel-chip closed';
+      chip.textContent = '의사 재확인 완료 · 취소 불가';
+
+      document.getElementById('restrict-sell').textContent = '불가';
+      document.getElementById('restrict-sell').className = 'restrict-val val-no';
+
+      document.getElementById('focus-title').textContent = '4. 현금화 · 이전 처리';
+      document.getElementById('focus-time').textContent = '보통 1~2영업일';
+      document.getElementById('focus-desc').innerHTML = '이관회사가 이전 의사를 확인했습니다.<br/><strong>실물이전 4종은 그대로, 현금화 2종은 결제 완료 후</strong> KB증권 계좌로 이전됩니다.';
+      document.getElementById('focus-action').style.display = 'none';
+
+      document.getElementById('cancel-btn').style.display = 'none';
+      document.getElementById('cancel-box-txt').innerHTML = '<strong style="color: var(--danger);">이전 의사 재확인이 완료되어 취소할 수 없습니다.</strong><br/>신청 당일이라도 재확인을 마친 뒤에는 취소가 불가능합니다.';
+
+      document.getElementById('track-count').textContent = '5 / 6 확정';
+      document.getElementById('pizza-progress').style.width = '75%';
+      document.getElementById('tracker-step-3').className = 'tracker-step done';
+      document.getElementById('tracker-step-4').className = 'tracker-step active';
+
+      showPush('이전 의사 확인이 완료됐습니다', '이제부터 이전 신청을 취소할 수 없습니다. 잔고에 반영되기 전까지 완료 처리되지 않습니다.');
+      demoStep = 1;
+      document.getElementById('demoAdvanceBtn').innerHTML = '시연용 다음단계 ⏩';
+    } else {
+      // STEP 5. 완료
+      nav('screen-f1-3');
+      setTimeout(() => {
+        showPush('이전이 완료됐습니다', '실물이전 4종이 그대로 입고되고 예수금 9,842,000원이 입금됐습니다.<br>매매 거래가 재개되었습니다.');
+      }, 400);
+      document.getElementById('demoAdvanceBtn').style.display = 'none';
+    }
+  },
+
+  reset() {
+    this.isSold = false;
+    this.mode = 'real';
+    this.acctType = 'IRP';
+    demoStep = 0;
+
+    // 사전조회 화면 초기화
+    const segItems = document.querySelectorAll('#seg-type .seg-item');
+    if (segItems.length) this.setType('IRP', segItems[0]);
+    this.setMode('real');
+
+    // 판정 화면 초기화
+    renderCalendar(false);
+    const dur = document.getElementById('durationTxt1');
+    if(dur) dur.textContent = '예상 영업일 7~9일';
+    const durBreak = document.getElementById('durationBreak');
+    if(durBreak) durBreak.innerHTML = '실물이전 <strong>3영업일</strong> + 현금화 대상 결제 <strong>5영업일</strong>';
+
+    const card = document.getElementById('hCritical');
+    if(card) {
+      card.className = 'item-card highlight';
+      card.innerHTML = DEFAULT_CRITICAL_HTML;
+    }
+
+    // 현황판 초기화
+    const banner = document.getElementById('s2-banner');
+    if(banner) {
+      banner.className = 'status-banner warning';
+      document.getElementById('s2-banner-title').textContent = '지금은 매도만 가능합니다';
+      document.getElementById('s2-banner-sub').textContent = '매수 재개 예상: 9/2(수) ~ 9/3(목)';
+      document.getElementById('s2-dday').textContent = 'D-5 영업일';
+    }
+    const chip = document.getElementById('s2-cancel-chip');
+    if(chip) { chip.className = 'cancel-chip open'; chip.textContent = '신청 당일 · 취소 가능'; }
+
+    const restrictSell = document.getElementById('restrict-sell');
+    if(restrictSell) {
+      restrictSell.textContent = '가능';
+      restrictSell.className = 'restrict-val val-yes';
+    }
+
+    const ft = document.getElementById('focus-title');
+    if(ft) {
+      ft.textContent = '3. 이관회사 의사 확인';
+      document.getElementById('focus-time').textContent = '보통 1~3영업일';
+      document.getElementById('focus-desc').innerHTML = '기존 금융기관(이관회사)에서 퇴직연금을 이전하는 것이 맞는지 최종 확인합니다.<br/><strong>이때 동의해야 이전이 진행됩니다.</strong>';
+      document.getElementById('focus-action').style.display = 'flex';
+    }
+
+    const cBtn = document.getElementById('cancel-btn');
+    if(cBtn) cBtn.style.display = 'block';
+    const cTxt = document.getElementById('cancel-box-txt');
+    if(cTxt) cTxt.innerHTML = '<strong style="color: var(--kb-blue);">신청 당일에만 취소할 수 있습니다.</strong><br/>수관회사(KB증권)에 취소 의사를 전달하거나, 이관회사가 이전 의사를 재확인할 때 취소 의사를 밝히면 됩니다. <strong>단, 이전 의사 재확인을 마쳤다면 신청 당일이라도 취소가 불가능합니다.</strong>';
+
+    const tc = document.getElementById('track-count');
+    if(tc) tc.textContent = '4 / 6 확정';
+
+    const pizzaProgress = document.getElementById('pizza-progress');
+    if(pizzaProgress) {
+      pizzaProgress.style.width = '50%';
+      document.getElementById('tracker-step-3').className = 'tracker-step active';
+      document.getElementById('tracker-step-4').className = 'tracker-step';
+      document.getElementById('tracker-step-5').className = 'tracker-step';
+    }
+
+    const demoAdv = document.getElementById('demoAdvanceBtn');
+    if(demoAdv) {
+      demoAdv.style.display = 'none';
+      demoAdv.innerHTML = '시연용 다음단계 ⏩';
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+
+    showToast('시연 상태가 모두 초기화되었습니다.');
+    nav('screen-f1-0');
+  }
+};
+</script>
+</body>
+</html>

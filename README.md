@@ -6,7 +6,7 @@
 
 | 산출물 | 링크 | 상태 |
 |---|---|---|
-| Master Deck | [발표자료 초안](docs/team/workflow/MASTER_DECK_DRAFT.md) | 작성 중 |
+| Master Deck | [16페이지 발표 원고](docs/team/workflow/MASTER_DECK.md) | 구현·검증 결과 반영 중 |
 | PRD | [MVP PRD](docs/PRD.md) | 완료 |
 | SRS | [SRS Lite](docs/SRS.md) | 완료 |
 | 기술 학습 계획 | [TECH_LEARNING_PLAN](docs/TECH_LEARNING_PLAN.md) | 작성 중 |

@@ -3,6 +3,10 @@ import { AppLayout } from '../components/layout/AppLayout'
 import { PlaceholderScreen } from '../components/layout/PlaceholderScreen'
 import { HomePage } from './HomePage'
 import { MyInfoPage } from './MyInfoPage'
+import { CancelPage } from './pension-savings/CancelPage'
+import { DepositHistoryPage } from './pension-savings/DepositHistoryPage'
+import { DepositLimitPage } from './pension-savings/DepositLimitPage'
+import { PensionReceiptPage } from './pension-savings/PensionReceiptPage'
 import { PensionSavingsPage } from './PensionSavingsPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
 import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
@@ -20,6 +24,10 @@ export function AppRouter() {
           <Route path="/preview" element={<PreviewPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/pension-savings" element={<PensionSavingsPage />} />
+          <Route path="/pension-savings/deposit-limit" element={<DepositLimitPage />} />
+          <Route path="/pension-savings/deposit-history" element={<DepositHistoryPage />} />
+          <Route path="/pension-savings/pension-receipt" element={<PensionReceiptPage />} />
+          <Route path="/pension-savings/cancel" element={<CancelPage />} />
           <Route path="/my-info" element={<MyInfoPage />} />
           <Route
             path="/transfer/holdings"

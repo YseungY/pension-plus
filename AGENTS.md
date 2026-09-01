@@ -10,7 +10,9 @@
 2. `docs/team/development/개발환경_협업가이드.md`를 읽는다.
 3. UI 작업이면 `docs/team/design/디자인시스템_개발적용가이드.md`를 읽는다.
 4. 담당 기능은 `docs/team/product/PRD_원본상세.md`와 `docs/team/product/예상_프로토타입.html`의 관련 부분을 확인한다(구조·흐름·문구 기준).
-5. 시각 스타일은 `docs/team/design/design-system/`의 디자인 시스템·모바일 앱 dc.html 두 파일과 이미 구현된 `src/app/HomePage.tsx`, `src/features/onboarding/` 화면을 기준으로 통일한다.
+5. 시각 스타일은 `docs/team/design/design-system/연금플러스 모바일 앱.dc.html`(실제 화면 목업, 1순위 참고)과
+   `연금플러스 디자인 시스템.dc.html`(색상·타이포 토큰), 이미 구현된 `src/app/HomePage.tsx`,
+   `src/features/onboarding/` 화면을 기준으로 통일한다.
 6. 요청받은 담당 폴더와 완료 조건을 확인한다.
 7. 관련 파일을 먼저 읽고 기존 구조를 유지한다.
 

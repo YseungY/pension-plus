@@ -18,7 +18,7 @@ src/
 docs/
 ├─ team/           지금 보고 있는 이 폴더 — 개발용 가이드·자료 전부
 │  ├─ product/     화면·데이터 기준 (예상 프로토타입, 상세 PRD)
-│  ├─ design/      디자인 기준 (디자인 시스템 dc.html 2종, 적용 가이드, 폰트)
+│  ├─ design/      디자인 기준 ("모바일 앱.dc.html"이 실제 화면 목업, 1순위 참고. 그 외 디자인 시스템 dc.html, 적용 가이드, 폰트)
 │  ├─ development/ 설치·Git 협업 상세 가이드
 │  ├─ start/       기획 배경, 일정
 │  └─ workflow/    진행 상황 공유, 팀 전달 메시지, 발표 자료
@@ -97,8 +97,9 @@ npm run dev
 참고 파일(모두 수정 금지, 참고만):
 - 화면 구조·흐름·문구·샘플 데이터: docs/team/product/예상_프로토타입.html
 - 요구사항: docs/submission/SRS_MVP.md (FR-002~009)
-- 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/의 디자인 시스템·모바일 앱
-  dc.html 두 파일 + docs/team/design/디자인시스템_개발적용가이드.md
+- 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/연금플러스 모바일 앱.dc.html
+  (실제 화면 목업, 1순위 참고) + 연금플러스 디자인 시스템.dc.html(색상·타이포 토큰) +
+  docs/team/design/디자인시스템_개발적용가이드.md
 - 이미 구현된 src/app/HomePage.tsx, src/features/onboarding/와 색상·폰트·카드 스타일이
   같아 보이게 만들어주세요. 새 색상 값을 만들지 말고 src/styles/globals.css의
   토큰(navy-*, mint-*, surface, line, text-* 등)을 쓰세요.
@@ -137,8 +138,9 @@ Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 
 - 화면 구조·흐름·문구·샘플 데이터: docs/team/product/예상_프로토타입.html
   (screen-manage의 "연금 외 수령" 항목 → screen-f2-detail → "인출 항목 및 세금 시뮬레이터" 모달)
 - 요구사항: docs/submission/SRS_MVP.md (FR-010~012), 계산식은 docs/team/references/SRS_원본_v1.0.md §7.1
-- 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/의 디자인 시스템·모바일 앱
-  dc.html 두 파일 + docs/team/design/디자인시스템_개발적용가이드.md
+- 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/연금플러스 모바일 앱.dc.html
+  (실제 화면 목업, 1순위 참고) + 연금플러스 디자인 시스템.dc.html(색상·타이포 토큰) +
+  docs/team/design/디자인시스템_개발적용가이드.md
 - 이미 구현된 src/app/HomePage.tsx, src/app/PensionSavingsPage.tsx와 색상·폰트·카드 스타일이
   같아 보이게 만들어주세요. 새 색상 값을 만들지 말고 src/styles/globals.css의
   토큰(navy-*, mint-*, surface, line, text-* 등)을 쓰세요.

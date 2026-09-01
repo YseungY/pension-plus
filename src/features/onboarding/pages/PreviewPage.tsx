@@ -33,8 +33,8 @@ export function PreviewPage() {
       </header>
 
       <section className="flex-1 pt-10">
-        <p className="text-[14px] font-[700] text-mint-700">로그인하고 연결하면</p>
-        <h1 className="mt-3 text-[28px] font-[800] leading-[1.35] tracking-[-0.035em] text-navy-800">이런 걸 확인할 수<br />있어요</h1>
+        <p className="text-[14px] font-[700] text-mint-700">연결하면</p>
+        <h1 className="mt-3 text-[26px] font-[800] leading-[1.35] tracking-[-0.035em] text-navy-800">이런 걸 확인할 수 있어요</h1>
 
         <div className="mt-8 flex flex-col gap-3">
           {previewItems.map(({ icon: Icon, title, description }) => (
@@ -51,10 +51,7 @@ export function PreviewPage() {
         </div>
       </section>
 
-      <div className="flex flex-col gap-2">
-        <button type="button" onClick={() => navigate('/login')} className="h-14 rounded-[14px] bg-navy-800 text-[16px] font-[800] text-white transition active:scale-[0.98]">로그인하고 시작하기</button>
-        <button type="button" onClick={() => navigate('/connect')} className="h-12 rounded-[14px] text-[15px] font-[700] text-text-tertiary transition hover:text-navy-800">연결 방식 다시 고르기</button>
-      </div>
+      <button type="button" onClick={() => navigate('/connect')} className="h-14 rounded-[14px] bg-navy-800 text-[16px] font-[800] text-white transition active:scale-[0.98]">지금 연결하기</button>
     </main>
   )
 }

@@ -9,8 +9,7 @@ src/
 ├─ app/            공통 · 라우터(router.tsx), 홈(HomePage.tsx), 연금저축 관리(PensionSavingsPage.tsx)
 ├─ components/     공통 · 레이아웃(하단 고객센터 바), 플레이스홀더 화면
 ├─ features/
-│  ├─ onboarding/  공통 · 스플래시·온보딩·연결 화면 (구현 완료)
-│  ├─ auth/        공통 · 시연용 로그인·회원가입 (구현 완료)
+│  ├─ onboarding/  공통 · 스플래시·온보딩·연결·미리보기 화면 (구현 완료)
 │  ├─ transfer/    기능1 담당 폴더 — 지금은 README만 있음, 여기에 구현
 │  └─ withdrawal/  기능2 담당 폴더 — 지금은 README만 있음, 여기에 구현
 ├─ lib/            공통 · mock 데이터 타입(mock-types.ts)
@@ -165,10 +164,9 @@ Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 
 |---|---|---|
 | `/` | 스플래시 | 공통 |
 | `/onboarding` | 진행 링 온보딩 | 공통 |
-| `/connect` | 인증서로 연결 | 공통 |
-| `/preview` | 로그인 전 기능 미리보기 ("먼저 둘러볼게요"에서 진입) | 공통 |
+| `/connect` | 인증서로 연결(공동인증서·금융인증서) | 공통 |
+| `/preview` | 연결 전 기능 미리보기 ("먼저 둘러볼게요"에서 진입) | 공통 |
 | `/home` | 홈 | 공통 |
-| `/login`, `/signup` | 로그인·회원가입 | 공통 |
 | `/pension-savings` | 연금저축 관리 (구현 완료) | 공통 |
 | `/transfer/holdings` | 이전 계좌·종목 확인 | 기능1 |
 | `/transfer/restrictions` | 이전 전 제한사항 | 기능1 |

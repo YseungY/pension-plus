@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { AppLayout } from '../components/layout/AppLayout'
 import { PlaceholderScreen } from '../components/layout/PlaceholderScreen'
-import { LoginPage } from '../features/auth/pages/LoginPage'
-import { SignupPage } from '../features/auth/pages/SignupPage'
 import { HomePage } from './HomePage'
 import { PensionSavingsPage } from './PensionSavingsPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
@@ -21,8 +19,6 @@ export function AppRouter() {
           <Route path="/preview" element={<PreviewPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/pension-savings" element={<PensionSavingsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/transfer/holdings"
             element={

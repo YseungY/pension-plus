@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
 import { SubPageHeader } from '../../components/layout/SubPageHeader'
 
@@ -7,6 +7,7 @@ type Tab = (typeof tabs)[number]
 
 export function CancelPage() {
   const [activeTab, setActiveTab] = useState<Tab>('신청')
+  const [noticeOpen, setNoticeOpen] = useState(true)
 
   return (
     <main className="flex flex-1 flex-col bg-white">
@@ -51,13 +52,51 @@ export function CancelPage() {
             </label>
             <label className="flex items-start gap-2">
               <input type="checkbox" checked readOnly className="mt-0.5 h-4 w-4 accent-mint-600" />
-              연도별 소득·세액공제 한도액 범위 내 불입액 중 공제받지 않은 금액이 있는 경우 관련 서류 제출 시 세제 혜택을 받을 수 있습니다.
+              연도별 소득, 세액공제 한도액 범위 내 불입액 중 소득, 세액, 공제받지 않은 원금이 있는 경우 「연금보험료 등 소득, 세액 공제 확인서」를 발급받아 제출하시면 원천징수된 기타 소득세의 일부를 돌려받을 수 있습니다.(지점 내점)
             </label>
+          </div>
+
+          <div className="mt-8 border-t border-line pt-6">
+            <button
+              type="button"
+              onClick={() => setNoticeOpen((open) => !open)}
+              className="flex w-full items-center justify-between text-[16px] font-[800] text-navy-800"
+            >
+              알려드립니다.
+              {noticeOpen ? <ChevronUp className="h-5 w-5 text-text-tertiary" aria-hidden="true" /> : <ChevronDown className="h-5 w-5 text-text-tertiary" aria-hidden="true" />}
+            </button>
+            {noticeOpen && (
+              <ul className="mt-4 flex flex-col gap-3 text-[13px] leading-[1.6] text-text-secondary">
+                <li>
+                  아래의 경우 해지 불가할 수 있습니다.
+                  <ul className="mt-1 flex flex-col gap-1 pl-3 text-text-tertiary">
+                    <li>- 펀드, ETF/리츠를 보유하고 있어 현금잔고가 아닌 경우</li>
+                    <li>- 매매신청중인 경우</li>
+                    <li>- 연금 수령이 시작된 경우</li>
+                  </ul>
+                </li>
+                <li>
+                  부득이한 사유가 아닌 경우 연금수령시보다 높은 수준의 세금이 부과됩니다.
+                  <ul className="mt-1 pl-3 text-text-tertiary">
+                    <li>- 부득이한 사유(사망, 파산, 천재지변 등)로 인한 해지는 별도 서류가 필요하여 영업점으로 내방하여 신청할 수 있습니다.</li>
+                  </ul>
+                </li>
+                <li>과세대상금액까지 포함하여 출금을 원하실 경우 유선으로 출금 할 수 있습니다.</li>
+              </ul>
+            )}
           </div>
         </div>
       ) : (
         <div className="flex-1 px-5 pb-8 pt-10 text-center">
           <p className="text-[14px] leading-[1.6] text-text-tertiary">신청 내역이 없습니다.</p>
+        </div>
+      )}
+
+      {activeTab === '신청' && (
+        <div className="px-5 pb-8">
+          <button type="button" aria-disabled="true" className="h-14 w-full cursor-default rounded-[14px] bg-surface-2 text-[16px] font-[800] text-text-tertiary">
+            모두 동의하고 해지
+          </button>
         </div>
       )}
     </main>

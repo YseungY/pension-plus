@@ -9,7 +9,7 @@
 1. `docs/team/start/개발전_준비.md`를 읽는다.
 2. `docs/team/development/개발환경_협업가이드.md`를 읽는다.
 3. UI 작업이면 `docs/team/design/디자인시스템_개발적용가이드.md`를 읽는다.
-4. 담당 기능은 `docs/team/product/PRD.md`와 `docs/team/product/예상_프로토타입.html`의 관련 부분을 확인한다.
+4. 담당 기능은 `docs/team/product/PRD_원본상세.md`와 `docs/team/product/예상_프로토타입.html`의 관련 부분을 확인한다.
 5. 요청받은 담당 폴더와 완료 조건을 확인한다.
 6. 관련 파일을 먼저 읽고 기존 구조를 유지한다.
 

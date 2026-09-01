@@ -5,7 +5,7 @@
 ## 사례 1 · Goal 1 — 공통 개발 기반
 
 - 목표: 로그인·회원가입(시연용)·홈·공통 라우팅·공통 레이아웃·mock 공통 타입 구현
-- AI에게 제공한 근거: `docs/PRD.md`, `docs/SRS.md`, [Issue #1](https://github.com/YseungY/pension-plus/issues/1), `docs/team/product/예상_프로토타입.html`, 디자인 시스템
+- AI에게 제공한 근거: `docs/submission/PRD_MVP.md`, `docs/submission/SRS_MVP.md`, [Issue #1](https://github.com/YseungY/pension-plus/issues/1), `docs/team/product/예상_프로토타입.html`, 디자인 시스템
 - AI가 제안한 내용: 8개 라우트(로그인·회원가입·홈·기능1 3개·기능2 2개) 구조, SRS §7.2 기반 mock 타입 스키마, 기능1·2 미착수 영역용 Placeholder 컴포넌트
 - 사람이 검토·수정·승인한 지점: mock 인증 기준(실제 계정 생성 없음, 시연용 배지 필수) 확정, 로그인·회원가입을 킥오프 문서상 "제외 범위"와 구분해 시연용 UI로만 포함하도록 범위 재확인
 - 최종 결과: `npm run build` 성공, `any` 사용 0건, 8개 라우트 전부 200 확인 후 `work/seungyeon`에 커밋·푸시

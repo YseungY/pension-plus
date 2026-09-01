@@ -5,5 +5,5 @@
 - [서비스 역기획서](./서비스_역기획서.md)
 - [MVP 상세 실행계획서](./MVP_상세실행계획서.md)
 
-현재 구현 범위와 충돌할 때는 `docs/PRD.md`, `docs/SRS.md`, `docs/team/start/개발전_준비.md`를 우선합니다.
+현재 구현 범위와 충돌할 때는 `docs/submission/PRD_MVP.md`, `docs/submission/SRS_MVP.md`, `docs/team/start/개발전_준비.md`를 우선합니다.
 

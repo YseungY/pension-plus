@@ -1,6 +1,6 @@
-# PRD · 연금플러스
+# PRD (원본 상세) · 연금플러스
 
-> **이 문서는 상세(전체 범위) PRD입니다.** 실제 이번 4일 MVP에서 구현하는 범위는 [`../PRD.md`](../PRD.md)(MVP Lite)를 참고하세요.
+> **이 문서는 상세(전체 범위) PRD입니다.** 실제 이번 4일 MVP에서 구현하는 범위는 [`docs/submission/PRD_MVP.md`](../../submission/PRD_MVP.md)(MVP Lite)를 참고하세요.
 
 **연금계좌 이체 진행 조회 · 인출순서 시뮬레이터**
 

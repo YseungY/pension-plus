@@ -10,7 +10,7 @@ GitHub Issue:
 - https://github.com/YseungY/pension-plus/issues/3 (이관 현황판)
 
 작업 폴더: src/features/transfer/
-근거 문서: docs/PRD.md, docs/SRS.md (FR-002~009), docs/team/product/예상_프로토타입.html
+근거 문서: docs/submission/PRD_MVP.md, docs/submission/SRS_MVP.md (FR-002~009), docs/team/product/예상_프로토타입.html
 
 시작 전에:
 1. README.md '팀원 시작 순서' 그대로 따라주세요.
@@ -31,14 +31,14 @@ GitHub Issue:
 - https://github.com/YseungY/pension-plus/issues/5 (인출 결과 화면)
 
 작업 폴더: src/features/withdrawal/
-근거 문서: docs/PRD.md, docs/SRS.md (FR-010~012), docs/team/product/예상_프로토타입.html
+근거 문서: docs/submission/PRD_MVP.md, docs/submission/SRS_MVP.md (FR-010~012), docs/team/product/예상_프로토타입.html
 
 시작 전에:
 1. README.md '팀원 시작 순서' 그대로 따라주세요.
 2. 루트의 AGENTS.md를 AI에게 먼저 읽게 해주세요.
 3. work/<본인이름> 브랜치에서 작업하고 dev로 PR 올려주세요.
 
-계산 로직(연금수령한도·인출순서·세액)은 docs/SRS_연금플러스_v1.0.md §7.1 산식과
+계산 로직(연금수령한도·인출순서·세액)은 docs/team/references/SRS_원본_v1.0.md §7.1 산식과
 프로토타입 검증값을 기준으로 만들고, UI 컴포넌트와 분리해서 npm run test로 확인해주세요.
 ```
 

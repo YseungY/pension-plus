@@ -7,11 +7,11 @@
 | 산출물 | 링크 | 상태 |
 |---|---|---|
 | Master Deck | [16페이지 발표 원고](docs/team/workflow/MASTER_DECK.md) | 구현·검증 결과 반영 중 |
-| PRD | [MVP PRD](docs/PRD.md) | 완료 |
-| SRS | [SRS Lite](docs/SRS.md) | 완료 |
-| 기술 학습 계획 | [TECH_LEARNING_PLAN](docs/TECH_LEARNING_PLAN.md) | 작성 중 |
-| Knowledge Base | [KB Index](docs/knowledge-base/00-index.md) | 기본 구조 완료 |
-| AI 협업 기록 | [AI_WORKFLOW_LOG](docs/AI_WORKFLOW_LOG.md) | Goal 1 기록 완료 |
+| PRD | [MVP PRD](docs/submission/PRD_MVP.md) | 완료 |
+| SRS | [SRS Lite](docs/submission/SRS_MVP.md) | 완료 |
+| 기술 학습 계획 | [TECH_LEARNING_PLAN](docs/submission/TECH_LEARNING_PLAN.md) | 작성 중 |
+| Knowledge Base | [KB Index](docs/submission/knowledge-base/00-index.md) | 기본 구조 완료 |
+| AI 협업 기록 | [AI_WORKFLOW_LOG](docs/submission/AI_WORKFLOW_LOG.md) | Goal 1 기록 완료 |
 | GitHub Project | [Project #13](https://github.com/users/YseungY/projects/13) | 진행 중 |
 | 배포 제품 | Vercel URL 추가 예정 | 미배포 |
 

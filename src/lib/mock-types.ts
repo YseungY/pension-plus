@@ -1,5 +1,5 @@
 // 시연용 mock 데이터 공통 타입.
-// SRS §7.2 상태·데이터 모델(docs/SRS_연금플러스_v1.0.md)에 대응한다.
+// SRS §7.2 상태·데이터 모델(docs/team/references/SRS_원본_v1.0.md)에 대응한다.
 // 기능1·기능2 화면은 이 타입만 참조하고, 픽스처 리터럴을 직접 만들지 않는다.
 
 export const DEMO_DATA_LABEL = '시연용 데이터'

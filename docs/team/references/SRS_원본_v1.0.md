@@ -1,4 +1,6 @@
-# [SRS 문서] 연금플러스
+# [SRS 원본 v1.0] 연금플러스
+
+> 이 문서는 전체 범위 상세 SRS입니다. 실제 4일 MVP 구현 범위는 [`docs/submission/SRS_MVP.md`](../../submission/SRS_MVP.md)를 참고하세요.
 
 # 소프트웨어 요구사항 명세서 (SRS)
 

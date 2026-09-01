@@ -41,7 +41,7 @@ PB의 도움 없이 연금계좌 이전 과정을 직접 확인해야 하는 일
 
 **발표자 노트:** 속도 개선이 아니라 진행 가시성 개선이 이번 프로젝트의 중심 가설입니다.
 
-**근거:** `docs/team/product/PRD.md` §1·§4, `docs/knowledge-base/01-product-context.md`
+**근거:** `docs/team/product/PRD_원본상세.md` §1·§4, `docs/submission/knowledge-base/01-product-context.md`
 
 ---
 
@@ -72,7 +72,7 @@ PB의 도움 없이 연금계좌 이전 과정을 직접 확인해야 하는 일
 
 **발표자 노트:** 로그인과 회원가입은 제출 시연 흐름을 위한 UI만 제공하며 실제 계정은 생성하지 않습니다.
 
-**근거:** `docs/PRD.md`, `docs/team/start/개발전_준비.md`
+**근거:** `docs/submission/PRD_MVP.md`, `docs/team/start/개발전_준비.md`
 
 ---
 
@@ -96,7 +96,7 @@ PB의 도움 없이 연금계좌 이전 과정을 직접 확인해야 하는 일
 
 **발표자 노트:** 전체 자료를 AI에 반복 입력하지 않고 KB 인덱스에서 필요한 근거만 선택하게 했습니다.
 
-**근거:** `docs/knowledge-base/00-index.md`
+**근거:** `docs/submission/knowledge-base/00-index.md`
 
 ---
 
@@ -125,7 +125,7 @@ PB의 도움 없이 연금계좌 이전 과정을 직접 확인해야 하는 일
 
 **권장 시각자료:** 핵심 흐름 5단계 화살표
 
-**근거:** `docs/PRD.md` §3·§5
+**근거:** `docs/submission/PRD_MVP.md` §3·§5
 
 ---
 
@@ -152,7 +152,7 @@ PB의 도움 없이 연금계좌 이전 과정을 직접 확인해야 하는 일
 
 **권장 시각자료:** Requirement 1개의 `입력 → 규칙 → 출력 → AC` 예시
 
-**근거:** `docs/SRS.md`
+**근거:** `docs/submission/SRS_MVP.md`
 
 ---
 
@@ -181,7 +181,7 @@ Knowledge Base → PRD → SRS Requirement → GitHub Issue → PR·검증
 
 **발표자 노트:** 요구사항을 사후 문서로 남기는 것이 아니라 Issue와 검증의 공통 식별자로 사용했습니다.
 
-**근거:** `docs/SRS.md` §6, GitHub Project #13
+**근거:** `docs/submission/SRS_MVP.md` §6, GitHub Project #13
 
 ---
 
@@ -208,7 +208,7 @@ Preview와 Production의 역할, 직접 URL 진입과 새로고침 설정을 검
 
 **권장 시각자료:** 기술 로고 나열보다 `학습 질문 → 제품 결정 → 확인 증거` 3열 구조
 
-**근거:** `docs/TECH_LEARNING_PLAN.md`
+**근거:** `docs/submission/TECH_LEARNING_PLAN.md`
 
 ---
 
@@ -343,7 +343,7 @@ Backlog → 진행 → 검토 → 완료
 
 **권장 시각자료:** `근거 제공 → AI 구현 → 사람 검토 → PR 승인` 한 줄 흐름
 
-**근거:** `docs/AI_WORKFLOW_LOG.md`, `docs/team/workflow/goal-prompts/`
+**근거:** `docs/submission/AI_WORKFLOW_LOG.md`, `docs/team/workflow/goal-prompts/`
 
 ---
 

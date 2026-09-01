@@ -138,9 +138,9 @@ PR에는 아래 세 가지만 씁니다.
 ## 8. 필요할 때만 보는 참고자료
 
 - 화면과 샘플 데이터: [예상 프로토타입](product/예상_프로토타입.html)
-- 상세 기능 조건: [상세 PRD](product/PRD.md)
+- 상세 기능 조건: [상세 PRD](product/PRD_원본상세.md)
 - 디자인 구현 기준: [디자인 시스템 가이드](design/디자인시스템_개발적용가이드.md)
 - 설치·Git 상세 설명: [개발환경·협업 가이드](development/개발환경_협업가이드.md)
-- 최종 제출 기준: [PRD](../PRD.md), [SRS](../SRS.md)
+- 최종 제출 기준: [PRD](../submission/PRD_MVP.md), [SRS](../submission/SRS_MVP.md)
 
-핵심 기준이 서로 다르면 `docs/PRD.md`, `docs/SRS.md`, GitHub Issue 순으로 우선합니다.
+핵심 기준이 서로 다르면 `docs/submission/PRD_MVP.md`, `docs/submission/SRS_MVP.md`, GitHub Issue 순으로 우선합니다.

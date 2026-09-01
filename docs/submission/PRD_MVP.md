@@ -1,6 +1,6 @@
 # 연금플러스 MVP PRD
 
-> **이 문서는 MVP Lite 버전입니다.** 전체 12화면·66개 요구사항의 원본은 [`team/product/PRD.md`](team/product/PRD.md)(상세 PRD v2.1)를 참고하세요. 실제 4일간 구현하는 범위는 이 문서 기준입니다.
+> **이 문서는 MVP Lite 버전입니다.** 전체 12화면·66개 요구사항의 원본은 [`team/product/PRD_원본상세.md`](../team/product/PRD_원본상세.md)(상세 PRD v2.1)를 참고하세요. 실제 4일간 구현하는 범위는 이 문서 기준입니다.
 
 > 상태: MVP 범위 확정
 > 목적: 기존 상세 PRD에서 3명·4일 MVP에 필요한 범위만 선별합니다.
@@ -43,6 +43,6 @@
 
 ## 6. 원본 기획 자산
 
-- [상세 PRD](team/product/PRD.md)
-- [상세 SRS](SRS_연금플러스_v1.0.md)
+- [상세 PRD](../team/product/PRD_원본상세.md)
+- [상세 SRS](../team/references/SRS_원본_v1.0.md)
 - [Knowledge Base](knowledge-base/00-index.md)

@@ -1,7 +1,7 @@
 # 연금플러스 MVP SRS Lite
 
 > 상태: MVP 범위 확정, Requirement 12개 작성 완료 · Issue 연결 예정
-> 원본: [상세 SRS v1.0](SRS_연금플러스_v1.0.md)
+> 원본: [상세 SRS v1.0](../team/references/SRS_원본_v1.0.md)
 
 ## 1. 목적과 범위
 
@@ -28,7 +28,7 @@
 
 ## 4. 기능 요구사항
 
-상세 SRS([SRS_연금플러스_v1.0.md](SRS_연금플러스_v1.0.md))에서 MVP 6개 화면에 해당하는 Requirement 12개를 추출합니다.
+상세 SRS([SRS_원본_v1.0.md](../team/references/SRS_원본_v1.0.md))에서 MVP 6개 화면에 해당하는 Requirement 12개를 추출합니다.
 
 | ID | 화면 | Requirement | Rationale | Acceptance Criteria | Source | Priority |
 |---|---|---|---|---|---|---|
@@ -45,7 +45,7 @@
 | FR-011 | 인출 조건 입력 | 인출 희망 금액이 평가금액을 초과하면 계산을 진행하지 않고 최대 인출 가능액을 안내한다 | 실제로 인출할 수 없는 금액을 계산하면 안 된다 | 초과 시 계산 미진행 + "최대 인출 가능액: ○○원" 즉시 안내 | REQ-FUNC-045 | Must |
 | FR-012 | 인출 결과 | 3층 법정 인출순서를 시각화하고 재원별 세금과 실수령액을 확정 금액(원)으로 보여주며 모의계산 면책 문구를 표시한다 | 사용자가 차감 순서와 실제 받을 금액을 이해해야 하고, 자문으로 오인되면 안 된다 | 3층 순서 시각화 + 확정 금액 우선 표기 + "실제 원천징수 세액과 다를 수 있습니다" 병기 | REQ-FUNC-050, REQ-FUNC-054, REQ-FUNC-057 | Must |
 
-> 상세 인수 기준 전문은 [SRS_연금플러스_v1.0.md](SRS_연금플러스_v1.0.md) §4.1의 REQ-FUNC ID로 역추적합니다.
+> 상세 인수 기준 전문은 [SRS_원본_v1.0.md](../team/references/SRS_원본_v1.0.md) §4.1의 REQ-FUNC ID로 역추적합니다.
 
 ## 5. UI·비기능 요구사항
 

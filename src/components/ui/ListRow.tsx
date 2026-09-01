@@ -1,0 +1,21 @@
+import { ChevronRight } from 'lucide-react'
+
+interface ListRowProps {
+  emoji: string
+  emojiBg?: string
+  label: string
+}
+
+export function ListRow({ emoji, emojiBg = 'var(--color-surface-2)', label }: ListRowProps) {
+  return (
+    <div aria-disabled="true" className="flex cursor-default items-center justify-between gap-3 border-b border-line py-4">
+      <span className="flex items-center gap-3">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full text-[14px]" style={{ background: emojiBg }}>
+          {emoji}
+        </span>
+        <span className="text-[15px] text-navy-800">{label}</span>
+      </span>
+      <ChevronRight className="h-4 w-4 shrink-0 text-navy-300" aria-hidden="true" />
+    </div>
+  )
+}

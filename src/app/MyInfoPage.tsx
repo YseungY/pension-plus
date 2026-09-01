@@ -1,21 +1,21 @@
-import { Bell, ChevronRight, FileText, LogOut, ShieldCheck, UserRound } from 'lucide-react'
+import { LogOut, UserRound } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import { BottomTabBar } from '../components/layout/BottomTabBar'
-import { DEMO_DATA_LABEL } from '../lib/mock-types'
+import { ListRow } from '../components/ui/ListRow'
 
 const infoSections = [
   {
     title: '계정',
     items: [
-      { icon: ShieldCheck, label: '연결된 인증서 관리' },
-      { icon: Bell, label: '알림 설정' },
+      { emoji: '🔐', label: '연결된 인증서 관리' },
+      { emoji: '🔔', label: '알림 설정' },
     ],
   },
   {
     title: '약관·정책',
     items: [
-      { icon: FileText, label: '이용약관' },
-      { icon: FileText, label: '개인정보 처리방침' },
+      { emoji: '📄', label: '이용약관' },
+      { emoji: '📄', label: '개인정보 처리방침' },
     ],
   },
 ] as const
@@ -34,25 +34,14 @@ export function MyInfoPage() {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-2">
             <UserRound className="h-6 w-6 text-navy-300" aria-hidden="true" />
           </span>
-          <div>
-            <strong className="block text-[17px] font-[800] text-navy-800">김연금님</strong>
-            <span className="mt-0.5 inline-block rounded-full bg-mint-100 px-2 py-0.5 text-[11px] font-[800] text-mint-700">{DEMO_DATA_LABEL}</span>
-          </div>
+          <strong className="text-[17px] font-[800] text-navy-800">김연금님</strong>
         </div>
 
         {infoSections.map(({ title, items }) => (
           <section key={title} className="px-5 pt-6">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">{title}</h2>
-            {items.map(({ icon: Icon, label }) => (
-              <div key={label} aria-disabled="true" className="flex cursor-default items-center justify-between gap-3 border-b border-line py-4">
-                <span className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-2">
-                    <Icon className="h-[16px] w-[16px] text-navy-800" aria-hidden="true" />
-                  </span>
-                  <span className="text-[15px] text-navy-800">{label}</span>
-                </span>
-                <ChevronRight className="h-4 w-4 shrink-0 text-navy-300" aria-hidden="true" />
-              </div>
+            {items.map(({ emoji, label }) => (
+              <ListRow key={label} emoji={emoji} label={label} />
             ))}
           </section>
         ))}

@@ -1,6 +1,7 @@
-import { ArrowLeft, ChevronDown, ChevronRight, CircleAlert } from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
+import { ListRow } from '../components/ui/ListRow'
 
 const manageTabs = ['입출금 관리', '서비스 관리'] as const
 type ManageTab = (typeof manageTabs)[number]
@@ -40,7 +41,7 @@ export function PensionSavingsPage() {
 
       {activeTab === '입출금 관리' ? (
         <div className="pb-8">
-          <div className="flex justify-center bg-surface py-3">
+          <div className="flex justify-center py-3">
             <span className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[600] text-text-secondary shadow-[0_1px_2px_rgba(14,32,51,0.08)]">
               신연금저축 123-456-789 01
               <ChevronDown className="h-3.5 w-3.5 text-text-tertiary" aria-hidden="true" />
@@ -49,15 +50,13 @@ export function PensionSavingsPage() {
 
           <section className="px-5 pt-6">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">입금 관리</h2>
-            <ManageRow emoji="📅" label="입금한도 설정" />
-            <ManageRow emoji="🧾" label="입금지급내역" />
+            <ListRow emoji="📅" label="입금한도 설정" />
+            <ListRow emoji="🧾" label="입금지급내역" />
           </section>
 
-          <div className="mt-6 h-3 bg-surface" />
-
-          <section className="px-5 pt-6">
+          <section className="px-5 pt-8">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">출금 관리</h2>
-            <ManageRow emoji="💰" emojiBg="var(--color-navy-100)" label="연금수령" />
+            <ListRow emoji="💰" emojiBg="var(--color-navy-100)" label="연금수령" />
             <Link
               to="/withdrawal/input"
               className="-mx-5 flex items-center justify-between gap-3 bg-mint-100 px-5 py-4 transition active:scale-[0.99]"
@@ -71,13 +70,8 @@ export function PensionSavingsPage() {
               </span>
               <ChevronRight className="h-4 w-4 shrink-0 text-mint-700" aria-hidden="true" />
             </Link>
-            <ManageRow emoji="🚫" label="연금저축 해지" />
+            <ListRow emoji="🚫" label="연금저축 해지" />
           </section>
-
-          <div className="mx-5 mt-6 flex gap-3 rounded-2xl bg-surface p-4">
-            <CircleAlert className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-tertiary" aria-hidden="true" />
-            <p className="text-[13px] leading-[1.55] text-text-secondary">입금·연금수령·해지는 시연 범위 밖입니다.</p>
-          </div>
         </div>
       ) : (
         <div className="flex-1 px-5 pb-8 pt-10 text-center">
@@ -85,19 +79,5 @@ export function PensionSavingsPage() {
         </div>
       )}
     </main>
-  )
-}
-
-function ManageRow({ emoji, emojiBg = 'var(--color-surface-2)', label }: { emoji: string; emojiBg?: string; label: string }) {
-  return (
-    <div aria-disabled="true" className="flex cursor-default items-center justify-between gap-3 border-b border-line py-4">
-      <span className="flex items-center gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full text-[14px]" style={{ background: emojiBg }}>
-          {emoji}
-        </span>
-        <span className="text-[16px] text-navy-800">{label}</span>
-      </span>
-      <ChevronRight className="h-4 w-4 shrink-0 text-navy-300" aria-hidden="true" />
-    </div>
   )
 }

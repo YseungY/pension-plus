@@ -10,7 +10,7 @@ export function PensionSavingsPage() {
   const [activeTab, setActiveTab] = useState<ManageTab>('입출금 관리')
 
   return (
-    <main className="flex min-h-screen flex-col bg-white">
+    <main className="flex flex-1 flex-col bg-white">
       <header className="flex h-16 items-center gap-3 border-b border-line px-5">
         <button
           type="button"

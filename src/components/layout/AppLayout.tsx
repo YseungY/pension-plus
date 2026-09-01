@@ -11,7 +11,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[393px] flex-col bg-surface">
-      <div className="flex-1">{children}</div>
+      <div className="flex flex-1 flex-col">{children}</div>
       {!isWelcomeFlow && <CustomerServiceBar />}
     </div>
   )
@@ -19,17 +19,10 @@ export function AppLayout({ children }: { children: ReactNode }) {
 
 function CustomerServiceBar() {
   return (
-    <footer className="sticky bottom-0 border-t border-line bg-white px-5 py-3 text-xs text-text-secondary">
-      <p className="font-semibold text-mint-700">{DEMO_DATA_LABEL} · 실제 계좌·상담과 무관합니다</p>
-      <div className="mt-2 flex flex-col gap-1">
-        <span>
-          KB증권 고객센터(이체 절차) · <strong className="text-text-primary">{KB_SUPPORT_NUMBER}</strong>
-        </span>
-        <span>
-          이관사 고객센터(해지공제·의사확인) ·{' '}
-          <strong className="text-text-primary">{TRANSFER_COMPANY_SUPPORT_NUMBER}</strong>
-        </span>
-      </div>
+    <footer className="sticky bottom-0 border-t border-line bg-white px-5 py-2 text-[11px] leading-relaxed text-text-tertiary">
+      <p>
+        {DEMO_DATA_LABEL} · KB증권 {KB_SUPPORT_NUMBER} · 이관사 {TRANSFER_COMPANY_SUPPORT_NUMBER}
+      </p>
     </footer>
   )
 }

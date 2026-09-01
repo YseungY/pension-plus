@@ -4,7 +4,7 @@ export function SignupPage() {
   const navigate = useNavigate()
 
   return (
-    <section className="flex min-h-screen flex-col justify-center px-5 py-8">
+    <section className="flex flex-1 flex-col justify-center px-5 py-8">
       <h1 className="text-2xl font-bold text-navy-800">회원가입</h1>
       <p className="mt-2 text-sm leading-6 text-text-secondary">
         실제 계정이 생성되지 않습니다. 버튼을 누르면 로그인 화면으로 이동합니다.

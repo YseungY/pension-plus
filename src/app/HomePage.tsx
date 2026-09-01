@@ -4,7 +4,7 @@ import { BrandMark } from '../features/onboarding/components/BrandMark'
 
 export function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col bg-white">
+    <main className="flex flex-1 flex-col bg-white">
       <header className="flex h-16 items-center justify-between px-5">
         <BrandMark size="sm" />
         <div className="flex items-center gap-2">
@@ -71,7 +71,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <nav className="sticky bottom-0 grid grid-cols-4 border-t border-line bg-white px-2 pb-5 pt-3" aria-label="주요 메뉴">
+      <nav className="grid grid-cols-4 border-t border-line bg-white px-2 pb-4 pt-3" aria-label="주요 메뉴">
         <NavItem label="홈" active icon={Home} />
         <NavItem label="현황판" icon={Activity} />
         <NavItem label="시뮬레이터" icon={Calculator} />

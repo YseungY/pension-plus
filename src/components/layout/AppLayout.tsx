@@ -10,7 +10,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
   const isWelcomeFlow = ['/', '/onboarding', '/connect'].includes(pathname)
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[393px] flex-col bg-surface">
+    <div className="mx-auto flex min-h-screen w-full max-w-[393px] flex-col bg-white">
       <div className="flex flex-1 flex-col">{children}</div>
       {!isWelcomeFlow && <CustomerServiceBar />}
     </div>

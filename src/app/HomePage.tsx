@@ -67,7 +67,7 @@ export function HomePage() {
 
         <div className="mt-5 flex gap-3 rounded-2xl bg-warning-surface p-4">
           <CircleAlert className="mt-0.5 h-[18px] w-[18px] shrink-0 text-status-warning" />
-          <p className="text-[13px] leading-[1.55] text-warning-text">현금이전 2종이 전체 일정을 정합니다. 진행 전에 제한 기간을 확인하세요.</p>
+          <p className="text-[13px] leading-[1.55] text-warning-text">현금이전 2종이 전체 일정을 정합니다.<br />진행 전에 제한 기간을 확인하세요.</p>
         </div>
       </div>
 

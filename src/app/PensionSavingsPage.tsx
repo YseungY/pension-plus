@@ -10,7 +10,7 @@ export function PensionSavingsPage() {
   const [activeTab, setActiveTab] = useState<ManageTab>('입출금 관리')
 
   return (
-    <main className="flex flex-1 flex-col bg-white">
+    <main className="flex flex-col bg-white">
       <header className="flex h-16 items-center gap-3 border-b border-line px-5">
         <button
           type="button"
@@ -39,7 +39,7 @@ export function PensionSavingsPage() {
       </div>
 
       {activeTab === '입출금 관리' ? (
-        <div className="flex-1 pb-8">
+        <div className="pb-8">
           <div className="flex justify-center bg-surface py-3">
             <span className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[600] text-text-secondary shadow-[0_1px_2px_rgba(14,32,51,0.08)]">
               신연금저축 123-456-789 01
@@ -76,7 +76,7 @@ export function PensionSavingsPage() {
 
           <div className="mx-5 mt-6 flex gap-3 rounded-2xl bg-surface p-4">
             <CircleAlert className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-tertiary" aria-hidden="true" />
-            <p className="text-[13px] leading-[1.55] text-text-secondary">연금 외 수령 외 나머지 항목(입금·연금수령·해지)은 이번 시연 범위에 포함되지 않습니다.</p>
+            <p className="text-[13px] leading-[1.55] text-text-secondary">입금·연금수령·해지는 시연 범위 밖입니다.</p>
           </div>
         </div>
       ) : (

@@ -23,12 +23,11 @@ export function ConnectPage() {
           </button>
           <BrandMark size="sm" />
         </div>
-        <span className="rounded-full bg-mint-100 px-3 py-1.5 text-[11px] font-[800] text-mint-700">시연용 화면</span>
       </header>
       <section className="flex-1 pt-16">
         <p className="text-[14px] font-[700] text-mint-700">한 번에 확인하려면</p>
         <h1 className="mt-3 text-[32px] font-[800] leading-[1.32] tracking-[-0.04em] text-navy-800">내 연금부터<br />연결할까요?</h1>
-        <p className="mt-4 text-[15px] leading-[1.65] text-text-secondary">실제 인증이나 계좌 연결은 진행되지 않습니다.<br />원하는 방식을 선택해 흐름만 체험해보세요.</p>
+        <p className="mt-4 text-[15px] leading-[1.65] text-text-secondary">실제 인증이나 계좌 연결은 진행되지 않습니다.<br />원하는 방식을 선택해주세요.</p>
         <div className="mt-9 flex flex-col gap-3" role="radiogroup" aria-label="연금 불러오기 방식">
           {connectionMethods.map(({ id, label, icon: Icon }) => {
             const selected = selectedMethod === id
@@ -45,7 +44,7 @@ export function ConnectPage() {
         </div>
       </section>
       <div className="flex flex-col gap-2">
-        <button type="button" onClick={() => navigate('/home')} className="h-14 rounded-[14px] bg-navy-800 text-[16px] font-[800] text-white transition active:scale-[0.98]">연결 화면 체험하기</button>
+        <button type="button" onClick={() => navigate('/home')} className="h-14 rounded-[14px] bg-navy-800 text-[16px] font-[800] text-white transition active:scale-[0.98]">선택한 방식으로 연결하기</button>
         <button type="button" onClick={() => navigate('/home')} className="h-12 rounded-[14px] text-[15px] font-[700] text-text-tertiary transition hover:text-navy-800">먼저 둘러볼게요</button>
       </div>
     </main>

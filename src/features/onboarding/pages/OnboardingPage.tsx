@@ -5,8 +5,6 @@ import { ProgressRing } from '../components/ProgressRing'
 export function OnboardingPage() {
   return (
     <main className="flex min-h-screen flex-col bg-navy-800 px-7 pb-10 pt-7 text-white">
-      <div className="text-right text-[11px] font-[600] text-navy-300">시연용 화면</div>
-
       <section className="flex flex-1 flex-col items-center justify-center pb-4 text-center">
         <ProgressRing label="지금 단계" value="3 / 5" />
         <p className="mt-10 text-[14px] font-[700] text-mint-400">연금 이전, 어디까지 왔을까요?</p>

@@ -73,20 +73,29 @@ npm run dev
 
 ## 3. 코딩 에이전트에게 보내는 요청
 
-아래 내용을 그대로 복사하고 대괄호만 담당 기능에 맞게 바꿉니다. 참고 파일 목록은 지우지 마세요.
+본인 담당 블록을 그대로 복사해서 보냅니다. 고칠 부분 없이 바로 쓰면 됩니다.
+
+### 기능1 담당자용
 
 ```text
 연금플러스 4일 MVP 작업입니다.
 
 먼저 루트의 AGENTS.md를 읽어주세요.
 
-담당 기능: [기능1 이관 현황판 / 기능2 연금 외 수령]
-관련 Issue: [Issue 번호와 URL]
-수정 가능한 폴더: [src/features/transfer / src/features/withdrawal]
-수정하면 안 되는 곳: 공통 설정, 라우터, 다른 기능 폴더
+담당 기능: 기능1 이관 현황판
+관련 Issue:
+- https://github.com/YseungY/pension-plus/issues/2 (이전 계좌·종목 확인 + 제한사항 확인)
+- https://github.com/YseungY/pension-plus/issues/3 (이관 현황판)
+수정 가능한 폴더: src/features/transfer/
+수정하면 안 되는 곳: 공통 설정, 라우터, src/features/withdrawal/
+
+만들 화면: /transfer/holdings(이전 계좌·종목 확인), /transfer/restrictions(이전 전 제한사항),
+/transfer/status(이관 현황판). 홈의 "타사 퇴직연금 가져오기" 버튼과 "이관사 확인 진행 중" 카드에서
+이미 이 경로들로 연결되어 있습니다.
 
 참고 파일(모두 수정 금지, 참고만):
 - 화면 구조·흐름·문구·샘플 데이터: docs/team/product/예상_프로토타입.html
+- 요구사항: docs/submission/SRS_MVP.md (FR-002~009)
 - 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/의 디자인 시스템·모바일 앱
   dc.html 두 파일 + docs/team/design/디자인시스템_개발적용가이드.md
 - 이미 구현된 src/app/HomePage.tsx, src/features/onboarding/와 색상·폰트·카드 스타일이
@@ -95,6 +104,45 @@ npm run dev
 
 모든 화면에서 뒤로가기(헤더 버튼·브라우저 뒤로가기)가 정상 동작해야 하고, 홈에서 시작해
 담당 흐름의 끝까지 막히거나 끊기지 않고 자연스럽게 이어져야 합니다.
+
+Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 5단계 이내로 제시해주세요.
+한 화면씩 구현하고, 완료 후 npm run build와 npm run test를 실행해주세요.
+마지막에 변경 파일, 브라우저 확인 방법, 남은 문제를 알려주세요.
+```
+
+### 기능2 담당자용
+
+```text
+연금플러스 4일 MVP 작업입니다.
+
+먼저 루트의 AGENTS.md를 읽어주세요.
+
+담당 기능: 기능2 연금 외 수령
+관련 Issue:
+- https://github.com/YseungY/pension-plus/issues/4 (연금 외 수령 조건·한도 계산)
+- https://github.com/YseungY/pension-plus/issues/5 (연금 외 수령 결과 화면)
+수정 가능한 폴더: src/features/withdrawal/
+수정하면 안 되는 곳: 공통 설정, 라우터, src/features/transfer/
+
+만들 화면: /withdrawal/input(연금 외 수령 조건 확인), /withdrawal/result(연금 외 수령 결과).
+홈의 "연금저축 관리" 버튼 → /pension-savings(공통에서 구현 완료, 손댈 필요 없음) → 출금 관리 >
+"연금 외 수령"을 누르면 /withdrawal/input으로 이미 연결되어 있습니다. 여기서부터 시작하세요.
+연금 외 수령 화면은 탭(본인·중도인출 / 타 명의·상속) 중 "본인·중도인출"만 실제로 만들고,
+"타 명의·상속" 탭은 프로토타입처럼 안내 문구만 있는 정적 화면으로 두면 됩니다.
+
+참고 파일(모두 수정 금지, 참고만):
+- 화면 구조·흐름·문구·샘플 데이터: docs/team/product/예상_프로토타입.html
+  (screen-manage의 "연금 외 수령" 항목 → screen-f2-detail → "인출 항목 및 세금 시뮬레이터" 모달)
+- 요구사항: docs/submission/SRS_MVP.md (FR-010~012), 계산식은 docs/team/references/SRS_원본_v1.0.md §7.1
+- 시각 스타일(색상·타이포·카드 모양): docs/team/design/design-system/의 디자인 시스템·모바일 앱
+  dc.html 두 파일 + docs/team/design/디자인시스템_개발적용가이드.md
+- 이미 구현된 src/app/HomePage.tsx, src/app/PensionSavingsPage.tsx와 색상·폰트·카드 스타일이
+  같아 보이게 만들어주세요. 새 색상 값을 만들지 말고 src/styles/globals.css의
+  토큰(navy-*, mint-*, surface, line, text-* 등)을 쓰세요.
+
+모든 화면에서 뒤로가기(헤더 버튼·브라우저 뒤로가기)가 정상 동작해야 하고, 홈에서 시작해
+담당 흐름의 끝까지 막히거나 끊기지 않고 자연스럽게 이어져야 합니다.
+계산 로직은 UI 컴포넌트와 분리하고 npm run test로 확인해주세요.
 
 Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 5단계 이내로 제시해주세요.
 한 화면씩 구현하고, 완료 후 npm run build와 npm run test를 실행해주세요.

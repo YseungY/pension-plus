@@ -1,4 +1,4 @@
-import { LogOut, UserRound } from 'lucide-react'
+import { Bell, FileCheck2, LogOut, ScrollText, ShieldCheck, UserRound } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import { BottomTabBar } from '../components/layout/BottomTabBar'
 import { ListRow } from '../components/ui/ListRow'
@@ -7,15 +7,15 @@ const infoSections = [
   {
     title: '계정',
     items: [
-      { emoji: '🔐', label: '연결된 인증서 관리' },
-      { emoji: '🔔', label: '알림 설정' },
+      { icon: ShieldCheck, iconBg: 'var(--color-navy-100)', label: '연결된 인증서 관리' },
+      { icon: Bell, iconBg: 'var(--color-mint-100)', label: '알림 설정' },
     ],
   },
   {
     title: '약관·정책',
     items: [
-      { emoji: '📄', label: '이용약관' },
-      { emoji: '📄', label: '개인정보 처리방침' },
+      { icon: ScrollText, iconBg: 'var(--color-surface-2)', label: '이용약관' },
+      { icon: FileCheck2, iconBg: 'var(--color-surface-2)', label: '개인정보 처리방침' },
     ],
   },
 ] as const
@@ -40,8 +40,8 @@ export function MyInfoPage() {
         {infoSections.map(({ title, items }) => (
           <section key={title} className="px-5 pt-6">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">{title}</h2>
-            {items.map(({ emoji, label }) => (
-              <ListRow key={label} emoji={emoji} label={label} />
+            {items.map(({ icon: Icon, iconBg, label }) => (
+              <ListRow key={label} icon={<Icon className="h-[15px] w-[15px] text-navy-800" aria-hidden="true" />} iconBg={iconBg} label={label} />
             ))}
           </section>
         ))}

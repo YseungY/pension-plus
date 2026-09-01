@@ -50,13 +50,13 @@ export function PensionSavingsPage() {
 
           <section className="px-5 pt-6">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">입금 관리</h2>
-            <ListRow emoji="📅" label="입금한도 설정" />
-            <ListRow emoji="🧾" label="입금지급내역" />
+            <ListRow icon="📅" label="입금한도 설정" />
+            <ListRow icon="🧾" label="입금지급내역" />
           </section>
 
           <section className="px-5 pt-8">
             <h2 className="mb-4 text-[18px] font-[700] text-navy-800">출금 관리</h2>
-            <ListRow emoji="💰" emojiBg="var(--color-navy-100)" label="연금수령" />
+            <ListRow icon="💰" iconBg="var(--color-navy-100)" label="연금수령" />
             <Link
               to="/withdrawal/input"
               className="-mx-5 flex items-center justify-between gap-3 bg-mint-100 px-5 py-4 transition active:scale-[0.99]"
@@ -70,7 +70,7 @@ export function PensionSavingsPage() {
               </span>
               <ChevronRight className="h-4 w-4 shrink-0 text-mint-700" aria-hidden="true" />
             </Link>
-            <ListRow emoji="🚫" label="연금저축 해지" />
+            <ListRow icon="🚫" label="연금저축 해지" />
           </section>
         </div>
       ) : (

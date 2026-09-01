@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { ProgressRing } from '../components/ProgressRing'
+import { BrandMark } from '../components/BrandMark'
 
 export function SplashPage() {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ export function SplashPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-navy-800" aria-label="연금플러스 시작 화면">
       <div className="splash-mark">
-        <ProgressRing compact />
+        <BrandMark inverted size="lg" />
       </div>
     </main>
   )

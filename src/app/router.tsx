@@ -8,6 +8,7 @@ import { PensionSavingsPage } from './PensionSavingsPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
 import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
 import { ConnectPage } from '../features/onboarding/pages/ConnectPage'
+import { PreviewPage } from '../features/onboarding/pages/PreviewPage'
 
 export function AppRouter() {
   return (
@@ -17,6 +18,7 @@ export function AppRouter() {
           <Route path="/" element={<SplashPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/connect" element={<ConnectPage />} />
+          <Route path="/preview" element={<PreviewPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/pension-savings" element={<PensionSavingsPage />} />
           <Route path="/login" element={<LoginPage />} />

@@ -14,7 +14,7 @@ export function LoginPage() {
         className="mt-6 flex flex-col gap-3"
         onSubmit={(event) => {
           event.preventDefault()
-          navigate('/')
+          navigate('/home')
         }}
       >
         <input
@@ -33,7 +33,7 @@ export function LoginPage() {
           type="submit"
           className="mt-2 rounded-xl bg-mint-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-mint-700"
         >
-          로그인 (시연용 데이터로 홈 이동)
+          로그인
         </button>
       </form>
 

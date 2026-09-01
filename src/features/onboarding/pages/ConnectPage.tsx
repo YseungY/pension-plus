@@ -45,7 +45,7 @@ export function ConnectPage() {
       </section>
       <div className="flex flex-col gap-2">
         <button type="button" onClick={() => navigate('/home')} className="h-14 rounded-[14px] bg-navy-800 text-[16px] font-[800] text-white transition active:scale-[0.98]">선택한 방식으로 연결하기</button>
-        <button type="button" onClick={() => navigate('/home')} className="h-12 rounded-[14px] text-[15px] font-[700] text-text-tertiary transition hover:text-navy-800">먼저 둘러볼게요</button>
+        <button type="button" onClick={() => navigate('/preview')} className="h-12 rounded-[14px] text-[15px] font-[700] text-text-tertiary transition hover:text-navy-800">먼저 둘러볼게요</button>
       </div>
     </main>
   )

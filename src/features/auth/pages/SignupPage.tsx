@@ -39,7 +39,7 @@ export function SignupPage() {
           type="submit"
           className="mt-2 rounded-xl bg-mint-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-mint-700"
         >
-          회원가입 (시연용, 로그인으로 이동)
+          회원가입
         </button>
       </form>
 

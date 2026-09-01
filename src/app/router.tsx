@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import { AppLayout } from '../components/layout/AppLayout'
 import { PlaceholderScreen } from '../components/layout/PlaceholderScreen'
 import { HomePage } from './HomePage'
+import { MyInfoPage } from './MyInfoPage'
 import { PensionSavingsPage } from './PensionSavingsPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
 import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
@@ -19,6 +20,7 @@ export function AppRouter() {
           <Route path="/preview" element={<PreviewPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/pension-savings" element={<PensionSavingsPage />} />
+          <Route path="/my-info" element={<MyInfoPage />} />
           <Route
             path="/transfer/holdings"
             element={

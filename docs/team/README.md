@@ -168,6 +168,7 @@ Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 
 | `/preview` | 연결 전 기능 미리보기 ("먼저 둘러볼게요"에서 진입) | 공통 |
 | `/home` | 홈 | 공통 |
 | `/pension-savings` | 연금저축 관리 (구현 완료) | 공통 |
+| `/my-info` | 내 정보 (구현 완료) | 공통 |
 | `/transfer/holdings` | 이전 계좌·종목 확인 | 기능1 |
 | `/transfer/restrictions` | 이전 전 제한사항 | 기능1 |
 | `/transfer/status` | 이관 현황판 | 기능1 |

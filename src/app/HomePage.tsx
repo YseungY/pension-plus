@@ -1,5 +1,6 @@
-import { Activity, Bell, Calculator, ChevronRight, CircleAlert, Home, Landmark, UserRound } from 'lucide-react'
+import { Bell, Calculator, ChevronRight, CircleAlert, Landmark, UserRound } from 'lucide-react'
 import { Link } from 'react-router'
+import { BottomTabBar } from '../components/layout/BottomTabBar'
 import { BrandMark } from '../features/onboarding/components/BrandMark'
 
 export function HomePage() {
@@ -71,23 +72,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <nav className="grid grid-cols-4 border-t border-line bg-white px-2 pb-4 pt-3" aria-label="주요 메뉴">
-        <NavItem label="홈" active icon={Home} />
-        <NavItem label="현황판" icon={Activity} />
-        <NavItem label="시뮬레이터" icon={Calculator} />
-        <NavItem label="내 정보" icon={UserRound} />
-      </nav>
+      <BottomTabBar />
     </main>
-  )
-}
-
-type NavItemProps = { label: string; active?: boolean; icon: typeof Home }
-
-function NavItem({ label, active = false, icon: Icon }: NavItemProps) {
-  return (
-    <span className={`flex flex-col items-center gap-1.5 text-[11px] font-[700] ${active ? 'text-navy-800' : 'text-text-tertiary'}`}>
-      <Icon className="h-[21px] w-[21px]" aria-hidden="true" />
-      {label}
-    </span>
   )
 }

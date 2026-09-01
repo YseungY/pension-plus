@@ -1,4 +1,4 @@
-import { ArrowLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronRight, CircleAlert } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
@@ -40,8 +40,11 @@ export function PensionSavingsPage() {
 
       {activeTab === '입출금 관리' ? (
         <div className="flex-1 pb-8">
-          <div className="px-5 pt-4">
-            <p className="text-[13px] text-text-tertiary">신연금저축 123-456-789 01</p>
+          <div className="flex justify-center bg-surface py-3">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-[600] text-text-secondary shadow-[0_1px_2px_rgba(14,32,51,0.08)]">
+              신연금저축 123-456-789 01
+              <ChevronDown className="h-3.5 w-3.5 text-text-tertiary" aria-hidden="true" />
+            </span>
           </div>
 
           <section className="px-5 pt-6">
@@ -70,6 +73,11 @@ export function PensionSavingsPage() {
             </Link>
             <ManageRow emoji="🚫" label="연금저축 해지" />
           </section>
+
+          <div className="mx-5 mt-6 flex gap-3 rounded-2xl bg-surface p-4">
+            <CircleAlert className="mt-0.5 h-[18px] w-[18px] shrink-0 text-text-tertiary" aria-hidden="true" />
+            <p className="text-[13px] leading-[1.55] text-text-secondary">연금 외 수령 외 나머지 항목(입금·연금수령·해지)은 이번 시연 범위에 포함되지 않습니다.</p>
+          </div>
         </div>
       ) : (
         <div className="flex-1 px-5 pb-8 pt-10 text-center">

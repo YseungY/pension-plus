@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 공통·통합 | `src/app`, `src/components`, `src/lib` | 온보딩·홈·라우팅·통합·배포 | #1, #6 |
 | 기능1 | `src/features/transfer` | 계좌 확인 → 제한사항 → 이관 현황판 | [#2](https://github.com/YseungY/pension-plus/issues/2), [#3](https://github.com/YseungY/pension-plus/issues/3) |
-| 기능2 | `src/features/withdrawal` | 인출 조건 입력 → 모의계산 결과 | [#4](https://github.com/YseungY/pension-plus/issues/4), [#5](https://github.com/YseungY/pension-plus/issues/5) |
+| 기능2 | `src/features/withdrawal` | 연금 외 수령 조건 확인 → 모의계산 결과 (연금저축 관리 화면은 공통에서 구현 완료) | [#4](https://github.com/YseungY/pension-plus/issues/4), [#5](https://github.com/YseungY/pension-plus/issues/5) |
 
 기능1·2 담당자 이름만 팀 채팅에서 확정합니다. 다른 담당 폴더와 공통 설정은 수정하지 않습니다.
 
@@ -47,20 +47,30 @@ npm run dev
 
 ## 3. 코딩 에이전트에게 보내는 요청
 
-아래 내용을 복사하고 대괄호 부분만 담당 기능에 맞게 바꿉니다.
+아래 내용을 그대로 복사하고 대괄호 부분만 담당 기능에 맞게 바꿉니다. **구조·문구**는 프로토타입, **시각 스타일**은 디자인 시스템 파일을 기준으로 삼으라고 명시되어 있으니 지우지 마세요.
 
 ```text
 연금플러스 4일 MVP 작업입니다.
 
 먼저 루트의 AGENTS.md를 읽어주세요.
 
-담당 기능: [기능1 이관 현황판 / 기능2 인출순서 시뮬레이터]
+담당 기능: [기능1 이관 현황판 / 기능2 연금 외 수령]
 관련 Issue: [Issue 번호와 URL]
 수정 가능한 폴더: [src/features/transfer / src/features/withdrawal]
 수정하면 안 되는 곳: 공통 설정, 라우터, 다른 기능 폴더
 
+화면 구조·흐름·문구·샘플 데이터는 이 파일을 그대로 따르세요(수정 금지, 참고만):
+- docs/team/product/예상_프로토타입.html
+
+화면 색상·타이포·카드 모양 등 시각 스타일은 아래 두 파일을 기준으로 삼으세요(수정 금지, 참고만):
+- docs/team/design/design-system/연금플러스 디자인 시스템.dc.html
+- docs/team/design/design-system/연금플러스 모바일 앱.dc.html
+지금 이미 구현된 src/app/HomePage.tsx, src/features/onboarding/ 화면과 색상·폰트·카드 스타일이
+같아 보여야 합니다. 새 색상 값을 임의로 만들지 말고 src/styles/globals.css에 이미 정의된
+토큰(navy-*, mint-*, surface, line, text-* 등)을 사용하세요. 자세한 사용 규칙은
+docs/team/design/디자인시스템_개발적용가이드.md를 참고하세요.
+
 Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 5단계 이내로 제시해주세요.
-예상 프로토타입과 디자인 시스템의 정보·시각 기준을 사용하되 원본 HTML은 수정하지 마세요.
 한 화면씩 구현하고, 완료 후 npm run build와 npm run test를 실행해주세요.
 마지막에 변경 파일, 브라우저 확인 방법, 남은 문제를 알려주세요.
 ```
@@ -74,13 +84,16 @@ Issue의 완료 조건과 현재 코드를 먼저 확인하고 구현 계획을 
 | `/` | 스플래시 | 공통 |
 | `/onboarding` | 진행 링 온보딩 | 공통 |
 | `/connect` | 시연용 바로 연결 | 공통 |
-| `/home` | 홈 | 공통 |
+| `/home` | 홈 — "타사 퇴직연금 가져오기" 버튼(→ 기능1 시작), "이관사 확인 진행 중" 카드(→ 이관 현황판), "연금저축 관리" 버튼(→ 연금저축 관리) | 공통 |
 | `/login`, `/signup` | 시연용 로그인·회원가입 | 공통 |
-| `/transfer/holdings` | 이전 계좌·종목 확인 | 기능1 |
+| `/pension-savings` | 연금저축 관리 — 입출금 관리 탭, 입금 관리·출금 관리 섹션. 목록에는 다 보이지만 실제로 눌러서 이동하는 항목은 출금 관리 > **연금 외 수령**뿐(구현 완료) | 공통 |
+| `/transfer/holdings` | 이전 계좌·종목 확인 (홈의 "타사 퇴직연금 가져오기" 버튼에서 진입) | 기능1 |
 | `/transfer/restrictions` | 이전 전 제한사항 | 기능1 |
-| `/transfer/status` | 이관 현황판 | 기능1 |
-| `/withdrawal/input` | 인출 조건 입력 | 기능2 |
-| `/withdrawal/result` | 인출 결과 | 기능2 |
+| `/transfer/status` | 이관 현황판 (홈의 "이관사 확인 진행 중" 카드에서 진입) | 기능1 |
+| `/withdrawal/input` | 연금 외 수령 조건 확인 (`/pension-savings`의 "연금 외 수령" 항목에서 진입) | 기능2 |
+| `/withdrawal/result` | 연금 외 수령 결과 (인출 순서·세금 시뮬레이션) | 기능2 |
+
+기능2는 `/pension-savings` 화면을 건드릴 필요 없이 `/withdrawal/input`부터 이어서 만들면 됩니다.
 
 새 주소나 기능을 임의로 추가하지 않습니다. 실제 인증·계좌 연결·DB·금융 API·이체·출금도 만들지 않습니다.
 

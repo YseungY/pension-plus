@@ -4,6 +4,7 @@ import { PlaceholderScreen } from '../components/layout/PlaceholderScreen'
 import { LoginPage } from '../features/auth/pages/LoginPage'
 import { SignupPage } from '../features/auth/pages/SignupPage'
 import { HomePage } from './HomePage'
+import { PensionSavingsPage } from './PensionSavingsPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
 import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
 import { ConnectPage } from '../features/onboarding/pages/ConnectPage'
@@ -17,6 +18,7 @@ export function AppRouter() {
           <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/connect" element={<ConnectPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/pension-savings" element={<PensionSavingsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route
@@ -50,8 +52,8 @@ export function AppRouter() {
             path="/withdrawal/input"
             element={
               <PlaceholderScreen
-                title="인출 조건 입력"
-                description="인출 희망 금액과 연금수령한도를 입력합니다."
+                title="연금 외 수령"
+                description="연금저축 관리 > 출금 관리에서 진입합니다. 인출 희망 금액과 연금수령한도를 입력합니다."
               />
             }
           />
@@ -59,7 +61,7 @@ export function AppRouter() {
             path="/withdrawal/result"
             element={
               <PlaceholderScreen
-                title="인출 결과"
+                title="연금 외 수령 결과"
                 description="3층 법정 인출순서와 예상 세금·실수령액을 보여줍니다."
               />
             }

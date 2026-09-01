@@ -23,4 +23,4 @@
 - [수업자료](team/references/course/README.md)
 - [역기획·이전 계획](team/references/background/README.md)
 
-구현 범위가 충돌하면 `submission/PRD_MVP.md`와 `submission/SRS_MVP.md`를 우선합니다.
+화면 구성·흐름은 `team/product/예상_프로토타입.html`이 우선이며, PRD/SRS는 그에 맞춰 갱신합니다. 그 외 범위가 충돌하면 `submission/PRD_MVP.md`와 `submission/SRS_MVP.md`를 우선합니다.

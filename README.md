@@ -14,7 +14,8 @@
 | 기술 학습 계획 | [TECH_LEARNING_PLAN](docs/submission/TECH_LEARNING_PLAN.md) | 작성 중 |
 | Knowledge Base | [KB Index](docs/submission/knowledge-base/00-index.md) | 기본 구조 완료 |
 | AI 협업 기록 | [AI_WORKFLOW_LOG](docs/submission/AI_WORKFLOW_LOG.md) | Goal 1 기록 완료 |
-| GitHub Project | [Project #13](https://github.com/users/YseungY/projects/13) | 진행 중 |
+| GitHub Issues | [Issue #1~#6](https://github.com/YseungY/pension-plus/issues) | 6개 생성 완료 |
+| GitHub Project | [Project #13](https://github.com/users/YseungY/projects/13) — Backlog/진행/검토/완료 | 진행 중 |
 | 배포 제품 | Vercel URL 추가 예정 | 미배포 |
 
 전체 문서 설명은 [문서 인덱스](docs/README.md)에서 확인합니다.

@@ -64,7 +64,7 @@ export function PensionSavingsPage() {
               <span className="flex items-center gap-3">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-surface-2 text-[14px]">💸</span>
                 <span>
-                  <span className="block text-[15px] text-navy-800">연금 외 수령</span>
+                  <span className="block text-[15px] font-[700] text-navy-800">연금 외 수령</span>
                   <span className="mt-1 block text-[13px] text-text-tertiary">해지 없이 꼭 필요한 금액만 빼기</span>
                 </span>
               </span>

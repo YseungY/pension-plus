@@ -16,7 +16,7 @@ export function ListRow({ icon, iconBg = 'var(--color-surface-2)', label, to }: 
         <span className="flex h-7 w-7 items-center justify-center rounded-full text-[14px]" style={{ background: iconBg }}>
           {icon}
         </span>
-        <span className="text-[15px] text-navy-800">{label}</span>
+        <span className="text-[15px] font-[700] text-navy-800">{label}</span>
       </span>
       <ChevronRight className="h-4 w-4 shrink-0 text-navy-300" aria-hidden="true" />
     </>

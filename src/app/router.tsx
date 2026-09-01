@@ -15,7 +15,7 @@ import { PreviewPage } from '../features/onboarding/pages/PreviewPage'
 
 export function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/app">
       <AppLayout>
         <Routes>
           <Route path="/" element={<SplashPage />} />

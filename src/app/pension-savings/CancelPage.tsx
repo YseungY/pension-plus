@@ -1,6 +1,5 @@
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
-import { Link } from 'react-router'
 import { SubPageHeader } from '../../components/layout/SubPageHeader'
 
 const tabs = ['신청', '신청내역'] as const
@@ -43,17 +42,6 @@ export function CancelPage() {
           <div className="mt-3 flex items-center justify-end gap-1 text-[13px] font-[700] text-text-secondary">
             예상 해지 금액 자세히보기
             <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-mint-200 bg-mint-100/40 p-5">
-            <h2 className="text-[16px] font-[800] text-navy-800">해지하지 않고 필요한 만큼 출금하세요!</h2>
-            <p className="mt-2 text-[13px] leading-[1.55] text-text-secondary">연금 외 수령으로 계좌를 유지한 채 필요한 금액만 인출할 수 있어요.</p>
-            <Link
-              to="/withdrawal/input"
-              className="mt-4 flex h-12 items-center justify-center rounded-xl bg-mint-600 text-[14px] font-[800] text-white transition active:scale-[0.98]"
-            >
-              해지없이 출금하기
-            </Link>
           </div>
 
           <div className="mt-8 flex flex-col gap-3 text-[13px] leading-[1.55] text-text-secondary">

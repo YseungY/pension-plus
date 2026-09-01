@@ -7,7 +7,7 @@ const TRANSFER_COMPANY_SUPPORT_NUMBER = '1544-0000'
 
 export function AppLayout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
-  const isWelcomeFlow = ['/', '/onboarding', '/connect', '/home'].includes(pathname)
+  const isWelcomeFlow = ['/', '/onboarding', '/connect'].includes(pathname)
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[393px] flex-col bg-surface">

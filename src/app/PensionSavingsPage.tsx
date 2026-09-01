@@ -1,7 +1,6 @@
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { DEMO_DATA_LABEL } from '../lib/mock-types'
 
 const manageTabs = ['입출금 관리', '서비스 관리'] as const
 type ManageTab = (typeof manageTabs)[number]
@@ -42,8 +41,7 @@ export function PensionSavingsPage() {
       {activeTab === '입출금 관리' ? (
         <div className="flex-1 pb-8">
           <div className="px-5 pt-4">
-            <span className="inline-block rounded-full bg-mint-100 px-2.5 py-1 text-[11px] font-[800] text-mint-700">{DEMO_DATA_LABEL}</span>
-            <p className="mt-2 text-[13px] text-text-tertiary">신연금저축 394-104-153 01</p>
+            <p className="text-[13px] text-text-tertiary">신연금저축 123-456-789 01</p>
           </div>
 
           <section className="px-5 pt-6">

@@ -1,7 +1,6 @@
 import { Activity, Bell, Calculator, ChevronRight, CircleAlert, Home, Landmark, UserRound } from 'lucide-react'
 import { Link } from 'react-router'
 import { BrandMark } from '../features/onboarding/components/BrandMark'
-import { DEMO_DATA_LABEL } from '../lib/mock-types'
 
 export function HomePage() {
   return (
@@ -22,8 +21,7 @@ export function HomePage() {
       <div className="flex-1 px-5 pb-7 pt-4">
         <div className="flex items-end justify-between">
           <div>
-            <span className="rounded-full bg-mint-100 px-2.5 py-1 text-[11px] font-[800] text-mint-700">{DEMO_DATA_LABEL}</span>
-            <h1 className="mt-3 text-[26px] font-[800] leading-[1.35] tracking-[-0.035em] text-navy-800">김연금님의<br />연금 이전 현황</h1>
+            <h1 className="text-[26px] font-[800] leading-[1.35] tracking-[-0.035em] text-navy-800">김연금님의<br />연금 이전 현황</h1>
           </div>
           <span className="pb-1 text-[12px] font-[600] text-text-tertiary">진행 중 1건</span>
         </div>

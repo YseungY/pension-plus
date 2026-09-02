@@ -8,6 +8,7 @@ import { DepositHistoryPage } from './pension-savings/DepositHistoryPage'
 import { DepositLimitPage } from './pension-savings/DepositLimitPage'
 import { PensionReceiptPage } from './pension-savings/PensionReceiptPage'
 import { PensionSavingsPage } from './PensionSavingsPage'
+import { TransferIntroPage } from '../features/transfer/pages/TransferIntroPage'
 import { SplashPage } from '../features/onboarding/pages/SplashPage'
 import { OnboardingPage } from '../features/onboarding/pages/OnboardingPage'
 import { ConnectPage } from '../features/onboarding/pages/ConnectPage'
@@ -29,21 +30,22 @@ export function AppRouter() {
           <Route path="/pension-savings/pension-receipt" element={<PensionReceiptPage />} />
           <Route path="/pension-savings/cancel" element={<CancelPage />} />
           <Route path="/my-info" element={<MyInfoPage />} />
+          <Route path="/transfer/intro" element={<TransferIntroPage />} />
           <Route
-            path="/transfer/holdings"
+            path="/transfer/pre-check"
             element={
               <PlaceholderScreen
-                title="이전 계좌·종목 확인"
-                description="보유 종목을 그대로 옮김·팔아야 함·판정 불가 3그룹으로 판정해 보여줍니다."
+                title="실물이전 사전조회"
+                description="퇴직연금 유형·계좌를 선택하고 이전 가능 조건 3가지를 확인합니다."
               />
             }
           />
           <Route
-            path="/transfer/restrictions"
+            path="/transfer/holdings"
             element={
               <PlaceholderScreen
-                title="이전 전 제한사항 확인"
-                description="이체 불가 조건과 매매 잠금 구간, 매매 가능 여부를 보여줍니다."
+                title="사전조회 결과"
+                description="보유 종목을 그대로 옮김·현금화 2그룹으로 판정하고 매매 제한 예상 구간을 보여줍니다."
               />
             }
           />
@@ -51,8 +53,17 @@ export function AppRouter() {
             path="/transfer/status"
             element={
               <PlaceholderScreen
-                title="이관 현황판"
+                title="이전 진행 현황"
                 description="이관 진행 단계와 예상 완료일을 기간으로 보여줍니다."
+              />
+            }
+          />
+          <Route
+            path="/transfer/complete"
+            element={
+              <PlaceholderScreen
+                title="이전 완료"
+                description="실물이전이 완료된 결과와 재편입 안내를 보여줍니다."
               />
             }
           />

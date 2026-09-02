@@ -53,11 +53,11 @@ export function HomePage() {
         <section className="mt-7">
           <h2 className="text-[15px] font-[800] text-navy-800">무엇을 확인할까요?</h2>
           <div className="mt-3 grid grid-cols-2 gap-3">
-            <button type="button" aria-disabled="true" className="cursor-default rounded-[18px] border border-line p-[18px] text-left">
+            <Link to="/transfer/intro" className="rounded-[18px] border border-line p-[18px] text-left transition active:scale-[0.99]">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-navy-100"><Landmark className="h-[18px] w-[18px] text-navy-800" /></span>
               <strong className="mt-4 block text-[15px] font-[800] leading-[1.45] text-navy-800">타사 퇴직연금<br />가져오기</strong>
               <span className="mt-2 block text-[12px] leading-[1.5] text-text-tertiary">가능 종목과 제한 확인</span>
-            </button>
+            </Link>
             <Link to="/pension-savings" className="rounded-[18px] border border-mint-200 bg-mint-100/40 p-[18px] text-left transition active:scale-[0.99]">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white"><Calculator className="h-[18px] w-[18px] text-mint-700" /></span>
               <strong className="mt-4 block text-[15px] font-[800] leading-[1.45] text-navy-800">연금저축<br />관리</strong>

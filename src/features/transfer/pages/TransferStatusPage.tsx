@@ -102,21 +102,28 @@ export function TransferStatusPage() {
 
       <div
         className={`mx-5 mt-3 flex items-center justify-between gap-4 rounded-2xl px-5 py-4.5 ${
-          config.bannerTone === 'mint' ? 'bg-mint-100' : 'bg-status-warning'
+          config.bannerTone === 'mint' ? 'border border-line bg-surface' : 'bg-status-warning'
         }`}
       >
-        <div className="flex flex-col gap-1.5">
-          <strong className={`text-[15.5px] font-[800] ${config.bannerTone === 'mint' ? 'text-mint-700' : 'text-white'}`}>
-            {config.bannerTitle}
-          </strong>
-          <span className={`text-[12.5px] ${config.bannerTone === 'mint' ? 'text-mint-700' : 'text-white/90'}`}>
-            {config.bannerSub}
-          </span>
-          {config.bannerChip && (
-            <span className="w-fit rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-[700] text-warning-text">
-              {config.bannerChip}
+        <div className="flex items-start gap-3">
+          {config.bannerTone === 'mint' && (
+            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mint-100">
+              <Check className="h-3.5 w-3.5 text-mint-600" aria-hidden="true" />
             </span>
           )}
+          <div className="flex flex-col gap-1.5">
+            <strong className={`text-[15.5px] font-[800] ${config.bannerTone === 'mint' ? 'text-navy-800' : 'text-white'}`}>
+              {config.bannerTitle}
+            </strong>
+            <span className={`text-[12.5px] ${config.bannerTone === 'mint' ? 'text-text-secondary' : 'text-white/90'}`}>
+              {config.bannerSub}
+            </span>
+            {config.bannerChip && (
+              <span className="w-fit rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-[700] text-warning-text">
+                {config.bannerChip}
+              </span>
+            )}
+          </div>
         </div>
         {config.dday && (
           <span className="shrink-0 rounded-full bg-[#FFCC00] px-3 py-1.5 text-[13px] font-[800] text-navy-800">{config.dday}</span>

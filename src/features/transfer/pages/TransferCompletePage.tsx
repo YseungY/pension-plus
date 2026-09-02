@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { SubPageHeader } from '../../../components/layout/SubPageHeader'
 import { Notice } from '../../../components/ui/Notice'
 import { formatWon } from '../../../lib/format'
@@ -14,7 +15,7 @@ const fixedDeposit = transferable.find((h) => h.name === '정기예금')
 export function TransferCompletePage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
-      <SubPageHeader title="이전 완료" backTo="/transfer/status" />
+      <SubPageHeader title="이전 완료" backTo="/home" />
 
       <div className="flex-1 px-6 pb-8 pt-7">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-mint-100">
@@ -60,13 +61,12 @@ export function TransferCompletePage() {
         >
           다른 상품 보기
         </button>
-        <button
-          type="button"
-          aria-disabled="true"
-          className="h-14 flex-[1.4] cursor-default rounded-[14px] bg-mint-500 text-[15.5px] font-[700] text-[#062B22]"
+        <Link
+          to="/home"
+          className="flex h-14 flex-[1.4] items-center justify-center rounded-[14px] bg-mint-500 text-[15.5px] font-[700] text-[#062B22] transition active:scale-[0.98]"
         >
-          이전 비중 그대로 담기
-        </button>
+          홈으로 돌아가기
+        </Link>
       </div>
     </main>
   )

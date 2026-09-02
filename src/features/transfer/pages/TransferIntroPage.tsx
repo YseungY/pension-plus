@@ -1,6 +1,8 @@
 import { Info } from 'lucide-react'
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { SubPageHeader } from '../../../components/layout/SubPageHeader'
+import { ProductTransferabilityModal } from '../components/ProductTransferabilityModal'
 
 const briefRows = [
   '퇴직연금 실물이전은 계좌에서 보유한 상품을 해지하지 않고 그대로 다른 금융기관으로 옮기는 제도입니다.',
@@ -9,6 +11,8 @@ const briefRows = [
 ] as const
 
 export function TransferIntroPage() {
+  const [productModalOpen, setProductModalOpen] = useState(false)
+
   return (
     <main className="flex flex-1 flex-col bg-white">
       <SubPageHeader title="타사 퇴직연금 가져오기" backTo="/home" />
@@ -67,7 +71,11 @@ export function TransferIntroPage() {
       </div>
 
       <div className="flex gap-2 px-5 pb-8">
-        <button type="button" aria-disabled="true" className="h-14 flex-1 cursor-default rounded-[14px] border border-line text-[15px] font-[700] text-text-secondary">
+        <button
+          type="button"
+          onClick={() => setProductModalOpen(true)}
+          className="h-14 flex-1 rounded-[14px] border border-line text-[15px] font-[700] text-text-secondary transition active:scale-[0.98]"
+        >
           가능 상품 보기
         </button>
         <Link
@@ -77,6 +85,8 @@ export function TransferIntroPage() {
           실물이전 사전조회
         </Link>
       </div>
+
+      <ProductTransferabilityModal open={productModalOpen} onClose={() => setProductModalOpen(false)} />
     </main>
   )
 }

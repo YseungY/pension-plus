@@ -102,14 +102,14 @@ export function TransferStatusPage() {
 
       <div
         className={`mx-5 mt-3 flex items-center justify-between gap-4 rounded-2xl px-5 py-4.5 ${
-          config.bannerTone === 'mint' ? 'bg-mint-500' : 'bg-status-warning'
+          config.bannerTone === 'mint' ? 'bg-mint-100' : 'bg-status-warning'
         }`}
       >
         <div className="flex flex-col gap-1.5">
-          <strong className={`text-[15.5px] font-[800] ${config.bannerTone === 'mint' ? 'text-[#062B22]' : 'text-white'}`}>
+          <strong className={`text-[15.5px] font-[800] ${config.bannerTone === 'mint' ? 'text-mint-700' : 'text-white'}`}>
             {config.bannerTitle}
           </strong>
-          <span className={`text-[12.5px] ${config.bannerTone === 'mint' ? 'text-[#062B22]/80' : 'text-white/90'}`}>
+          <span className={`text-[12.5px] ${config.bannerTone === 'mint' ? 'text-mint-700' : 'text-white/90'}`}>
             {config.bannerSub}
           </span>
           {config.bannerChip && (
@@ -182,9 +182,14 @@ export function TransferStatusPage() {
             )}
           </div>
         ) : (
-          <div className="mt-5 rounded-[20px] border border-mint-200 bg-mint-100 p-5">
-            <p className="text-[19px] font-[700] text-mint-700">{config.focusTitle}</p>
-            <p className="mt-2 text-[13.5px] leading-[1.6] text-mint-700">이관된 잔고와 최종 결과는 완료 화면에서 확인하세요.</p>
+          <div className="mt-5 flex gap-3 rounded-[20px] border border-line p-5">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mint-100">
+              <Check className="h-4.5 w-4.5 text-mint-600" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-[17px] font-[700] text-navy-800">{config.focusTitle}</p>
+              <p className="mt-1 text-[13.5px] leading-[1.6] text-text-secondary">이관된 잔고와 최종 결과는 완료 화면에서 확인하세요.</p>
+            </div>
           </div>
         )}
 

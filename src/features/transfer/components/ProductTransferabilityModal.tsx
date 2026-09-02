@@ -41,7 +41,7 @@ export function ProductTransferabilityModal({ open, onClose }: { open: boolean; 
                 <div key={row.name} className="flex items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-2.5">
                   <span className="text-[13px] text-navy-800">{row.name}</span>
                   <span
-                    className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] font-[800] ${
+                    className={`inline-flex h-5 shrink-0 items-center rounded px-1.5 text-[11px] leading-none font-[800] ${
                       row.ok ? 'bg-mint-100 text-mint-700' : 'bg-warning-surface text-status-danger'
                     }`}
                   >

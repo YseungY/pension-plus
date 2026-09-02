@@ -66,7 +66,9 @@ export function WithdrawalResultPage() {
                   <span className={`flex items-center gap-1.5 text-[14px] font-[700] ${i === 0 ? 'text-mint-700' : 'text-navy-800'}`}>
                     {meta.name}
                     {meta.tag && (
-                      <span className="rounded bg-mint-200 px-1.5 py-0.5 text-[10px] font-[800] text-mint-700">{meta.tag}</span>
+                      <span className="inline-flex h-4.5 items-center rounded bg-mint-200 px-1.5 text-[10px] leading-none font-[800] text-mint-700">
+                        {meta.tag}
+                      </span>
                     )}
                   </span>
                   <span className={`text-[12px] ${i === 0 ? 'text-mint-700' : 'text-text-tertiary'}`}>

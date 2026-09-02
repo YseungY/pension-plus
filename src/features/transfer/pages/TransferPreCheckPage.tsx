@@ -83,7 +83,7 @@ export function TransferPreCheckPage() {
           ))}
         </div>
         <div className="mt-2.5 flex gap-2 rounded-xl bg-surface p-3">
-          <span className="shrink-0 rounded bg-navy-100 px-1.5 py-0.5 text-[10px] font-[800] text-navy-800">규칙</span>
+          <span className="inline-flex h-4.5 shrink-0 items-center rounded bg-navy-100 px-1.5 text-[10px] leading-none font-[800] text-navy-800">규칙</span>
           <p className="text-[12.5px] leading-[1.5] text-text-secondary">{typeInfo.note}</p>
         </div>
 
@@ -117,7 +117,7 @@ export function TransferPreCheckPage() {
           ))}
         </div>
         <div className="mt-2.5 flex gap-2 rounded-xl bg-surface p-3">
-          <span className="shrink-0 rounded bg-navy-100 px-1.5 py-0.5 text-[10px] font-[800] text-navy-800">안내</span>
+          <span className="inline-flex h-4.5 shrink-0 items-center rounded bg-navy-100 px-1.5 text-[10px] leading-none font-[800] text-navy-800">안내</span>
           <p className="text-[12.5px] leading-[1.5] text-text-secondary">
             {mode === 'real' ? (
               <>

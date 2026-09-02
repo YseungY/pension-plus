@@ -96,7 +96,7 @@ export function TransferHoldingsPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-[14px] font-[600] text-navy-800">
                         {h.name}
-                        <span className="ml-1.5 rounded-full bg-mint-200 px-1.5 py-0.5 text-[10.5px] font-[800] text-mint-700">
+                        <span className="ml-1.5 inline-flex h-4.5 items-center rounded-full bg-mint-200 px-1.5 text-[10.5px] leading-none font-[800] text-mint-700">
                           해지 없음
                         </span>
                       </span>
@@ -136,7 +136,7 @@ export function TransferHoldingsPage() {
                     <span className="text-[14px] font-[600] text-navy-800">
                       {h.name}
                       {isCriticalActive && (
-                        <span className="ml-1.5 rounded-full bg-[#FCEAED] px-1.5 py-0.5 text-[10.5px] font-[800] text-status-danger">
+                        <span className="ml-1.5 inline-flex h-4.5 items-center rounded-full bg-[#FCEAED] px-1.5 text-[10.5px] leading-none font-[800] text-status-danger">
                           조건 ③
                         </span>
                       )}

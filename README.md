@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/assets/pension-plus-cover.png" alt="연금플러스 프로젝트 대표 이미지" width="100%" />
   <br /><br />
-  복잡한 퇴직연금 이관 과정을 한눈에, 연금 인출 결과를 미리.
+  복잡한 퇴직연금 이관 과정을 한눈에.
   <br /><br />
   <a href="https://pension-plus.vercel.app">서비스 소개</a>
   &nbsp;·&nbsp;

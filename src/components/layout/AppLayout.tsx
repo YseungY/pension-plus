@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import { DEMO_DATA_LABEL } from '../../lib/mock-types'
 
@@ -7,6 +7,11 @@ const TRANSFER_COMPANY_SUPPORT_NUMBER = '1544-0000'
 
 export function AppLayout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   const isWelcomeFlow = ['/', '/onboarding', '/connect'].includes(pathname)
 
   return (

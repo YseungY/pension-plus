@@ -4,7 +4,7 @@ import { SubPageHeader } from '../../components/layout/SubPageHeader'
 export function DepositLimitPage() {
   return (
     <main className="flex flex-1 flex-col bg-white">
-      <SubPageHeader title="입금한도 설정" backTo="/pension-savings" accountLabel="신연금저축 123-456-789 01" />
+      <SubPageHeader title="입금한도 설정" backTo={-1} accountLabel="신연금저축 123-456-789 01" />
 
       <div className="flex-1 px-5 pb-8 pt-6">
         <p className="text-[13px] font-[700] text-text-secondary">현재 한도 금액</p>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 
 interface SubPageHeaderProps {
   title: string
-  backTo: string
+  backTo: string | number
   accountLabel?: string
 }
 
@@ -15,7 +15,7 @@ export function SubPageHeader({ title, backTo, accountLabel }: SubPageHeaderProp
       <header className="flex h-16 items-center gap-3 border-b border-line px-5">
         <button
           type="button"
-          onClick={() => navigate(backTo)}
+          onClick={() => navigate(backTo as any)}
           aria-label="이전 화면으로"
           className="flex h-9 w-9 items-center justify-center rounded-full text-navy-800 transition active:scale-95"
         >

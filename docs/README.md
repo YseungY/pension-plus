@@ -8,9 +8,9 @@
 |---|---|---|
 | [PRD (MVP)](submission/PRD_MVP.md) | 3명·4일 MVP 목표와 범위 | 완료 |
 | [SRS (MVP)](submission/SRS_MVP.md) | Requirement와 Acceptance Criteria | 완료 |
-| [기술 학습 계획](submission/TECH_LEARNING_PLAN.md) | 기술 선택·학습·적용 기록 | 작성 중 |
-| [Knowledge Base](submission/knowledge-base/00-index.md) | 근거·결정·기술·용어 | 기본 구조 완료 |
-| [AI 협업 기록](submission/AI_WORKFLOW_LOG.md) | Goal 실행과 사람의 개입 기록 | Goal 1 기록 완료 |
+| [기술 학습 기록](submission/TECH_LEARNING_PLAN.md) | 기술 선택·학습·적용·검증 기록 | 완료 |
+| [Knowledge Base](submission/knowledge-base/00-index.md) | 근거·결정·기술·용어 | 완료 |
+| [AI 협업 기록](submission/AI_WORKFLOW_LOG.md) | 공통·기능1·기능2 구현과 사람의 개입 기록 | 완료 |
 
 ## 2. 팀 개발 자료
 

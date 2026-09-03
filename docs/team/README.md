@@ -31,11 +31,11 @@ docs/
 
 | 담당 | 수정할 폴더 | 구현 화면 | Issue |
 |---|---|---|---|
-| 공통·통합 | `src/app`, `src/components`, `src/lib` | 온보딩·홈·연금저축 관리·라우팅·통합·배포 | #1, #6 |
-| 기능1 | `src/features/transfer` | 계좌 확인 → 제한사항 → 이관 현황판 | [#2](https://github.com/YseungY/pension-plus/issues/2), [#3](https://github.com/YseungY/pension-plus/issues/3) |
-| 기능2 | `src/features/withdrawal` | 연금 외 수령 조건 확인 → 모의계산 결과 | [#4](https://github.com/YseungY/pension-plus/issues/4), [#5](https://github.com/YseungY/pension-plus/issues/5) |
+| 공통·통합 · 양승연 | `src/app`, `src/components`, `src/lib` | 온보딩·홈·연금저축 관리·라우팅·통합·배포 | #1, #6 |
+| 기능1 · 유고은 | `src/features/transfer` | 계좌 확인 → 제한사항 → 이관 현황판 | [#2](https://github.com/YseungY/pension-plus/issues/2), [#3](https://github.com/YseungY/pension-plus/issues/3) |
+| 기능2 · 김동건 | `src/features/withdrawal` | 연금 외 수령 조건 확인 → 모의계산 결과 | [#4](https://github.com/YseungY/pension-plus/issues/4), [#5](https://github.com/YseungY/pension-plus/issues/5) |
 
-기능1·2 담당자 이름만 팀 채팅에서 확정합니다. 다른 담당 폴더와 공통 설정은 수정하지 않습니다.
+담당자는 공통·통합 양승연, 기능1 유고은, 기능2 김동건입니다. 다른 담당 폴더와 공통 설정은 수정하지 않습니다.
 
 ## 2. 처음 시작 — 그대로 복사하세요
 

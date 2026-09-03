@@ -4,11 +4,7 @@ import { Link } from 'react-router'
 import { SubPageHeader } from '../../../components/layout/SubPageHeader'
 import { ProductTransferabilityModal } from '../components/ProductTransferabilityModal'
 
-const briefRows = [
-  '퇴직연금 실물이전은 계좌에서 보유한 상품을 해지하지 않고 그대로 다른 금융기관으로 옮기는 제도입니다.',
-  '퇴직연금 유형과 상품이 같을 때만 실물이전이 가능하며, 실물이전이 불가능한 상품은 현금화 후 이전됩니다.',
-  '가입자 선택권 확대와 퇴직연금 사업자 간 경쟁 촉진을 위해 2024년 10월 시행됐습니다.',
-] as const
+
 
 export function TransferIntroPage() {
   const [productModalOpen, setProductModalOpen] = useState(false)
@@ -24,13 +20,25 @@ export function TransferIntroPage() {
           연금플러스로
         </h1>
 
-        <div className="mt-8 flex flex-col gap-4 text-left">
-          {briefRows.map((row, i) => (
-            <div key={row} className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-100 text-[12px] font-[800] text-navy-800">{i + 1}</span>
-              <p className="text-[14.5px] font-[500] leading-[1.6] text-navy-800">{row}</p>
-            </div>
-          ))}
+        <div className="mt-8 flex flex-col gap-4 rounded-3xl border border-line/50 bg-surface/50 p-5 text-left shadow-sm">
+          <div className="flex gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-800 text-[12px] font-[800] text-white">1</span>
+            <p className="mt-0.5 text-[14px] font-[500] leading-[1.55] text-navy-800">
+              보유한 상품을 <strong className="font-[800]">해지하지 않고 그대로</strong> 옮기는 제도입니다.
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-800 text-[12px] font-[800] text-white">2</span>
+            <p className="mt-0.5 text-[14px] font-[500] leading-[1.55] text-navy-800">
+              퇴직연금 <strong className="font-[800]">유형과 상품이 같을 때만</strong> 가능하며, 불가 상품은 <strong className="font-[800]">현금화</strong>됩니다.
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-navy-800 text-[12px] font-[800] text-white">3</span>
+            <p className="mt-0.5 text-[14px] font-[500] leading-[1.55] text-navy-800">
+              가입자 선택권 확대를 위해 <strong className="font-[800]">2024년 10월 시행</strong>됐습니다.
+            </p>
+          </div>
         </div>
 
         <div className="mt-8 rounded-2xl border border-line bg-surface/30 p-[18px] text-left">

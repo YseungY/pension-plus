@@ -95,8 +95,8 @@ export function WithdrawalResultPage() {
           </p>
           <button
             type="button"
-            aria-disabled="true"
-            className="mt-3 h-11 w-full cursor-default rounded-xl border border-line text-[13.5px] font-[700] text-text-secondary"
+            onClick={() => navigate('/pension-savings/deposit-limit')}
+            className="mt-3 h-11 w-full rounded-xl border border-line text-[13.5px] font-[700] text-text-secondary transition active:scale-[0.98]"
           >
             은행연합회 연금저축 한도 조회
           </button>

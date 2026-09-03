@@ -250,7 +250,10 @@ export function TransferStatusPage() {
         {step < 5 ? (
           <button
             type="button"
-            onClick={() => setStep((step + 1) as Step)}
+            onClick={() => {
+              setStep((step + 1) as Step)
+              window.scrollTo(0, 0)
+            }}
             className="flex h-11 w-full items-center justify-center rounded-xl border border-dashed border-line text-[12.5px] font-[700] text-text-tertiary transition active:scale-[0.98]"
           >
             시연: 다음 단계로 진행 ⏩

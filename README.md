@@ -1,44 +1,77 @@
-# 연금플러스
+# 연금플러스+
 
-연금 이전 진행 과정과 연금 외 수령(중도인출) 시 인출순서를 이해하기 쉽게 보여주는 모바일 웹 MVP입니다.
+![연금플러스 프로젝트 대표 이미지](docs/assets/pension-plus-cover.png)
 
-배포 주소의 `/`는 프로젝트를 소개하는 랜딩페이지이고, `/app`이 실제 시연용 앱입니다.
+> 복잡한 퇴직연금 이관 과정을 한눈에, 연금 인출 결과를 미리.
 
-## 최종 제출 허브
+연금플러스+는 PB의 도움 없이 연금 업무를 직접 처리하는 사용자를 위한 모바일 웹 MVP입니다. 이관 신청 후 현재 어디까지 처리됐는지 보여주고, 연금 외 수령(중도인출) 전에는 인출 순서와 예상 세금·실수령액을 미리 계산해 줍니다.
 
-| 산출물 | 링크 | 상태 |
-|---|---|---|
-| Master Deck | [16페이지 발표 원고](docs/team/workflow/MASTER_DECK.md) | 구현·검증 결과 반영 중 |
-| PRD | [MVP PRD](docs/submission/PRD_MVP.md) | 완료 |
-| SRS | [SRS Lite](docs/submission/SRS_MVP.md) | 완료 |
-| 기술 학습 계획 | [TECH_LEARNING_PLAN](docs/submission/TECH_LEARNING_PLAN.md) | 작성 중 |
-| Knowledge Base | [KB Index](docs/submission/knowledge-base/00-index.md) | 기본 구조 완료 |
-| AI 협업 기록 | [AI_WORKFLOW_LOG](docs/submission/AI_WORKFLOW_LOG.md) | Goal 1 기록 완료 |
-| GitHub Issues | [Issue #1~#6](https://github.com/YseungY/pension-plus/issues) | 6개 생성 완료 |
-| GitHub Project | [Project #13](https://github.com/users/YseungY/projects/13) — Backlog/진행/검토/완료 | 진행 중 |
-| 배포 제품 | Vercel URL 추가 예정 | 미배포 |
+## 왜 만들었나요?
 
-전체 문서 설명은 [문서 인덱스](docs/README.md)에서 확인합니다.
+퇴직연금 이관을 신청한 사용자는 종종 **‘신청중’이라는 한 줄의 상태만** 마주합니다. 지금 어느 기관에서 처리 중인지, 언제 다음 단계로 넘어가는지, 매매 제한은 언제 풀리는지 알기 어렵습니다.
 
-## 팀 개발 시작
+연금플러스+는 사용자가 가장 궁금해하는 질문에 답하는 데 집중했습니다.
 
-팀원은 [팀원 개발 가이드](docs/team/README.md) 하나만 먼저 확인하세요. 설치, 담당 기능, 에이전트 요청문, 완료 조건과 PR 방법이 모두 그 문서에 있습니다.
+- 내 이관은 지금 몇 단계인가?
+- 현재 제한되는 업무는 무엇이고, 언제 해제되는가?
+- 중도인출 시 어떤 재원부터 차감되는가?
+- 세금을 제외하고 실제로 얼마를 받게 되는가?
+
+## 핵심 경험
+
+### 이관 진행 상황판
+
+이전할 계좌와 보유 종목을 확인하고, 종목별 이전 가능 여부와 주의사항을 살펴볼 수 있습니다. 신청 후에는 5단계 타임라인에서 현재 처리 기관, 예상 완료 시점, 매매 제한 정보를 함께 확인합니다.
+
+### 연금 외 수령 모의계산
+
+희망 인출 금액을 입력하면 법정 인출 순서에 따라 재원별 차감액을 계산합니다. 예상 세금과 실수령액을 한 화면에 보여줘 인출 전에 결과를 이해할 수 있도록 돕습니다.
+
+### 처음부터 끝까지 이어지는 모바일 체험
+
+온보딩과 인증서 선택부터 홈, 이관 현황 확인, 인출 모의계산까지 하나의 흐름으로 체험할 수 있습니다. 393px 모바일 화면을 우선해 설계했습니다.
+
+```text
+시작 → 서비스 소개 → 인증서 연결 안내 → 홈
+                                  ├─ 퇴직연금 가져오기 → 보유 종목 확인 → 이관 현황
+                                  └─ 연금저축 관리 → 인출 조건 입력 → 모의계산 결과
+```
+
+## 프로젝트 범위
+
+이 프로젝트는 4일 안에 핵심 사용자 가설을 검증하기 위해 만든 **시연용 MVP**입니다. 실제 금융 서비스가 아니며, 화면에 표시되는 계좌·잔액·이관 정보는 모두 mock 데이터입니다.
+
+- 실제 계정 생성 및 본인 인증 없음
+- 실제 계좌 연결 및 금융기관 API 연동 없음
+- 실제 이체·출금 및 주문 기능 없음
+- 계산 결과는 모의계산이며 실제 세금·수령액과 다를 수 있음
+
+## 직접 실행해 보기
+
+Node.js 24 LTS 환경에서 실행할 수 있습니다.
 
 ```bash
+git clone https://github.com/YseungY/pension-plus.git
+cd pension-plus
 npm install
 npm run dev
 ```
 
-작업은 개인 `work/<이름>` 브랜치에서 진행하고 `dev` 브랜치로 PR을 만듭니다.
-
-## MVP 기능
-
-- 기능1: 타사 퇴직연금 가져오기 — 이전 가능 여부·진행 단계·제한 업무 확인
-- 기능2: 연금저축 관리 — 연금 외 수령(중도인출) 순서·예상 세금·실수령액 확인
-- 인증서 연결: 공동인증서·금융인증서로 불러오기 선택 UI
-
-실제 계정·인증·데이터베이스·금융기관 API·이체·출금은 구현하지 않습니다. 모든 계좌와 계산 결과는 시연용이며 실제 결과와 다를 수 있습니다.
+터미널에 표시된 로컬 주소에서 `/app`으로 이동하면 전체 시연을 시작할 수 있습니다. `/`에서는 프로젝트 소개 랜딩 페이지를 볼 수 있습니다.
 
 ## 기술 구성
 
-Vite · React · TypeScript · Tailwind CSS · React Router · Vitest · Vercel
+`React` · `TypeScript` · `Vite` · `Tailwind CSS` · `React Router` · `Vitest` · `Vercel`
+
+계산 로직과 화면을 분리하고, 서버 없이 로컬 mock 데이터만으로 전체 사용자 흐름이 동작하도록 구성했습니다.
+
+## 더 알아보기
+
+- [MVP PRD](docs/submission/PRD_MVP.md)
+- [SRS Lite](docs/submission/SRS_MVP.md)
+- [프로젝트 문서 인덱스](docs/README.md)
+- [GitHub Issues](https://github.com/YseungY/pension-plus/issues)
+
+---
+
+Team 페이스메이커 · 2026

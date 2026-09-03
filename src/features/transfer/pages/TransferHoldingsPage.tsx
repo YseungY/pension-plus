@@ -182,14 +182,14 @@ export function TransferHoldingsPage() {
           <button
             type="button"
             onClick={() => setProductModalOpen(true)}
-            className="h-10 flex-1 rounded-xl border border-line text-[13px] font-[700] text-text-secondary transition active:scale-[0.98]"
+            className="h-11 flex-1 rounded-[14px] bg-surface text-[13.5px] font-[600] text-navy-700 transition-all hover:bg-surface-2 active:scale-[0.98]"
           >
             상품별 가능 여부
           </button>
           <button
             type="button"
             onClick={() => setFaqModalOpen(true)}
-            className="h-10 flex-1 rounded-xl border border-line text-[13px] font-[700] text-text-secondary transition active:scale-[0.98]"
+            className="h-11 flex-1 rounded-[14px] bg-surface text-[13.5px] font-[600] text-navy-700 transition-all hover:bg-surface-2 active:scale-[0.98]"
           >
             자주 묻는 질문
           </button>

@@ -17,7 +17,7 @@ export function TransferIntroPage() {
     <main className="flex flex-1 flex-col bg-white">
       <SubPageHeader title="타사 퇴직연금 가져오기" backTo="/home" />
 
-      <div className="flex-1 px-6 pb-6 pt-4 text-center">
+      <div className="flex-1 flex flex-col justify-center px-6 pb-10 pt-2 text-center">
         <h1 className="text-[26px] font-[900] leading-[1.32] tracking-[-0.03em] text-navy-800">
           운용 상품 그대로
           <br />

@@ -106,11 +106,6 @@ export function TransferStatusPage() {
         }`}
       >
         <div className="flex items-start gap-3">
-          {config.bannerTone === 'mint' && (
-            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mint-100">
-              <Check className="h-3.5 w-3.5 text-mint-600" aria-hidden="true" />
-            </span>
-          )}
           <div className="flex flex-col gap-1.5">
             <strong className={`text-[15.5px] font-[800] ${config.bannerTone === 'mint' ? 'text-navy-800' : 'text-white'}`}>
               {config.bannerTitle}

@@ -73,15 +73,27 @@ export function TransferHoldingsPage() {
           </div>
         )}
 
-        <div className="mt-4 rounded-[20px] border border-line p-5">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-[15px] font-[700] text-navy-800">매매 제한 예상</h2>
-            <span className="text-[13px] font-[700] text-status-warning">{durationLabel}</span>
-          </div>
-          <div className="mt-3">
+        <div className="mt-5 flex flex-col items-center rounded-3xl bg-white px-5 pb-7 pt-8 shadow-[0_4px_24px_rgba(14,32,51,0.04)] border border-line/30">
+          <h2 className="text-center text-[19px] font-[800] leading-[1.4] text-navy-800">
+            지금 신청하면 이 기간에<br />
+            <span className="relative inline-block">
+              <span className="relative z-10">매매가 제한됩니다</span>
+              <span className="absolute bottom-1 left-0 -z-0 h-3 w-full bg-[#FFE4A0]/60" />
+            </span>
+          </h2>
+          <p className="mt-4 text-[14px] font-[700] text-text-secondary">매매 제한 예상 구간</p>
+          
+          <div className="mt-6 w-full border-t border-line/50 pt-6">
             <LockCalendar fast={!isCash && isSold} />
           </div>
-          <p className="mt-3 text-[12px] leading-[1.5] text-text-tertiary">{durationBreakdown}</p>
+          
+          <div className="mt-7 mb-2 inline-flex items-center justify-center rounded-full bg-[#EFF6FF] px-4 py-2">
+            <span className="text-[13px] font-[800] text-[#2563EB]">예상 영업일 {durationLabel.replace('영업일', '')}일</span>
+          </div>
+          
+          <p className="text-[12px] font-[600] text-text-secondary text-center">
+            {durationBreakdown}
+          </p>
         </div>
 
         <div className="mt-4 flex flex-col gap-5">

@@ -1,46 +1,52 @@
-type DayType = 'plain' | 'warning' | 'peak'
-
-interface Day {
-  d: number
-  type: DayType
-}
-
-const DAYS: Day[] = [
-  { d: 28, type: 'plain' },
-  { d: 31, type: 'warning' },
-  { d: 1, type: 'warning' },
-  { d: 2, type: 'peak' },
-  { d: 3, type: 'warning' },
-  { d: 4, type: 'plain' },
-  { d: 7, type: 'plain' },
-]
-
-const DAYS_FAST: Day[] = [
-  { d: 28, type: 'peak' },
-  { d: 29, type: 'plain' },
-  { d: 1, type: 'plain' },
-  { d: 2, type: 'plain' },
-  { d: 3, type: 'plain' },
-  { d: 4, type: 'plain' },
-  { d: 5, type: 'plain' },
-]
-
-const CELL_CLASS: Record<DayType, string> = {
-  plain: 'bg-surface text-text-tertiary',
-  warning: 'bg-warning-surface font-[700] text-warning-text',
-  peak: 'bg-status-warning font-[700] text-white',
-}
-
 export function LockCalendar({ fast }: { fast: boolean }) {
-  const days = fast ? DAYS_FAST : DAYS
+  const stripeStyle = {
+    backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 4px, #F59E0B 4px, #F59E0B 8px)',
+  }
 
   return (
-    <div className="grid grid-cols-7 gap-1.5">
-      {days.map((day, i) => (
-        <div key={i} className={`flex h-[30px] items-center justify-center rounded-lg text-[12px] tabular-nums ${CELL_CLASS[day.type]}`}>
-          {day.d}
+    <div className="flex flex-col">
+      <h4 className="mb-2 text-left text-[15px] font-[800] text-navy-800">8월</h4>
+      <div className="grid grid-cols-7 gap-1 text-center text-[13px]">
+        <div className="pb-1 font-[700] text-navy-300">일</div>
+        <div className="pb-1 font-[700] text-navy-300">월</div>
+        <div className="pb-1 font-[700] text-navy-300">화</div>
+        <div className="pb-1 font-[700] text-navy-300">수</div>
+        <div className="pb-1 font-[700] text-navy-300">목</div>
+        <div className="pb-1 font-[700] text-navy-300">금</div>
+        <div className="pb-1 font-[700] text-navy-300">토</div>
+
+        <div className="flex h-9 items-center justify-center font-[600] text-navy-400">23</div>
+        <div className="flex h-9 items-center justify-center rounded-l-md bg-[#EF4444] font-[800] text-white shadow-[0_4px_12px_rgba(239,68,68,0.35)]">
+          24
         </div>
-      ))}
+        <div className="flex h-9 items-center justify-center bg-[#FEE2E2] font-[800] text-[#EF4444]">25</div>
+        <div className="flex h-9 items-center justify-center bg-[#FEE2E2] font-[800] text-[#EF4444]">26</div>
+        <div className="flex h-9 items-center justify-center bg-[#FEE2E2] font-[800] text-[#EF4444]">27</div>
+        <div className="flex h-9 items-center justify-center rounded-r-md bg-[#FEE2E2] font-[800] text-[#EF4444]">28</div>
+        <div className="flex h-9 items-center justify-center font-[600] text-navy-400">29</div>
+      </div>
+
+      <h4 className="mb-2 mt-5 text-left text-[15px] font-[800] text-navy-800">9월</h4>
+      <div className="grid grid-cols-7 gap-1 text-center text-[13px]">
+        <div className="flex h-9 items-center justify-center font-[600] text-navy-400">30</div>
+        <div className="flex h-9 items-center justify-center rounded-md bg-[#FEE2E2] font-[800] text-[#EF4444]">31</div>
+
+        <div className="relative flex h-9 items-center justify-center overflow-hidden rounded-md bg-[#FEF3C7] font-[800] text-[#D97706]">
+          <div className="absolute inset-0 opacity-[0.25]" style={stripeStyle} />
+          <span className="relative z-10">1</span>
+        </div>
+
+        <div className="relative flex h-9 items-center justify-center overflow-hidden rounded-md bg-[#FEF3C7] font-[800] text-[#D97706]">
+          <div className="absolute inset-0 opacity-[0.25]" style={stripeStyle} />
+          <span className="relative z-10">2</span>
+        </div>
+
+        <div className="z-10 flex h-9 scale-[1.03] items-center justify-center rounded-md bg-[#F59E0B] font-[800] text-white shadow-[0_4px_12px_rgba(245,158,11,0.4)]">
+          3
+        </div>
+        <div className="flex h-9 items-center justify-center font-[600] text-navy-800">4</div>
+        <div className="flex h-9 items-center justify-center font-[600] text-navy-400">5</div>
+      </div>
     </div>
   )
 }

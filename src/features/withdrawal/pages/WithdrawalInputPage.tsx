@@ -176,13 +176,14 @@ export function WithdrawalInputPage() {
             <p className="mt-1.5 text-[13px] leading-[1.55] text-text-secondary">
               상속인의 편의를 위해 피상속인(사망자) 명의의 모든 금융채권 및 채무를 확인하실 수 있는 서비스입니다.
             </p>
-            <button
-              type="button"
-              aria-disabled="true"
-              className="mt-3 h-11 w-full cursor-default rounded-xl border border-line text-[13.5px] font-[700] text-text-secondary"
+            <a
+              href="https://www.fss.or.kr/fss/cvpl/inhCerEc/main.do?menuNo=200010"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex h-11 w-full items-center justify-center rounded-xl border border-line text-[13.5px] font-[700] text-text-secondary transition active:scale-[0.98]"
             >
               금감원 상속인금융거래조회 바로가기
-            </button>
+            </a>
           </div>
 
           <div className="mt-3 rounded-2xl bg-surface p-4">

@@ -29,15 +29,15 @@ export function ConnectPage() {
         <h1 className="mt-3 text-[32px] font-[800] leading-[1.32] tracking-[-0.04em] text-navy-800">내 연금부터<br />연결할까요?</h1>
         <p className="mt-4 text-[15px] leading-[1.65] text-text-secondary">실제 인증이나 계좌 연결은 진행되지 않습니다.<br />원하는 방식을 선택해주세요.</p>
         <div className="mt-9 flex flex-col gap-3" role="radiogroup" aria-label="연금 불러오기 방식">
-          {connectionMethods.map(({ id, label, icon: Icon }) => {
+          {connectionMethods.map(({ id, label, icon: Icon }, index) => {
             const selected = selectedMethod === id
             return (
-              <button key={id} type="button" role="radio" aria-checked={selected} onClick={() => setSelectedMethod(id)} className={`flex min-h-[70px] items-center justify-between rounded-2xl border px-[18px] text-left transition ${selected ? 'border-mint-500 bg-mint-100/50' : 'border-line bg-white'}`}>
+              <button key={id} type="button" role="radio" aria-checked={selected} onClick={() => setSelectedMethod(id)} className={`animate-in-up flex min-h-[70px] items-center justify-between rounded-2xl border px-[18px] text-left transition-all duration-300 ease-out hover:shadow-sm ${selected ? 'border-mint-500 bg-mint-100/50 shadow-[0_4px_12px_rgba(20,184,146,0.15)] scale-[1.02]' : 'border-line bg-white hover:border-mint-200'} ${index === 0 ? 'delay-100' : 'delay-200'}`}>
                 <span className="flex items-center gap-3">
-                  <span className={`flex h-9 w-9 items-center justify-center rounded-[10px] ${selected ? 'bg-white' : 'bg-surface-2'}`}><Icon className={`h-[18px] w-[18px] ${selected ? 'text-mint-700' : 'text-text-secondary'}`} aria-hidden="true" /></span>
-                  <span className="text-[15.5px] font-[700] text-navy-800">{label}</span>
+                  <span className={`flex h-9 w-9 items-center justify-center rounded-[10px] transition-colors ${selected ? 'bg-white shadow-sm' : 'bg-surface-2'}`}><Icon className={`h-[18px] w-[18px] transition-colors ${selected ? 'text-mint-700' : 'text-text-secondary'}`} aria-hidden="true" /></span>
+                  <span className={`text-[15.5px] font-[700] transition-colors ${selected ? 'text-navy-900' : 'text-navy-800'}`}>{label}</span>
                 </span>
-                {selected ? <BadgeCheck className="h-5 w-5 text-mint-600" aria-hidden="true" /> : <ChevronRight className="h-5 w-5 text-navy-300" aria-hidden="true" />}
+                {selected ? <BadgeCheck className="h-5 w-5 text-mint-600 drop-shadow-sm" aria-hidden="true" /> : <ChevronRight className="h-5 w-5 text-navy-300" aria-hidden="true" />}
               </button>
             )
           })}

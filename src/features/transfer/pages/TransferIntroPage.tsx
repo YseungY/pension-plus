@@ -25,8 +25,7 @@ export function TransferIntroPage() {
         </h1>
 
         <div className="mt-6 rounded-2xl border border-line bg-surface p-[18px] text-left">
-          <p className="text-[13px] font-[800] text-mint-700">연금플러스만의 사전조회 · 일정 미리보기</p>
-          <p className="mt-2 text-[15px] font-[700] leading-[1.5] tracking-[-0.02em] text-navy-800">
+          <p className="text-[15px] font-[700] leading-[1.5] tracking-[-0.02em] text-navy-800">
             어떤 상품이 그대로 옮겨지고 어떤 상품이 현금화되는지, 신청 전에 먼저 확인하세요
           </p>
         </div>

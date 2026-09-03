@@ -84,7 +84,7 @@ export function TransferHoldingsPage() {
           <p className="mt-4 text-[14px] font-[700] text-text-secondary">매매 제한 예상 구간</p>
           
           <div className="mt-6 w-full border-t border-line/50 pt-6">
-            <LockCalendar fast={!isCash && isSold} />
+            <LockCalendar />
           </div>
           
           <div className="mt-7 mb-2 inline-flex items-center justify-center rounded-full bg-[#EFF6FF] px-4 py-2">

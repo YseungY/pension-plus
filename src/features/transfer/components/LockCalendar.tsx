@@ -1,4 +1,4 @@
-export function LockCalendar({ fast }: { fast: boolean }) {
+export function LockCalendar() {
   const stripeStyle = {
     backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 4px, #F59E0B 4px, #F59E0B 8px)',
   }
